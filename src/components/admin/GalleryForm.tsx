@@ -80,7 +80,7 @@ export default function GalleryForm({ initialData }: GalleryFormProps) {
       <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui foto...' : 'Menambahkan foto...'} />
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
         {/* Header */}
-      <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -98,21 +98,21 @@ export default function GalleryForm({ initialData }: GalleryFormProps) {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light"
+            className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
+            className="flex-1 sm:flex-none justify-center inline-flex items-center gap-2 px-5 py-2 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <Save className="w-4 h-4" />
-            {loading ? 'Menyimpan...' : 'Simpan Foto'}
+            {loading ? 'Menyimpan...' : 'Simpan'}
           </button>
         </div>
       </div>

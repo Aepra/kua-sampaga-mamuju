@@ -88,7 +88,7 @@ export default function AdminProfilPage() {
     <>
       <FullScreenLoader isLoading={saving} message="Menyimpan profil..." />
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-12">
-        <div className="flex items-center justify-between border-b border-border-light pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light pb-4">
         <div>
           <h1 className="text-2xl font-bold text-text-primary font-heading">Profil & Informasi KUA</h1>
           <p className="text-sm text-text-secondary mt-1">
@@ -98,7 +98,7 @@ export default function AdminProfilPage() {
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
+          className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
         >
           <Save className="w-4 h-4" />
           {saving ? 'Menyimpan...' : 'Simpan Perubahan'}

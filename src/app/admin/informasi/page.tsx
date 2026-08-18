@@ -71,7 +71,7 @@ export default function AdminInformasiListPage() {
         </div>
         <Link
           href="/admin/informasi/tambah"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           Tambah Informasi
@@ -97,7 +97,7 @@ export default function AdminInformasiListPage() {
         ) : filtered.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-surface-secondary border-b border-border-light text-xs font-semibold text-text-tertiary uppercase">
+              <thead className="bg-surface-secondary border-b border-border-light text-xs font-semibold text-text-tertiary uppercase whitespace-nowrap">
                 <tr>
                   <th className="px-4 py-3">Judul Informasi</th>
                   <th className="px-4 py-3">Kategori</th>
@@ -109,19 +109,19 @@ export default function AdminInformasiListPage() {
               <tbody className="divide-y divide-border-light">
                 {filtered.map(item => (
                   <tr key={item.id} className="hover:bg-surface-secondary/50 transition-colors">
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 min-w-[200px]">
                       <p className="font-semibold text-text-primary">{item.title}</p>
                       <p className="text-xs text-text-tertiary font-mono">/{item.slug}</p>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 whitespace-nowrap">
                       <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700">
                         {item.category}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-xs text-text-secondary">
+                    <td className="px-4 py-3 text-xs text-text-secondary whitespace-nowrap">
                       {item.date}
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 whitespace-nowrap">
                       {item.published ? (
                         <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
                           <CheckCircle2 className="w-3 h-3" /> Dipublikasikan
@@ -132,7 +132,7 @@ export default function AdminInformasiListPage() {
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-4 py-3 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-2">
                         <Link
                           href={`/admin/informasi/${item.id}/edit`}
