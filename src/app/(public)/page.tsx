@@ -226,8 +226,8 @@ export default async function HomePage() {
               const content = (
                 <div className="flex flex-col items-center justify-start gap-3 sm:gap-4 w-[90px] sm:w-[110px]">
                   {/* Icon Container */}
-                  <div className="w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] rounded-2xl bg-[#F8FAF9] border border-[#E5EBE5] flex items-center justify-center group-hover:-translate-y-2 group-hover:bg-[#ECFDF5] group-hover:border-[#10B981] group-hover:shadow-[0_12px_24px_rgba(16,185,129,0.15)] transition-all duration-300">
-                    <div className="scale-[1.2] sm:scale-[1.3] text-[#059669] transition-transform duration-300 group-hover:scale-[1.4]">
+                  <div className="w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] rounded-2xl bg-[#F8FAF9] border border-[#E5EBE5] flex items-center justify-center group-hover:-translate-y-2 group-hover:bg-[#ECFDF5] group-hover:border-[#10B981] group-hover:shadow-[0_12px_24px_rgba(16,185,129,0.15)] group-active:scale-90 group-active:bg-[#D1FAE5] transition-all duration-300">
+                    <div className="scale-[1.2] sm:scale-[1.3] text-[#059669] transition-transform duration-300 group-hover:scale-[1.4] group-active:scale-[1.1]">
                       {item.icon}
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export default async function HomePage() {
                 </div>
               );
 
-              const boxClass = "group cursor-pointer outline-none animate-fade-in flex-shrink-0";
+              const boxClass = "group cursor-pointer outline-none animate-fade-in flex-shrink-0 active:opacity-80 transition-opacity duration-200";
 
               if (item.external) {
                 return (
@@ -301,7 +301,7 @@ export default async function HomePage() {
           <div className="flex overflow-x-auto gap-2 sm:gap-3 mb-10 pb-4 hide-scrollbar snap-x">
             <Link
               href="/layanan"
-              className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full bg-[#064E3B] text-white shadow-md hover:bg-[#047857] hover:shadow-lg transition-all hover:-translate-y-0.5"
+              className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full bg-[#064E3B] text-white shadow-md hover:bg-[#047857] hover:shadow-lg transition-all hover:-translate-y-0.5 active:scale-95 active:bg-[#047857]"
             >
               Semua Layanan ({services.length})
             </Link>
@@ -309,7 +309,7 @@ export default async function HomePage() {
               <Link
                 key={cat}
                 href={`/layanan?kategori=${encodeURIComponent(cat)}`}
-                className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#4A5D4A] hover:bg-[#ECFDF5] hover:text-[#047857] border border-[#E5EBE5] hover:border-[#10B981] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+                className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#4A5D4A] hover:bg-[#ECFDF5] hover:text-[#047857] border border-[#E5EBE5] hover:border-[#10B981] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 active:scale-95 active:bg-[#ECFDF5]"
               >
                 {cat}
               </Link>

@@ -2,6 +2,7 @@ import Navbar from '@/components/public/Navbar';
 import Footer from '@/components/public/Footer';
 import WhatsAppButton from '@/components/public/WhatsAppButton';
 import { getSettings } from '@/lib/data/settings';
+import NextTopLoader from 'nextjs-toploader';
 
 export default async function PublicLayout({
   children,
@@ -12,6 +13,7 @@ export default async function PublicLayout({
 
   return (
     <>
+      <NextTopLoader color="#059669" height={3} showSpinner={false} />
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />
