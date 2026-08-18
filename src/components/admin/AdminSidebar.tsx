@@ -26,7 +26,6 @@ const menuGroups = [
       { href: '/admin/layanan', label: 'Layanan', icon: FileText },
       { href: '/admin/informasi', label: 'Informasi', icon: BookOpen },
       { href: '/admin/galeri', label: 'Galeri', icon: ImageIcon },
-      { href: '/admin/peraturan', label: 'Peraturan', icon: BookOpen },
     ],
   },
   {

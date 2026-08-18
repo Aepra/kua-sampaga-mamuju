@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Service {
+  id                    String        @id @default(cuid())
+  title                 String
+  slug                  String        @unique
+  category              String
+  icon                  String
+  image                 String
+  description           String
+  additionalDescription String
+  documentsToBring      String[]
+  steps                 String[]
+  notes                 String[]
+  fee                   String?
+  processingTime        String?
+  externalLink          String?
+  keywords              String[]
+  published             Boolean       @default(true)
+  isDummy               Boolean       @default(false)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  requirements Requirement[]
+}
+
+model Requirement {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  required    Boolean @default(true)
+  serviceId   String
+  service     Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+}
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  image       String
+  date        String
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Information {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  excerpt   String
+  thumbnail String
+  category  String
+  date      String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("user")
+  createdAt    DateTime @default(now())
+}
+
+model SiteSettings {
+  id          String   @id @default("default")
+  name        String
+  head        String
+  nip         String
+  address     String
+  whatsapp    String
+  facebook    String
+  instagram   String
+  tiktok      String
+  youtube     String
+  description String
+  vision      String
+  mission     String[]
+  officeImage String
+  headImage   String
+  officeHours String
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  detail    String
+  userId    String
+  userName  String
+  timestamp DateTime @default(now())
+}

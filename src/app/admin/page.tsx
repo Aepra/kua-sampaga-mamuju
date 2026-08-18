@@ -6,7 +6,6 @@ import {
 import { getServiceCount, getRecentServices } from '@/lib/data/services';
 import { getInformationCount, getRecentInformation } from '@/lib/data/information';
 import { getGalleryCount, getRecentGallery } from '@/lib/data/gallery';
-import { getRegulationCount } from '@/lib/data/regulations';
 import { getUserCount } from '@/lib/data/users';
 import { getRecentLogs } from '@/lib/data/activity-logs';
 
@@ -17,7 +16,6 @@ export default async function AdminDashboardPage() {
     serviceCount,
     infoCount,
     galleryCount,
-    regCount,
     userCount,
     recentServices,
     , // recentInfo
@@ -27,7 +25,6 @@ export default async function AdminDashboardPage() {
     getServiceCount(),
     getInformationCount(),
     getGalleryCount(),
-    getRegulationCount(),
     getUserCount(),
     getRecentServices(5),
     getRecentInformation(3),
@@ -39,7 +36,6 @@ export default async function AdminDashboardPage() {
     { label: 'Total Layanan', value: serviceCount, icon: FileText, color: 'bg-blue-50 text-blue-600', href: '/admin/layanan' },
     { label: 'Total Informasi', value: infoCount, icon: BookOpen, color: 'bg-amber-50 text-amber-600', href: '/admin/informasi' },
     { label: 'Total Galeri', value: galleryCount, icon: ImageIcon, color: 'bg-emerald-50 text-emerald-600', href: '/admin/galeri' },
-    { label: 'Total Peraturan', value: regCount, icon: Scale, color: 'bg-purple-50 text-purple-600', href: '/admin/peraturan' },
     { label: 'Total Pengguna', value: userCount, icon: Users, color: 'bg-pink-50 text-pink-600', href: '/admin/pengaturan' },
   ];
 
@@ -103,13 +99,6 @@ export default async function AdminDashboardPage() {
           >
             <Plus className="w-4 h-4" />
             Tambah Galeri
-          </Link>
-          <Link
-            href="/admin/peraturan/tambah"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Tambah Peraturan
           </Link>
         </div>
       </div>

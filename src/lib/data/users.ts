@@ -1,24 +1,27 @@
-// ============================================================
-// Users Data Access Layer
-// ============================================================
-
 import { User, UserPublic } from '@/lib/types';
-import { readJsonFile, writeJsonFile } from './json-helper';
-
-const FILE = 'users.json';
+import { prisma } from '@/lib/prisma';
 
 export async function getAllUsers(): Promise<User[]> {
-  return readJsonFile<User[]>(FILE);
+  const users = await prisma.user.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+  return users.map(u => ({ ...u, createdAt: u.createdAt.toISOString() })) as User[];
 }
 
 export async function getUserById(id: string): Promise<User | undefined> {
-  const users = await getAllUsers();
-  return users.find(u => u.id === id);
+  const user = await prisma.user.findUnique({
+    where: { id }
+  });
+  if (!user) return undefined;
+  return { ...user, createdAt: user.createdAt.toISOString() } as User;
 }
 
 export async function getUserByEmail(email: string): Promise<User | undefined> {
-  const users = await getAllUsers();
-  return users.find(u => u.email === email);
+  const user = await prisma.user.findUnique({
+    where: { email }
+  });
+  if (!user) return undefined;
+  return { ...user, createdAt: user.createdAt.toISOString() } as User;
 }
 
 export function getUserPublic(user: User): UserPublic {
@@ -31,16 +34,17 @@ export function getUserPublic(user: User): UserPublic {
 }
 
 export async function updateUser(id: string, updates: Partial<User>): Promise<User | null> {
-  const users = await getAllUsers();
-  const index = users.findIndex(u => u.id === id);
-  if (index === -1) return null;
-
-  users[index] = { ...users[index], ...updates };
-  await writeJsonFile(FILE, users);
-  return users[index];
+  try {
+    const updated = await prisma.user.update({
+      where: { id },
+      data: updates
+    });
+    return { ...updated, createdAt: updated.createdAt.toISOString() } as User;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function getUserCount(): Promise<number> {
-  const users = await getAllUsers();
-  return users.length;
+  return prisma.user.count();
 }

@@ -1,67 +1,131 @@
-// ============================================================
-// Gallery Data Access Layer
-// ============================================================
-
 import { GalleryItem } from '@/lib/types';
-import { readJsonFile, writeJsonFile } from './json-helper';
-
-const FILE = 'gallery.json';
+import { prisma } from '@/lib/prisma';
 
 export async function getAllGallery(): Promise<GalleryItem[]> {
-  return readJsonFile<GalleryItem[]>(FILE);
+  const items = await prisma.galleryItem.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+  // Prisma returns dates as Date objects, we map them back to string if needed by types, or just return as is since they match types mostly
+  return items.map(i => ({
+    ...i,
+    createdAt: i.createdAt.toISOString(),
+    updatedAt: i.updatedAt.toISOString(),
+  }));
 }
 
 export async function getPublishedGallery(): Promise<GalleryItem[]> {
-  const gallery = await getAllGallery();
-  return gallery.filter(g => g.published);
+  const items = await prisma.galleryItem.findMany({
+    where: { published: true },
+    orderBy: { date: 'desc' }
+  });
+  return items.map(i => ({
+    ...i,
+    createdAt: i.createdAt.toISOString(),
+    updatedAt: i.updatedAt.toISOString(),
+  }));
 }
 
 export async function getGalleryById(id: string): Promise<GalleryItem | undefined> {
-  const gallery = await getAllGallery();
-  return gallery.find(g => g.id === id);
+  const item = await prisma.galleryItem.findUnique({
+    where: { id }
+  });
+  if (!item) return undefined;
+  return {
+    ...item,
+    createdAt: item.createdAt.toISOString(),
+    updatedAt: item.updatedAt.toISOString(),
+  };
 }
 
 export async function getGalleryByCategory(category: string): Promise<GalleryItem[]> {
-  const gallery = await getPublishedGallery();
-  if (category === 'Semua') return gallery;
-  return gallery.filter(g => g.category === category);
+  if (category === 'Semua') return getPublishedGallery();
+  
+  const items = await prisma.galleryItem.findMany({
+    where: { 
+      published: true,
+      category
+    },
+    orderBy: { date: 'desc' }
+  });
+  return items.map(i => ({
+    ...i,
+    createdAt: i.createdAt.toISOString(),
+    updatedAt: i.updatedAt.toISOString(),
+  }));
 }
 
 export async function createGalleryItem(item: GalleryItem): Promise<GalleryItem> {
-  const gallery = await getAllGallery();
-  gallery.push(item);
-  await writeJsonFile(FILE, gallery);
-  return item;
+  const created = await prisma.galleryItem.create({
+    data: {
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      category: item.category,
+      image: item.image,
+      date: item.date,
+      published: item.published,
+      createdAt: item.createdAt ? new Date(item.createdAt) : undefined,
+      updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+    }
+  });
+  return {
+    ...created,
+    createdAt: created.createdAt.toISOString(),
+    updatedAt: created.updatedAt.toISOString(),
+  };
 }
 
 export async function updateGalleryItem(id: string, updates: Partial<GalleryItem>): Promise<GalleryItem | null> {
-  const gallery = await getAllGallery();
-  const index = gallery.findIndex(g => g.id === id);
-  if (index === -1) return null;
-
-  gallery[index] = { ...gallery[index], ...updates, updatedAt: new Date().toISOString().split('T')[0] };
-  await writeJsonFile(FILE, gallery);
-  return gallery[index];
+  try {
+    const updated = await prisma.galleryItem.update({
+      where: { id },
+      data: {
+        title: updates.title,
+        description: updates.description,
+        category: updates.category,
+        image: updates.image,
+        date: updates.date,
+        published: updates.published,
+      }
+    });
+    return {
+      ...updated,
+      createdAt: updated.createdAt.toISOString(),
+      updatedAt: updated.updatedAt.toISOString(),
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function deleteGalleryItem(id: string): Promise<GalleryItem | null> {
-  const gallery = await getAllGallery();
-  const item = gallery.find(g => g.id === id);
-  if (!item) return null;
-
-  const filtered = gallery.filter(g => g.id !== id);
-  await writeJsonFile(FILE, filtered);
-  return item;
+  try {
+    const deleted = await prisma.galleryItem.delete({
+      where: { id }
+    });
+    return {
+      ...deleted,
+      createdAt: deleted.createdAt.toISOString(),
+      updatedAt: deleted.updatedAt.toISOString(),
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function getGalleryCount(): Promise<number> {
-  const gallery = await getAllGallery();
-  return gallery.length;
+  return prisma.galleryItem.count();
 }
 
 export async function getRecentGallery(limit: number = 4): Promise<GalleryItem[]> {
-  const gallery = await getPublishedGallery();
-  return gallery
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
+  const items = await prisma.galleryItem.findMany({
+    where: { published: true },
+    orderBy: { date: 'desc' },
+    take: limit
+  });
+  return items.map(i => ({
+    ...i,
+    createdAt: i.createdAt.toISOString(),
+    updatedAt: i.updatedAt.toISOString(),
+  }));
 }

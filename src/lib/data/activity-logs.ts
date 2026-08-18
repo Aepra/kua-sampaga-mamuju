@@ -1,22 +1,20 @@
-// ============================================================
-// Activity Logs Data Access Layer
-// ============================================================
-
 import { ActivityLog } from '@/lib/types';
-import { readJsonFile, writeJsonFile } from './json-helper';
+import { prisma } from '@/lib/prisma';
 import { v4 as uuidv4 } from 'uuid';
 
-const FILE = 'activity-logs.json';
-
 export async function getAllLogs(): Promise<ActivityLog[]> {
-  return readJsonFile<ActivityLog[]>(FILE);
+  const logs = await prisma.activityLog.findMany({
+    orderBy: { timestamp: 'desc' }
+  });
+  return logs.map(l => ({ ...l, timestamp: l.timestamp.toISOString() }));
 }
 
 export async function getRecentLogs(limit: number = 10): Promise<ActivityLog[]> {
-  const logs = await getAllLogs();
-  return logs
-    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-    .slice(0, limit);
+  const logs = await prisma.activityLog.findMany({
+    orderBy: { timestamp: 'desc' },
+    take: limit
+  });
+  return logs.map(l => ({ ...l, timestamp: l.timestamp.toISOString() }));
 }
 
 export async function addLog(
@@ -25,22 +23,35 @@ export async function addLog(
   userId: string,
   userName: string
 ): Promise<ActivityLog> {
-  const logs = await getAllLogs();
-  const log: ActivityLog = {
-    id: uuidv4(),
-    action,
-    detail,
-    userId,
-    userName,
-    timestamp: new Date().toISOString(),
-  };
-  logs.push(log);
+  const log = await prisma.activityLog.create({
+    data: {
+      id: uuidv4(),
+      action,
+      detail,
+      userId,
+      userName,
+    }
+  });
 
-  // Keep only last 100 logs
-  const trimmed = logs
-    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-    .slice(0, 100);
+  // Prisma does not automatically trim logs, but we can do a cleanup query
+  // to keep only the last 100 logs.
+  const logsCount = await prisma.activityLog.count();
+  if (logsCount > 100) {
+    const oldestToKeep = await prisma.activityLog.findMany({
+      orderBy: { timestamp: 'desc' },
+      take: 100,
+      skip: 99
+    });
+    if (oldestToKeep.length > 0) {
+      await prisma.activityLog.deleteMany({
+        where: {
+          timestamp: {
+            lt: oldestToKeep[0].timestamp
+          }
+        }
+      });
+    }
+  }
 
-  await writeJsonFile(FILE, trimmed);
-  return log;
+  return { ...log, timestamp: log.timestamp.toISOString() };
 }

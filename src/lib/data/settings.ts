@@ -1,19 +1,23 @@
-// ============================================================
-// Site Settings Data Access Layer
-// ============================================================
-
 import { SiteSettings } from '@/lib/types';
-import { readJsonFile, writeJsonFile } from './json-helper';
-
-const FILE = 'site-settings.json';
+import { prisma } from '@/lib/prisma';
 
 export async function getSettings(): Promise<SiteSettings> {
-  return readJsonFile<SiteSettings>(FILE);
+  const settings = await prisma.siteSettings.findUnique({
+    where: { id: 'default' }
+  });
+  
+  if (!settings) {
+    throw new Error('Settings not found');
+  }
+
+  return settings;
 }
 
 export async function updateSettings(updates: Partial<SiteSettings>): Promise<SiteSettings> {
   const settings = await getSettings();
-  const updated = { ...settings, ...updates };
-  await writeJsonFile(FILE, updated);
+  const updated = await prisma.siteSettings.update({
+    where: { id: 'default' },
+    data: { ...updates }
+  });
   return updated;
 }

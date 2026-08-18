@@ -1,17 +1,23 @@
 // ============================================================
-// Storage Abstraction Layer
-// Handles file upload/delete for local storage
-// Can be swapped to Supabase Storage later
+// Supabase Storage Layer
+// Handles file upload/delete for Supabase Storage
 // ============================================================
 
-import { promises as fs } from 'fs';
+import { createClient } from '@supabase/supabase-js';
 import path from 'path';
 
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads');
+// Supabase Configuration
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+// Create a Supabase client with the service role key for admin-level bypass
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const BUCKET_NAME = 'uploads';
 
 const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 export type UploadFolder = 'gallery' | 'information' | 'profile' | 'services';
 
@@ -28,17 +34,12 @@ function getExtension(filename: string): string {
   return path.extname(filename).toLowerCase();
 }
 
-export async function ensureUploadDir(folder: UploadFolder): Promise<void> {
-  const dir = path.join(UPLOAD_DIR, folder);
-  await fs.mkdir(dir, { recursive: true });
-}
-
 export function validateFile(
   file: File
 ): { valid: boolean; error?: string } {
   // Check size
   if (file.size > MAX_FILE_SIZE) {
-    return { valid: false, error: 'Ukuran file maksimal 5 MB.' };
+    return { valid: false, error: 'Ukuran file maksimal 2 MB.' };
   }
 
   // Check MIME type
@@ -60,48 +61,76 @@ export async function uploadFile(
   folder: UploadFolder,
   prefix?: string
 ): Promise<string> {
-  await ensureUploadDir(folder);
-
   const ext = getExtension(file.name);
   const nameWithoutExt = file.name.replace(/\.[^.]+$/, '');
   const sanitized = sanitizeFilename(prefix || nameWithoutExt);
   const timestamp = Date.now();
-  const filename = `${folder}-${timestamp}-${sanitized}${ext}`;
+  const filename = `${folder}/${timestamp}-${sanitized}${ext}`;
 
-  const filePath = path.join(UPLOAD_DIR, folder, filename);
+  // Read file to buffer
   const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(filePath, buffer);
 
-  // Return the public path
-  return `/uploads/${folder}/${filename}`;
-}
+  // Upload to Supabase Storage
+  const { data, error } = await supabase.storage
+    .from(BUCKET_NAME)
+    .upload(filename, buffer, {
+      contentType: file.type,
+      upsert: true,
+    });
 
-export async function deleteFile(publicPath: string): Promise<boolean> {
-  if (!publicPath || !publicPath.startsWith('/uploads/')) {
-    return false;
+  if (error) {
+    console.error('Supabase upload error:', error);
+    throw new Error('Gagal mengunggah file ke Supabase');
   }
 
+  // Get public URL
+  const { data: publicUrlData } = supabase.storage
+    .from(BUCKET_NAME)
+    .getPublicUrl(filename);
+
+  return publicUrlData.publicUrl;
+}
+
+export async function deleteFile(publicUrl: string): Promise<boolean> {
+  if (!publicUrl) return false;
+
   try {
-    const filePath = path.join(process.cwd(), 'public', publicPath);
-    await fs.unlink(filePath);
+    // Extract the file path from the URL
+    // URL format: https://[project].supabase.co/storage/v1/object/public/uploads/[folder]/[filename]
+    const urlObj = new URL(publicUrl);
+    const pathParts = urlObj.pathname.split('/');
+    
+    // Find the index of the bucket name
+    const bucketIndex = pathParts.indexOf(BUCKET_NAME);
+    if (bucketIndex === -1) return false;
+
+    // Reconstruct the path inside the bucket
+    const filePath = pathParts.slice(bucketIndex + 1).join('/');
+
+    const { error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .remove([filePath]);
+
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return false;
+    }
+    
     return true;
-  } catch {
-    // File may not exist, that's okay
+  } catch (error) {
+    console.error('Failed to parse or delete file URL:', error);
     return false;
   }
 }
 
 export async function replaceFile(
-  oldPublicPath: string,
+  oldPublicUrl: string,
   newFile: File,
   folder: UploadFolder,
   prefix?: string
 ): Promise<string> {
-  // Delete old file
-  if (oldPublicPath) {
-    await deleteFile(oldPublicPath);
+  if (oldPublicUrl) {
+    await deleteFile(oldPublicUrl);
   }
-
-  // Upload new file
   return uploadFile(newFile, folder, prefix);
 }
