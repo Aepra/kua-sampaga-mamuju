@@ -1,0 +1,18 @@
+[
+  {
+    "id": "f927261f-1d2b-4425-bb0b-f7752624bba6",
+    "action": "Tambah Galeri",
+    "detail": "Menambahkan foto: kegiatan nikah di kua",
+    "userId": "user-001",
+    "userName": "Administrator",
+    "timestamp": "2026-08-18T04:37:13.671Z"
+  },
+  {
+    "id": "53b9ba05-cb81-464d-811f-7530fc45e681",
+    "action": "Tambah Layanan",
+    "detail": "Menambahkan layanan: Pendaftaran NIkah Contoh Test",
+    "userId": "user-001",
+    "userName": "Administrator",
+    "timestamp": "2026-08-18T04:36:23.522Z"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "user-001",
+    "name": "Administrator",
+    "email": "admin@kuasampaga.test",
+    "passwordHash": "$2b$12$pBsSdTt/8MiS5rSeOc84Ueuxfs6YZDVOREKYwRX9nGNqrbazvogcS",
+    "role": "admin",
+    "createdAt": "2026-08-18"
+  },
+  {
+    "id": "user-002",
+    "name": "User Demo",
+    "email": "user@kuasampaga.test",
+    "passwordHash": "$2b$12$li5su0CbNd1IMz87efq5.O7/VxsN0tq542wGnuAF1mIbeaMTHLn9.",
+    "role": "user",
+    "createdAt": "2026-08-18"
+  }
+]

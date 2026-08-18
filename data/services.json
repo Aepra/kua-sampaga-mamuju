@@ -1,0 +1,832 @@
+[
+  {
+    "id": "service-001",
+    "title": "Pendaftaran Nikah",
+    "slug": "pendaftaran-nikah",
+    "category": "Pernikahan",
+    "icon": "Heart",
+    "image": "",
+    "description": "Informasi mengenai persyaratan dan dokumen yang perlu disiapkan untuk pendaftaran nikah di KUA Kecamatan Sampaga.",
+    "additionalDescription": "Pastikan seluruh dokumen telah disiapkan sebelum datang ke kantor KUA untuk memperlancar proses pendaftaran.",
+    "requirements": [
+      {
+        "id": "req-001",
+        "title": "KTP",
+        "description": "KTP asli dan fotokopi calon pengantin.",
+        "required": true
+      },
+      {
+        "id": "req-002",
+        "title": "Kartu Keluarga",
+        "description": "KK asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-003",
+        "title": "Akta Kelahiran",
+        "description": "Akta kelahiran asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-004",
+        "title": "Ijazah Terakhir",
+        "description": "Fotokopi ijazah pendidikan terakhir.",
+        "required": true
+      },
+      {
+        "id": "req-005",
+        "title": "Pas Foto",
+        "description": "Pas foto berwarna latar biru ukuran 2x3 dan 3x4.",
+        "required": true
+      },
+      {
+        "id": "req-006",
+        "title": "Surat Pengantar dari Desa/Kelurahan",
+        "description": "Surat pengantar nikah dari desa atau kelurahan.",
+        "required": true
+      },
+      {
+        "id": "req-007",
+        "title": "Surat Persetujuan Kedua Calon Mempelai",
+        "description": "Formulir persetujuan yang ditandatangani kedua calon mempelai.",
+        "required": true
+      },
+      {
+        "id": "req-008",
+        "title": "Surat Izin Orang Tua",
+        "description": "Surat izin orang tua bagi calon mempelai yang belum berusia 21 tahun.",
+        "required": false
+      },
+      {
+        "id": "req-009",
+        "title": "Akta Cerai / Surat Kematian",
+        "description": "Bagi yang berstatus duda/janda, melampirkan akta cerai atau surat kematian pasangan.",
+        "required": false
+      },
+      {
+        "id": "req-010",
+        "title": "Surat Dispensasi Pengadilan",
+        "description": "Bagi calon mempelai yang belum memenuhi syarat usia minimal.",
+        "required": false
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli dan fotokopi",
+      "Kartu Keluarga asli dan fotokopi",
+      "Akta Kelahiran asli dan fotokopi",
+      "Fotokopi Ijazah Terakhir",
+      "Pas Foto 2x3 dan 3x4",
+      "Surat Pengantar Desa/Kelurahan",
+      "Surat Persetujuan Mempelai"
+    ],
+    "steps": [
+      "Siapkan seluruh dokumen persyaratan",
+      "Dapatkan surat pengantar dari desa/kelurahan",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Serahkan berkas dan isi formulir pendaftaran",
+      "Tunggu proses verifikasi data",
+      "Ikuti bimbingan perkawinan",
+      "Pelaksanaan akad nikah sesuai jadwal"
+    ],
+    "notes": [
+      "Pastikan data pada KTP, KK, dan Akta Kelahiran semuanya sama.",
+      "Jika terdapat perbedaan data, sebaiknya diperbaiki terlebih dahulu di Dinas Kependudukan dan Pencatatan Sipil (Capil).",
+      "Pendaftaran nikah minimal 10 hari kerja sebelum hari pelaksanaan."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "nikah",
+      "pernikahan",
+      "daftar nikah",
+      "pendaftaran nikah",
+      "menikah",
+      "kawin"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-002",
+    "title": "Pendaftaran Nikah Online",
+    "slug": "pendaftaran-nikah-online",
+    "category": "Pernikahan",
+    "icon": "Globe",
+    "image": "",
+    "description": "Informasi mengenai persiapan data dan dokumen sebelum melakukan pendaftaran nikah secara online.",
+    "additionalDescription": "Layanan pendaftaran nikah online memudahkan masyarakat untuk mendaftarkan pernikahan tanpa harus datang langsung ke kantor KUA pada tahap awal pendaftaran.",
+    "requirements": [
+      {
+        "id": "req-011",
+        "title": "Email Aktif",
+        "description": "Siapkan email yang aktif untuk proses registrasi.",
+        "required": true
+      },
+      {
+        "id": "req-012",
+        "title": "Nomor HP Aktif",
+        "description": "Siapkan nomor handphone yang aktif.",
+        "required": true
+      },
+      {
+        "id": "req-013",
+        "title": "KTP",
+        "description": "Data KTP yang masih berlaku.",
+        "required": true
+      },
+      {
+        "id": "req-014",
+        "title": "Kartu Keluarga",
+        "description": "Data Kartu Keluarga.",
+        "required": true
+      },
+      {
+        "id": "req-015",
+        "title": "Akta Kelahiran",
+        "description": "Data Akta Kelahiran.",
+        "required": true
+      },
+      {
+        "id": "req-016",
+        "title": "Ijazah",
+        "description": "Fotokopi ijazah pendidikan terakhir.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli dan fotokopi",
+      "Kartu Keluarga asli dan fotokopi",
+      "Akta Kelahiran asli dan fotokopi",
+      "Fotokopi Ijazah"
+    ],
+    "steps": [
+      "Siapkan data sebelum mendaftar online sesuai syarat daftar nikah",
+      "Siapkan email dan nomor handphone yang aktif",
+      "Pastikan data pada Akta Kelahiran, KK, dan KTP semuanya sama",
+      "Siapkan fotokopi ijazah",
+      "Jika terdapat perbedaan data, perbaiki terlebih dahulu di Capil",
+      "Jika semua sudah siap, klik link pendaftaran",
+      "Klik daftar dan isi sesuai permintaan aplikasi",
+      "Setelah pendaftaran online diterima KUA, bawa berkas fisik pendaftaran nikah ke KUA"
+    ],
+    "notes": [
+      "Pastikan data pada Akta Kelahiran, KK, dan KTP semuanya sama sebelum mendaftar online.",
+      "Jika terdapat perbedaan data pada akta kelahiran, KK, KTP, dan ijazah, sebaiknya diperbaiki terlebih dahulu di Capil.",
+      "Setelah pendaftaran online diterima, Anda tetap harus membawa berkas fisik ke KUA."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "nikah online",
+      "daftar nikah online",
+      "pendaftaran online",
+      "nikah",
+      "pernikahan"
+    ],
+    "published": true,
+    "isDummy": false,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-003",
+    "title": "Perubahan Data Pernikahan",
+    "slug": "perubahan-data-pernikahan",
+    "category": "Administrasi",
+    "icon": "FileEdit",
+    "image": "",
+    "description": "Informasi mengenai persyaratan perubahan data pada buku nikah atau dokumen pernikahan.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-017",
+        "title": "Buku Nikah Asli",
+        "description": "Buku nikah asli yang datanya akan diubah.",
+        "required": true
+      },
+      {
+        "id": "req-018",
+        "title": "KTP",
+        "description": "KTP asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-019",
+        "title": "Kartu Keluarga",
+        "description": "KK asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-020",
+        "title": "Dokumen Pendukung Perubahan",
+        "description": "Dokumen yang mendukung perubahan data, seperti akta kelahiran yang sudah diperbaiki.",
+        "required": true
+      },
+      {
+        "id": "req-021",
+        "title": "Surat Pengantar dari Desa/Kelurahan",
+        "description": "Surat pengantar dari desa atau kelurahan.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "Buku Nikah asli",
+      "KTP asli dan fotokopi",
+      "Kartu Keluarga asli dan fotokopi",
+      "Dokumen pendukung perubahan",
+      "Surat Pengantar Desa/Kelurahan"
+    ],
+    "steps": [
+      "Siapkan seluruh dokumen persyaratan",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Isi formulir permohonan perubahan data",
+      "Serahkan berkas untuk diverifikasi",
+      "Tunggu proses perubahan data"
+    ],
+    "notes": [
+      "Perubahan data hanya dapat dilakukan dengan dokumen pendukung yang sah."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "perubahan data",
+      "ubah data nikah",
+      "koreksi buku nikah",
+      "perbaikan data"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-004",
+    "title": "Perubahan Nama",
+    "slug": "perubahan-nama",
+    "category": "Administrasi",
+    "icon": "UserCog",
+    "image": "",
+    "description": "Informasi mengenai persyaratan perubahan nama pada dokumen pernikahan, termasuk perubahan nama suami, istri, atau orang tua yang telah meninggal.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-022",
+        "title": "Buku Nikah Asli",
+        "description": "Buku nikah asli.",
+        "required": true
+      },
+      {
+        "id": "req-023",
+        "title": "KTP",
+        "description": "KTP asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-024",
+        "title": "Kartu Keluarga",
+        "description": "KK asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-025",
+        "title": "Penetapan Pengadilan",
+        "description": "Surat penetapan dari pengadilan terkait perubahan nama.",
+        "required": true
+      },
+      {
+        "id": "req-026",
+        "title": "Akta Kelahiran Baru",
+        "description": "Akta kelahiran yang sudah diperbarui.",
+        "required": true
+      },
+      {
+        "id": "req-027",
+        "title": "Surat Kematian",
+        "description": "Surat kematian jika perubahan nama terkait orang tua yang meninggal.",
+        "required": false
+      }
+    ],
+    "documentsToBring": [
+      "Buku Nikah asli",
+      "KTP asli dan fotokopi",
+      "KK asli dan fotokopi",
+      "Penetapan Pengadilan",
+      "Akta Kelahiran baru"
+    ],
+    "steps": [
+      "Siapkan seluruh dokumen persyaratan",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Serahkan berkas dan formulir permohonan",
+      "Tunggu proses verifikasi dan perubahan"
+    ],
+    "notes": [
+      "Perubahan nama memerlukan penetapan dari pengadilan."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "perubahan nama",
+      "ganti nama",
+      "ubah nama",
+      "nama suami",
+      "nama istri"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-005",
+    "title": "Surat Keterangan",
+    "slug": "surat-keterangan",
+    "category": "Administrasi",
+    "icon": "FileText",
+    "image": "",
+    "description": "Informasi mengenai persyaratan pengurusan surat keterangan dari KUA Kecamatan Sampaga.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-028",
+        "title": "KTP",
+        "description": "KTP asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-029",
+        "title": "Kartu Keluarga",
+        "description": "KK asli dan fotokopi.",
+        "required": true
+      },
+      {
+        "id": "req-030",
+        "title": "Buku Nikah",
+        "description": "Buku nikah asli (jika terkait pernikahan).",
+        "required": false
+      },
+      {
+        "id": "req-031",
+        "title": "Surat Pengantar Desa/Kelurahan",
+        "description": "Surat pengantar dari desa atau kelurahan.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli dan fotokopi",
+      "Kartu Keluarga asli dan fotokopi",
+      "Buku Nikah (jika diperlukan)",
+      "Surat Pengantar Desa/Kelurahan"
+    ],
+    "steps": [
+      "Siapkan dokumen yang diperlukan",
+      "Dapatkan surat pengantar dari desa/kelurahan",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Sampaikan keperluan surat keterangan",
+      "Tunggu proses penerbitan"
+    ],
+    "notes": [
+      "Jenis surat keterangan disesuaikan dengan kebutuhan pemohon."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "surat keterangan",
+      "surat",
+      "keterangan",
+      "SKK"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-006",
+    "title": "Surat Pengantar Desa/Kelurahan",
+    "slug": "surat-pengantar-desa-kelurahan",
+    "category": "Administrasi",
+    "icon": "ScrollText",
+    "image": "",
+    "description": "Informasi mengenai format dan persyaratan surat pengantar dari desa atau kelurahan yang diperlukan untuk pengurusan di KUA.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-032",
+        "title": "KTP Pemohon",
+        "description": "KTP asli pemohon.",
+        "required": true
+      },
+      {
+        "id": "req-033",
+        "title": "Kartu Keluarga",
+        "description": "KK asli.",
+        "required": true
+      },
+      {
+        "id": "req-034",
+        "title": "Surat Permohonan",
+        "description": "Surat permohonan kepada kepala desa/lurah.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli",
+      "Kartu Keluarga asli",
+      "Surat permohonan"
+    ],
+    "steps": [
+      "Siapkan dokumen yang diperlukan",
+      "Datang ke kantor desa/kelurahan",
+      "Ajukan permohonan surat pengantar",
+      "Tunggu surat pengantar diterbitkan",
+      "Gunakan surat pengantar untuk pengurusan di KUA"
+    ],
+    "notes": [
+      "Surat pengantar desa/kelurahan diperlukan untuk beberapa pengurusan di KUA.",
+      "Format surat pengantar dapat ditanyakan langsung ke kantor desa/kelurahan."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "surat pengantar",
+      "pengantar desa",
+      "pengantar kelurahan",
+      "surat desa"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-007",
+    "title": "Wakaf",
+    "slug": "wakaf",
+    "category": "Wakaf",
+    "icon": "Landmark",
+    "image": "",
+    "description": "Informasi mengenai persyaratan dan prosedur pendaftaran wakaf melalui KUA Kecamatan Sampaga.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-035",
+        "title": "KTP Wakif",
+        "description": "KTP asli dan fotokopi pewakaf.",
+        "required": true
+      },
+      {
+        "id": "req-036",
+        "title": "Sertifikat Tanah",
+        "description": "Sertifikat tanah atau bukti kepemilikan.",
+        "required": true
+      },
+      {
+        "id": "req-037",
+        "title": "Surat Pernyataan Wakaf",
+        "description": "Ikrar wakaf yang ditandatangani pewakaf.",
+        "required": true
+      },
+      {
+        "id": "req-038",
+        "title": "Saksi-Saksi",
+        "description": "Minimal 2 orang saksi.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli dan fotokopi",
+      "Sertifikat tanah / bukti kepemilikan",
+      "Surat pernyataan wakaf",
+      "Data saksi-saksi"
+    ],
+    "steps": [
+      "Siapkan dokumen kepemilikan tanah/aset yang akan diwakafkan",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Bawa saksi-saksi",
+      "Lakukan ikrar wakaf di hadapan Pejabat Pembuat Akta Ikrar Wakaf (PPAIW)",
+      "Tunggu proses penerbitan Akta Ikrar Wakaf"
+    ],
+    "notes": [
+      "Wakaf bersifat permanen dan tidak dapat ditarik kembali."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "wakaf",
+      "tanah wakaf",
+      "ikrar wakaf",
+      "PPAIW"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-008",
+    "title": "Konsultasi Keluarga",
+    "slug": "konsultasi-keluarga",
+    "category": "Konsultasi",
+    "icon": "Users",
+    "image": "",
+    "description": "Layanan konsultasi keluarga yang disediakan oleh KUA Kecamatan Sampaga untuk membantu masyarakat dalam masalah keluarga.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-039",
+        "title": "KTP",
+        "description": "KTP asli pemohon konsultasi.",
+        "required": true
+      },
+      {
+        "id": "req-040",
+        "title": "Buku Nikah",
+        "description": "Buku nikah jika terkait masalah pernikahan.",
+        "required": false
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli",
+      "Buku Nikah (jika diperlukan)"
+    ],
+    "steps": [
+      "Hubungi KUA Kecamatan Sampaga untuk membuat janji",
+      "Datang ke kantor KUA sesuai jadwal",
+      "Sampaikan permasalahan keluarga",
+      "Dapatkan bimbingan dan konsultasi"
+    ],
+    "notes": [
+      "Konsultasi bersifat rahasia.",
+      "Masyarakat dapat menghubungi KUA melalui WhatsApp terlebih dahulu."
+    ],
+    "fee": "Gratis",
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "konsultasi",
+      "konsultasi keluarga",
+      "masalah keluarga",
+      "bimbingan keluarga"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-009",
+    "title": "Bimbingan Perkawinan",
+    "slug": "bimbingan-perkawinan",
+    "category": "Pernikahan",
+    "icon": "BookHeart",
+    "image": "",
+    "description": "Informasi mengenai program bimbingan perkawinan bagi calon pengantin sebelum melangsungkan pernikahan.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-041",
+        "title": "Terdaftar sebagai Calon Pengantin",
+        "description": "Sudah terdaftar di KUA sebagai calon pengantin.",
+        "required": true
+      },
+      {
+        "id": "req-042",
+        "title": "KTP",
+        "description": "KTP asli kedua calon pengantin.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli kedua calon pengantin",
+      "Bukti pendaftaran nikah"
+    ],
+    "steps": [
+      "Daftar nikah terlebih dahulu di KUA",
+      "Ikuti jadwal bimbingan perkawinan yang ditentukan",
+      "Hadiri seluruh sesi bimbingan",
+      "Dapatkan sertifikat bimbingan perkawinan"
+    ],
+    "notes": [
+      "Bimbingan perkawinan wajib diikuti oleh kedua calon mempelai."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "bimbingan perkawinan",
+      "kursus nikah",
+      "calon pengantin",
+      "bimbingan"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-010",
+    "title": "Rujuk",
+    "slug": "rujuk",
+    "category": "Keluarga",
+    "icon": "HeartHandshake",
+    "image": "",
+    "description": "Informasi mengenai persyaratan dan prosedur rujuk bagi pasangan yang ingin kembali bersama setelah perceraian.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-043",
+        "title": "Akta Cerai",
+        "description": "Akta cerai asli.",
+        "required": true
+      },
+      {
+        "id": "req-044",
+        "title": "KTP Kedua Pihak",
+        "description": "KTP asli dan fotokopi suami dan istri.",
+        "required": true
+      },
+      {
+        "id": "req-045",
+        "title": "Buku Nikah",
+        "description": "Buku nikah asli.",
+        "required": true
+      },
+      {
+        "id": "req-046",
+        "title": "Surat Pengantar Desa/Kelurahan",
+        "description": "Surat pengantar dari desa atau kelurahan.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "Akta Cerai asli",
+      "KTP asli dan fotokopi kedua pihak",
+      "Buku Nikah asli",
+      "Surat Pengantar Desa/Kelurahan"
+    ],
+    "steps": [
+      "Siapkan seluruh dokumen persyaratan",
+      "Datang ke kantor KUA Kecamatan Sampaga bersama pasangan",
+      "Serahkan berkas dan isi formulir",
+      "Proses pencatatan rujuk"
+    ],
+    "notes": [
+      "Rujuk hanya dapat dilakukan dalam masa iddah (talak raj'i)."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "rujuk",
+      "kembali",
+      "cerai",
+      "talak"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-011",
+    "title": "Legalisasi Dokumen",
+    "slug": "legalisasi-dokumen",
+    "category": "Administrasi",
+    "icon": "BadgeCheck",
+    "image": "",
+    "description": "Informasi mengenai persyaratan legalisasi dokumen pernikahan dan dokumen keagamaan di KUA Kecamatan Sampaga.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-047",
+        "title": "Dokumen Asli",
+        "description": "Dokumen asli yang akan dilegalisasi.",
+        "required": true
+      },
+      {
+        "id": "req-048",
+        "title": "Fotokopi Dokumen",
+        "description": "Fotokopi dokumen yang akan dilegalisasi.",
+        "required": true
+      },
+      {
+        "id": "req-049",
+        "title": "KTP Pemohon",
+        "description": "KTP asli pemohon.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "Dokumen asli yang akan dilegalisasi",
+      "Fotokopi dokumen",
+      "KTP asli"
+    ],
+    "steps": [
+      "Siapkan dokumen asli dan fotokopinya",
+      "Datang ke kantor KUA Kecamatan Sampaga",
+      "Serahkan dokumen untuk dilegalisasi",
+      "Tunggu proses legalisasi"
+    ],
+    "notes": [
+      "Legalisasi hanya dapat dilakukan untuk dokumen yang diterbitkan oleh KUA."
+    ],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "legalisasi",
+      "legalisir",
+      "pengesahan",
+      "stempel"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-012",
+    "title": "Layanan Keagamaan",
+    "slug": "layanan-keagamaan",
+    "category": "Keagamaan",
+    "icon": "BookOpen",
+    "image": "",
+    "description": "Informasi mengenai layanan keagamaan yang disediakan oleh KUA Kecamatan Sampaga, termasuk penyuluhan dan bimbingan keagamaan.",
+    "additionalDescription": "",
+    "requirements": [
+      {
+        "id": "req-050",
+        "title": "KTP",
+        "description": "KTP pemohon.",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP asli"
+    ],
+    "steps": [
+      "Hubungi KUA Kecamatan Sampaga",
+      "Sampaikan kebutuhan layanan keagamaan",
+      "Ikuti jadwal yang ditentukan"
+    ],
+    "notes": [
+      "Untuk informasi lebih lanjut, silakan hubungi KUA melalui WhatsApp."
+    ],
+    "fee": "Gratis",
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [
+      "keagamaan",
+      "agama",
+      "penyuluhan",
+      "bimbingan agama",
+      "ceramah"
+    ],
+    "published": true,
+    "isDummy": true,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "service-d27c1853",
+    "title": "Pendaftaran NIkah Contoh Test",
+    "slug": "pendaftaran-nikah-contoh-test",
+    "category": "Pernikahan",
+    "icon": "Heart",
+    "image": "/uploads/services/services-1787027729139-pendaftaran-nikah-contoh-test.png",
+    "description": "Layanan Nikah untuk KUA",
+    "additionalDescription": "nbjh",
+    "requirements": [
+      {
+        "id": "req-1787027728059",
+        "title": "Dokumen asli KTP",
+        "description": "",
+        "required": true
+      }
+    ],
+    "documentsToBring": [
+      "KTP",
+      "Kartu Keluarga",
+      "dan lain lain"
+    ],
+    "steps": [],
+    "notes": [],
+    "fee": null,
+    "processingTime": null,
+    "externalLink": null,
+    "keywords": [],
+    "published": true,
+    "isDummy": false,
+    "createdAt": "2026-08-18",
+    "updatedAt": "2026-08-18"
+  }
+]
