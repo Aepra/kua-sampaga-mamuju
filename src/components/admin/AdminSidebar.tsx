@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 import {
   LayoutDashboard, FileText, Image as ImageIcon, BookOpen,
   Landmark, Settings, LogOut,
@@ -45,11 +46,8 @@ const menuGroups = [
 export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
 
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/login');
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/login' });
   };
 
   const isActive = (href: string) => {
