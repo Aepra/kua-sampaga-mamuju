@@ -67,16 +67,16 @@ export default function AdminGaleriListPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary font-heading">Kelola Galeri</h1>
-          <p className="text-sm text-text-secondary mt-1">Daftar foto kegiatan dan pelayanan KUA.</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">Kelola Galeri</h1>
+          <p className="text-xs sm:text-sm text-text-secondary mt-1">Daftar foto kegiatan dan pelayanan KUA.</p>
         </div>
         <Link
           href="/admin/galeri/tambah"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors w-full sm:w-auto"
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors w-full sm:w-auto"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           Tambah Foto
         </Link>
       </div>

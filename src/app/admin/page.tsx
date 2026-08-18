@@ -43,14 +43,14 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-bold text-text-primary font-heading">Dashboard Admin</h1>
-        <p className="text-sm text-text-secondary mt-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">Dashboard Admin</h1>
+        <p className="text-xs sm:text-sm text-text-secondary mt-1">
           Ringkasan data dan aktivitas pengelolaan website KUA Kecamatan Sampaga.
         </p>
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
@@ -60,12 +60,12 @@ export default async function AdminDashboardPage() {
               className="bg-white rounded-xl border border-border-light p-4 hover:shadow-md transition-all group"
             >
               <div className="flex items-center justify-between">
-                <div className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center`}>
-                  <Icon className="w-5 h-5" />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${stat.color} flex items-center justify-center`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <span className="text-2xl font-bold text-text-primary font-heading">{stat.value}</span>
+                <span className="text-xl sm:text-2xl font-bold text-text-primary font-heading">{stat.value}</span>
               </div>
-              <p className="mt-3 text-xs font-medium text-text-secondary group-hover:text-primary-700 transition-colors">
+              <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs font-medium text-text-secondary group-hover:text-primary-700 transition-colors">
                 {stat.label}
               </p>
             </Link>
@@ -74,30 +74,30 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl border border-border-light p-5">
-        <h2 className="text-sm font-bold text-text-primary uppercase tracking-wider mb-4 font-heading">
+      <div className="bg-white rounded-xl border border-border-light p-4 sm:p-5">
+        <h2 className="text-xs sm:text-sm font-bold text-text-primary uppercase tracking-wider mb-3 sm:mb-4 font-heading">
           Aksi Cepat
         </h2>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <Link
             href="/admin/layanan/tambah"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Tambah Layanan
           </Link>
           <Link
             href="/admin/informasi/tambah"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Tambah Informasi
           </Link>
           <Link
             href="/admin/galeri/tambah"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Tambah Galeri
           </Link>
         </div>
