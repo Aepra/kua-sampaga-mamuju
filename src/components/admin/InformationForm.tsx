@@ -7,6 +7,7 @@ import type { Information } from '@/lib/types';
 import { INFORMATION_CATEGORIES } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
 import { useToast } from '@/components/ui/Toast';
+import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
 interface InformationFormProps {
   initialData?: Information;
@@ -86,8 +87,10 @@ export default function InformationForm({ initialData }: InformationFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
-      <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
+    <>
+      <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui informasi...' : 'Menambahkan informasi...'} />
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
+        <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -234,7 +237,8 @@ export default function InformationForm({ initialData }: InformationFormProps) {
             </span>
           </label>
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }

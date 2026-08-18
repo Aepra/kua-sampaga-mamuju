@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { Upload, X, AlertCircle } from 'lucide-react';
 import type { UploadFolder } from '@/lib/storage';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface UploadImageProps {
   value: string;
@@ -21,6 +22,7 @@ export default function UploadImage({
 }: UploadImageProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showConfirm, setShowConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +68,14 @@ export default function UploadImage({
     }
   };
 
-  const handleRemove = () => {
+  const handleRemoveClick = () => {
+    setShowConfirm(true);
+  };
+
+  const confirmRemove = () => {
     onChange('');
     setError('');
+    setShowConfirm(false);
   };
 
   return (
@@ -104,7 +111,7 @@ export default function UploadImage({
             </button>
             <button
               type="button"
-              onClick={handleRemove}
+              onClick={handleRemoveClick}
               className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-medium transition-colors"
             >
               <X className="w-4 h-4" />
@@ -143,6 +150,14 @@ export default function UploadImage({
         accept="image/jpeg,image/png,image/webp"
         onChange={handleFileChange}
         className="hidden"
+      />
+
+      <ConfirmDialog
+        isOpen={showConfirm}
+        title="Hapus Gambar"
+        message="Apakah Anda yakin ingin menghapus gambar ini? Gambar yang dihapus tidak dapat dikembalikan."
+        onConfirm={confirmRemove}
+        onCancel={() => setShowConfirm(false)}
       />
     </div>
   );

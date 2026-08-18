@@ -5,6 +5,7 @@ import { Save } from 'lucide-react';
 import type { SiteSettings } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
 import { useToast } from '@/components/ui/Toast';
+import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
 export default function AdminProfilPage() {
   const { showToast } = useToast();
@@ -84,8 +85,10 @@ export default function AdminProfilPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-12">
-      <div className="flex items-center justify-between border-b border-border-light pb-4">
+    <>
+      <FullScreenLoader isLoading={saving} message="Menyimpan profil..." />
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-12">
+        <div className="flex items-center justify-between border-b border-border-light pb-4">
         <div>
           <h1 className="text-2xl font-bold text-text-primary font-heading">Profil & Informasi KUA</h1>
           <p className="text-sm text-text-secondary mt-1">
@@ -282,7 +285,8 @@ export default function AdminProfilPage() {
             label="Foto Kepala KUA"
           />
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }

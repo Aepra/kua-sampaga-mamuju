@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Save, User, Shield } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
+import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
 export default function AdminPengaturanPage() {
   const { showToast } = useToast();
@@ -37,9 +38,11 @@ export default function AdminPengaturanPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
-      <div>
-        <h1 className="text-2xl font-bold text-text-primary font-heading">Pengaturan Akun</h1>
+    <>
+      <FullScreenLoader isLoading={saving} message="Memperbarui kata sandi..." />
+      <div className="space-y-6 max-w-2xl">
+        <div>
+          <h1 className="text-2xl font-bold text-text-primary font-heading">Pengaturan Akun</h1>
         <p className="text-sm text-text-secondary mt-1">Kelola keamanan dan kata sandi akun admin.</p>
       </div>
 
@@ -112,7 +115,8 @@ export default function AdminPengaturanPage() {
             {saving ? 'Memproses...' : 'Ubah Password'}
           </button>
         </div>
-      </form>
-    </div>
-  );
-}
+          </form>
+        </div>
+      </>
+    );
+  }

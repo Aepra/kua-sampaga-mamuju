@@ -7,6 +7,7 @@ import type { GalleryItem } from '@/lib/types';
 import { GALLERY_CATEGORIES } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
 import { useToast } from '@/components/ui/Toast';
+import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
 interface GalleryFormProps {
   initialData?: GalleryItem;
@@ -75,8 +76,10 @@ export default function GalleryForm({ initialData }: GalleryFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
-      {/* Header */}
+    <>
+      <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui foto...' : 'Menambahkan foto...'} />
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+        {/* Header */}
       <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
         <div className="flex items-center gap-3">
           <button
@@ -194,7 +197,8 @@ export default function GalleryForm({ initialData }: GalleryFormProps) {
             </span>
           </label>
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }

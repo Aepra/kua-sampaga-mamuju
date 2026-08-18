@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import NextTopLoader from 'nextjs-toploader';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-surface-secondary flex">
+      <NextTopLoader color="#059669" height={3} showSpinner={false} />
       <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
         <AdminHeader onOpenSidebar={() => setSidebarOpen(true)} user={user} />

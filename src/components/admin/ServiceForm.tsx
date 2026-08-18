@@ -7,6 +7,7 @@ import type { Service, Requirement } from '@/lib/types';
 import { SERVICE_CATEGORIES } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
 import { useToast } from '@/components/ui/Toast';
+import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
 interface ServiceFormProps {
   initialData?: Service;
@@ -158,8 +159,10 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl pb-12">
-      {/* Top Header */}
+    <>
+      <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui layanan...' : 'Menambahkan layanan...'} />
+      <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl pb-12">
+        {/* Top Header */}
       <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
         <div className="flex items-center gap-3">
           <button
@@ -557,7 +560,8 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             <span className="text-sm font-medium text-text-primary">Dipublikasikan di website publik</span>
           </label>
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }
