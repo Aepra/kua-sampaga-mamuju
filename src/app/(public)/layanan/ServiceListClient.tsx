@@ -69,8 +69,8 @@ export default function ServiceListClient({ services, categories }: ServiceListC
       <div className="bg-[#022C22] text-white pt-[70px] relative overflow-hidden">
         {/* Subtle decorative background pattern */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold font-heading">Layanan KUA</h1>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 relative z-10">
+          <h1 className="text-2xl sm:text-4xl font-bold font-heading">Layanan KUA</h1>
           <p className="mt-2 text-[#A7F3D0] max-w-2xl">
             Temukan informasi persyaratan dan dokumen yang perlu dipersiapkan sebelum datang ke kantor KUA.
           </p>
@@ -133,7 +133,7 @@ export default function ServiceListClient({ services, categories }: ServiceListC
         </p>
 
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 items-stretch">
             {filtered.map((service, i) => (
               <div key={service.id} className="h-full">
                 <ServiceCardPublic

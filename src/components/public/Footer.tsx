@@ -42,10 +42,10 @@ export default function Footer({ settings }: FooterProps) {
 
   return (
     <footer className="bg-primary-950 text-white no-print">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-4">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
                 <Landmark className="w-5 h-5 text-white" />
@@ -55,12 +55,14 @@ export default function Footer({ settings }: FooterProps) {
                 <p className="text-[10px] text-primary-300 leading-tight">Kab. Mamuju</p>
               </div>
             </div>
-            <p className="text-sm text-primary-200 leading-relaxed">
+            <p className="text-sm text-primary-200 leading-relaxed pr-4">
               Informasi layanan dan persyaratan KUA Kecamatan Sampaga Kabupaten Mamuju.
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Navigation & Services Wrapper (Side-by-side on mobile) */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-8 lg:col-span-4">
+            {/* Navigation */}
           <div>
             <h3 className="text-sm font-semibold font-heading uppercase tracking-wider text-primary-300 mb-4">
               Navigasi
@@ -97,9 +99,10 @@ export default function Footer({ settings }: FooterProps) {
               ))}
             </ul>
           </div>
+          </div>
 
           {/* Contact & Social */}
-          <div>
+          <div className="lg:col-span-4">
             <h3 className="text-sm font-semibold font-heading uppercase tracking-wider text-primary-300 mb-4">
               Kontak
             </h3>

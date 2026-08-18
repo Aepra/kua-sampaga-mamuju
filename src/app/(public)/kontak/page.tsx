@@ -25,8 +25,8 @@ export default async function KontakPage() {
     <div className="min-h-screen bg-[#F8FAF9]">
       <div className="bg-[#022C22] text-white pt-[70px] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold font-heading">Kontak</h1>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 relative z-10">
+          <h1 className="text-2xl sm:text-4xl font-bold font-heading">Kontak</h1>
           <p className="mt-2 text-[#A7F3D0]">Hubungi KUA Kecamatan Sampaga.</p>
         </div>
       </div>

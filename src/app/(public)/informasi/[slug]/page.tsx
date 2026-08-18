@@ -31,7 +31,7 @@ export default async function InformasiDetailPage({ params }: Props) {
           <div className="mb-2">
             <span className="inline-block px-3 py-1 text-xs font-bold bg-[#059669] text-white shadow-sm rounded-full">{info.category}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-heading tracking-tight leading-tight">{info.title}</h1>
+          <h1 className="text-2xl sm:text-4xl font-extrabold font-heading tracking-tight leading-tight">{info.title}</h1>
           <div className="flex items-center gap-2 mt-4 text-[#D1FAE5] text-sm font-medium">
             <Clock className="w-4 h-4" />
             {new Date(info.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}

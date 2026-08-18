@@ -101,7 +101,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
               <span className="inline-block px-4 py-1.5 text-xs font-bold bg-[#059669] text-white shadow-sm rounded-full mb-4">
                 {service.category}
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
                 {service.title}
               </h1>
               <p className="mt-3 text-sm sm:text-base text-[#D1FAE5] leading-relaxed max-w-3xl">

@@ -81,8 +81,8 @@ export default async function HomePage() {
       {/* 1. HERO SECTION (MODERN, PROFESSIONAL, CLEAN) */}
       {/* ============================================================ */}
       <section 
-        className="relative min-h-[100vh] flex items-center pt-[100px] pb-20 px-6 overflow-hidden bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#047857]"
-        style={{ paddingLeft: 'clamp(1.5rem, 8vw, 8rem)', paddingRight: 'clamp(1.5rem, 8vw, 8rem)' }}
+        className="relative min-h-[100svh] flex items-center pt-[90px] lg:pt-[100px] pb-12 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#047857]"
+        style={{ paddingLeft: 'clamp(1rem, 5vw, 8rem)', paddingRight: 'clamp(1rem, 5vw, 8rem)' }}
       > 
         <style>{`
           @keyframes panGrid {
@@ -126,8 +126,7 @@ export default async function HomePage() {
 
               {/* Title */}
               <h1 
-                className="text-4xl sm:text-5xl lg:text-[4rem] font-black font-heading text-white leading-[1.1] tracking-tight drop-shadow-sm"
-                style={{ marginBottom: '32px' }}
+                className="text-3xl sm:text-5xl lg:text-[4rem] font-black font-heading text-white leading-[1.1] tracking-tight drop-shadow-sm mb-6 lg:mb-8"
               >
                 Layanan KUA yang <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FCD34D] to-[#F59E0B]">
@@ -137,25 +136,23 @@ export default async function HomePage() {
 
               {/* Subtitle */}
               <p 
-                className="text-base sm:text-lg text-[#D1FAE5] leading-relaxed font-medium"
-                style={{ marginBottom: '32px' }}
+                className="text-sm sm:text-lg text-[#D1FAE5] leading-relaxed font-medium mb-6 lg:mb-8"
               >
                 Dapatkan kemudahan akses informasi terkait syarat dokumen, alur pengurusan, dan persiapan pelayanan publik sebelum Anda berkunjung ke kantor kami.
               </p>
 
               {/* CTAs */}
               <div 
-                className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-                style={{ marginBottom: '36px' }}
+                className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto mb-8 lg:mb-10"
               >
-                <Link
-                  href="/layanan"
+                <a
+                  href="#layanan-section"
                   className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-[#FBBF24] hover:bg-[#F59E0B] text-[#1A2E1A] font-bold transition-all shadow-[0_4px_15px_rgba(251,191,36,0.2)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.4)] hover:-translate-y-0.5"
                   style={{ padding: '12px 28px', borderRadius: '100px', fontSize: '14px' }}
                 >
                   Jelajahi Layanan
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
                 <a
                   href={waHeroLink}
                   target="_blank"
@@ -222,9 +219,9 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 2. QUICK ACCESS SECTION (PROFESSIONAL & PRECISE) */}
       {/* ============================================================ */}
-      <section className="relative bg-white py-12 sm:py-16 z-20 border-b border-[#E5EBE5] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-        <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
-          <div className="flex flex-wrap md:flex-nowrap items-start justify-center gap-6 sm:gap-12 lg:gap-16">
+      <section className="relative bg-white py-8 sm:py-16 z-20 border-b border-[#E5EBE5] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div className="max-w-[1000px] mx-auto px-2 sm:px-6">
+          <div className="flex flex-wrap md:flex-nowrap items-start justify-center gap-4 sm:gap-12 lg:gap-16">
             {quickAccessItems.map((item, i) => {
               const content = (
                 <div className="flex flex-col items-center justify-start gap-3 sm:gap-4 w-[90px] sm:w-[110px]">
@@ -284,15 +281,15 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 4. LAYANAN POPULER SECTION */}
       {/* ============================================================ */}
-      <section className="py-16 lg:py-24 bg-[#F8FAF9] border-t border-b border-[#E5EBE5]">
+      <section id="layanan-section" className="py-10 lg:py-24 bg-[#F8FAF9] border-t border-b border-[#E5EBE5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Title */}
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
-            <span className="text-[11px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-4 py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
+          <div className="text-center max-w-2xl mx-auto mb-8 lg:mb-12 space-y-3 sm:space-y-4">
+            <span className="text-[10px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
               Layanan KUA
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
               Layanan & Persyaratan
             </h2>
             <p className="text-sm sm:text-base text-[#4A5D4A] leading-relaxed">
@@ -301,10 +298,10 @@ export default async function HomePage() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
+          <div className="flex overflow-x-auto gap-2 sm:gap-3 mb-10 pb-4 hide-scrollbar snap-x">
             <Link
               href="/layanan"
-              className="px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full bg-[#064E3B] text-white shadow-md hover:bg-[#047857] hover:shadow-lg transition-all hover:-translate-y-0.5"
+              className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-bold rounded-full bg-[#064E3B] text-white shadow-md hover:bg-[#047857] hover:shadow-lg transition-all hover:-translate-y-0.5"
             >
               Semua Layanan ({services.length})
             </Link>
@@ -312,7 +309,7 @@ export default async function HomePage() {
               <Link
                 key={cat}
                 href={`/layanan?kategori=${encodeURIComponent(cat)}`}
-                className="px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#4A5D4A] hover:bg-[#ECFDF5] hover:text-[#047857] border border-[#E5EBE5] hover:border-[#10B981] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+                className="shrink-0 snap-start whitespace-nowrap px-5 py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#4A5D4A] hover:bg-[#ECFDF5] hover:text-[#047857] border border-[#E5EBE5] hover:border-[#10B981] shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
               >
                 {cat}
               </Link>
@@ -351,17 +348,17 @@ export default async function HomePage() {
       {/* 5. INFORMASI TERBARU SECTION */}
       {/* ============================================================ */}
       {recentInfo.length > 0 && (
-        <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+        <section className="py-10 lg:py-24 bg-white relative overflow-hidden">
           {/* Decorative background elements */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#ECFDF5] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-              <div className="space-y-3">
-                <span className="text-[11px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-4 py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 lg:mb-12">
+              <div className="space-y-2 sm:space-y-3">
+                <span className="text-[10px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
                   Pengumuman & Berita
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
                   Informasi Terbaru
                 </h2>
               </div>
@@ -432,14 +429,14 @@ export default async function HomePage() {
       {/* 6. GALERI KEGIATAN SECTION */}
       {/* ============================================================ */}
       {recentGallery.length > 0 && (
-        <section className="py-16 lg:py-24 bg-[#022C22] text-white">
+        <section className="py-10 lg:py-24 bg-[#022C22] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-              <div className="space-y-3">
-                <span className="text-[11px] sm:text-xs font-bold text-[#A7F3D0] uppercase tracking-[0.15em] bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20 inline-block">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 lg:mb-12">
+              <div className="space-y-2 sm:space-y-3">
+                <span className="text-[10px] sm:text-xs font-bold text-[#A7F3D0] uppercase tracking-[0.15em] bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/20 inline-block">
                   Dokumentasi
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-heading tracking-tight">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-heading tracking-tight">
                   Galeri Kegiatan
                 </h2>
               </div>
@@ -485,18 +482,18 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 7. PROFIL KUA SECTION */}
       {/* ============================================================ */}
-      <section className="py-16 lg:py-24 bg-[#F8FAF9] border-t border-[#E5EBE5]">
+      <section className="py-10 lg:py-24 bg-[#F8FAF9] border-t border-[#E5EBE5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 sm:p-12 rounded-[32px] border border-[#E5EBE5] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-12 rounded-[24px] sm:rounded-[32px] border border-[#E5EBE5] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden">
             
             {/* Subtle background pattern in the card */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #064E3B 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
             
-            <div className="lg:col-span-7 space-y-6 relative z-10">
-              <span className="text-[11px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-4 py-1.5 rounded-full border border-[#D1FAE5] inline-block">
+            <div className="lg:col-span-7 space-y-4 sm:space-y-6 relative z-10">
+              <span className="text-[10px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block">
                 Profil Institusi
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading leading-tight tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading leading-tight tracking-tight">
                 KUA Kecamatan Sampaga Kabupaten Mamuju
               </h2>
               <p className="text-sm sm:text-base text-[#4A5D4A] leading-relaxed max-w-2xl">
