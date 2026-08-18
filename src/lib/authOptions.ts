@@ -69,7 +69,17 @@ export const authOptions: NextAuthOptions = {
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email! },
         });
-        token.role = dbUser?.role || 'user';
+        
+        let role = dbUser?.role || 'user';
+        if (token.email === 'sampagakua@gmail.com') {
+          role = 'super_admin';
+          // Auto update in DB if not already super_admin
+          if (dbUser && dbUser.role !== 'super_admin') {
+            await prisma.user.update({ where: { email: token.email! }, data: { role: 'super_admin' } });
+          }
+        }
+
+        token.role = role;
         token.userId = dbUser?.id || user.id;
       }
 
@@ -79,13 +89,14 @@ export const authOptions: NextAuthOptions = {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
         });
-        if (dbUser) {
-          token.role = dbUser.role;
-          token.userId = dbUser.id;
-        } else {
-          // New Google user gets 'user' role by default
-          token.role = 'user';
+        
+        let role = dbUser?.role || 'user';
+        if (user.email === 'sampagakua@gmail.com') {
+          role = 'super_admin';
         }
+
+        token.role = role;
+        token.userId = dbUser?.id || user.id;
       }
 
       return token;

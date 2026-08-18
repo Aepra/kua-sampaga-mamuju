@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import {
   LayoutDashboard, FileText, Image as ImageIcon, BookOpen,
-  Landmark, Settings, LogOut,
+  Landmark, Settings, LogOut, Users,
   ChevronRight, X
 } from 'lucide-react';
 
@@ -45,6 +45,7 @@ const menuGroups = [
 
 export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const handleLogout = () => {
     signOut({ callbackUrl: '/login' });
@@ -54,6 +55,17 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
     if (href === '/admin') return pathname === '/admin';
     return pathname.startsWith(href);
   };
+
+  const dynamicMenuGroups = [...menuGroups];
+  
+  if ((session?.user as any)?.role === 'super_admin') {
+    dynamicMenuGroups.push({
+      title: 'Super Admin',
+      items: [
+        { href: '/admin/pengguna', label: 'Kelola Admin', icon: Users },
+      ],
+    });
+  }
 
   return (
     <>
@@ -91,10 +103,10 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         </div>
 
         {/* Navigation */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-6">
-          {menuGroups.map((group, idx) => (
-            <div key={idx}>
-              <p className="px-3 text-[10px] font-semibold text-primary-400 uppercase tracking-wider mb-2">
+        <div className="flex-1 overflow-y-auto py-6 px-4 space-y-6">
+          {dynamicMenuGroups.map((group, i) => (
+            <div key={i}>
+              <p className="px-3 text-xs font-bold text-primary-300 uppercase tracking-wider mb-2">
                 {group.title}
               </p>
               <div className="space-y-1">
