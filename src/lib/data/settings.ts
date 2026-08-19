@@ -25,6 +25,6 @@ export async function updateSettings(updates: Partial<SiteSettings>): Promise<Si
     where: { id: 'default' },
     data: { ...updates }
   });
-  revalidateTag('settings'); // Purge the cache after update
+  revalidateTag('settings', { expire: 0 }); // Purge the cache after update
   return updated;
 }

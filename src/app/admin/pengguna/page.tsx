@@ -21,6 +21,11 @@ export default function AdminPenggunaPage() {
   const [users, setUsers] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  
+  // Add User Form State
+  const [newEmail, setNewEmail] = useState('');
+  const [newRole, setNewRole] = useState('admin');
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -72,6 +77,36 @@ export default function AdminPenggunaPage() {
     }
   };
 
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newEmail) {
+      showToast('Email wajib diisi', 'error');
+      return;
+    }
+
+    setIsAdding(true);
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newEmail.toLowerCase(), role: newRole }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        showToast(data.message || 'Pengguna berhasil ditambahkan', 'success');
+        setNewEmail('');
+        fetchUsers();
+      } else {
+        showToast(data.error || 'Gagal menambahkan pengguna', 'error');
+      }
+    } catch {
+      showToast('Terjadi kesalahan jaringan', 'error');
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
   if ((session?.user as any)?.role !== 'super_admin') {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -86,9 +121,47 @@ export default function AdminPenggunaPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">Kelola Admin</h1>
-          <p className="text-xs sm:text-sm text-text-secondary mt-1">Angkat pengguna menjadi Admin atau cabut aksesnya.</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">Kelola Admin & Pengguna</h1>
+          <p className="text-xs sm:text-sm text-text-secondary mt-1">Tambahkan pengguna baru atau ubah hak akses mereka.</p>
         </div>
+      </div>
+
+      {/* Add User Form */}
+      <div className="bg-white rounded-xl border border-border-light shadow-sm p-5">
+        <h2 className="text-sm font-bold text-text-primary mb-4 flex items-center gap-2">
+          <User className="w-4 h-4 text-primary-600" />
+          Tambah Pengguna Baru
+        </h2>
+        <form onSubmit={handleAddUser} className="flex flex-col sm:flex-row gap-3">
+          <div className="flex-1">
+            <input
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder="Alamat Email (misal: budi@gmail.com)"
+              required
+              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+            />
+          </div>
+          <div className="w-full sm:w-48">
+            <select
+              value={newRole}
+              onChange={(e) => setNewRole(e.target.value)}
+              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+            >
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+              <option value="guest">Guest</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            disabled={isAdding}
+            className="px-6 py-2 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-medium rounded-lg text-sm transition-colors whitespace-nowrap"
+          >
+            {isAdding ? 'Menyimpan...' : 'Tambah Pengguna'}
+          </button>
+        </form>
       </div>
 
       <div className="bg-white rounded-xl border border-border-light shadow-sm overflow-hidden">
