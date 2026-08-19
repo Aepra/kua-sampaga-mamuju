@@ -124,7 +124,7 @@ export default function Navbar() {
               {profileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-[#E5EBE5] py-2 animate-fade-in">
                   <Link
-                    href={session.user?.role === 'user' || session.user?.role === 'guest' ? '/user' : '/admin'}
+                    href={(session.user as any)?.role === 'user' || (session.user as any)?.role === 'guest' ? '/user' : '/admin'}
                     className="flex items-center gap-3 px-4 py-2 text-sm font-semibold text-[#4A5D4A] hover:bg-[#ECFDF5] hover:text-[#064E3B] transition-colors"
                     onClick={() => setProfileOpen(false)}
                   >
@@ -195,7 +195,7 @@ export default function Navbar() {
             ) : session ? (
               <>
                 <Link
-                  href={session.user?.role === 'user' || session.user?.role === 'guest' ? '/user' : '/admin'}
+                  href={(session.user as any)?.role === 'user' || (session.user as any)?.role === 'guest' ? '/user' : '/admin'}
                   className="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#064E3B] bg-[#ECFDF5] hover:bg-[#D1FAE5] rounded-lg transition-colors"
                 >
                   <LayoutDashboard className="w-4 h-4" /> Dashboard
