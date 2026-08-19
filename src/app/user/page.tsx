@@ -20,7 +20,7 @@ interface SavedServiceData {
 }
 
 export default function UserDashboardPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [savedServices, setSavedServices] = useState<SavedServiceData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -88,6 +88,14 @@ export default function UserDashboardPage() {
       if (res.ok) setSavedServices(prev => prev.filter(ss => ss.serviceId !== serviceId));
     } catch (error) { console.error(error); }
   };
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#F8FAF9]">
+        <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
+      </div>
+    );
+  }
 
   if (!session) return null;
 
