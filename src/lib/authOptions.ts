@@ -99,6 +99,15 @@ export const authOptions: NextAuthOptions = {
         token.userId = dbUser?.id || user.id;
       }
 
+      // Fallback for old sessions that don't have role in token
+      if (!token.role && token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+        });
+        token.role = dbUser?.role || 'user';
+        token.userId = dbUser?.id;
+      }
+
       return token;
     },
 
