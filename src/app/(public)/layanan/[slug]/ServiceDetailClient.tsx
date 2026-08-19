@@ -5,8 +5,10 @@ import Link from 'next/link';
 import {
   CheckCircle, Circle, ExternalLink, Printer,
   MessageCircle, Copy, AlertTriangle,
-  Bookmark, FileText, Check, ShieldAlert, Sparkles
+  Bookmark, FileText, Check, ShieldAlert, Sparkles, Loader2
 } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import type { Service, SiteSettings } from '@/lib/types';
 
 interface ServiceDetailClientProps {
@@ -17,8 +19,11 @@ interface ServiceDetailClientProps {
 export default function ServiceDetailClient({ service, settings }: ServiceDetailClientProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  // Save to recently viewed & check bookmark
+  // Save to recently viewed
   useEffect(() => {
     let isMounted = true;
     const initData = async () => {
@@ -29,10 +34,6 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
         const recent = JSON.parse(localStorage.getItem(keyRecent) || '[]') as string[];
         const updated = [service.slug, ...recent.filter(s => s !== service.slug)].slice(0, 10);
         localStorage.setItem(keyRecent, JSON.stringify(updated));
-
-        const keyBook = 'kua-bookmarks';
-        const bookmarks = JSON.parse(localStorage.getItem(keyBook) || '[]') as string[];
-        setIsBookmarked(bookmarks.includes(service.id));
       } catch { /* ignore */ }
     };
     initData();
@@ -40,6 +41,22 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
       isMounted = false;
     };
   }, [service.id, service.slug]);
+
+  // Check if bookmarked in DB
+  useEffect(() => {
+    if (session?.user?.email) {
+      // In a real app, we might fetch the status from an API like /api/user/saved-services?serviceId=...
+      // For simplicity, if we don't have a GET endpoint, we can assume false initially or fetch it.
+      // To keep it simple, we will fetch it when they go to their dashboard.
+      // Wait, we need to know the state here! Let's fetch the state.
+      fetch(`/api/user/saved-services?serviceId=${service.id}`)
+        .then(res => res.json())
+        .then(data => {
+           if (data.isSaved) setIsBookmarked(true);
+        })
+        .catch(console.error);
+    }
+  }, [session, service.id]);
 
   const handlePrint = () => {
     window.print();
@@ -61,20 +78,42 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
-  const handleToggleBookmark = () => {
+  const handlePrepare = async () => {
+    if (!session) {
+      alert('Silakan masuk (login) terlebih dahulu untuk mempersiapkan layanan.');
+      router.push('/login');
+      return;
+    }
+
+    // Already saved? Just go to dashboard
+    if (isBookmarked) {
+      router.push('/user');
+      return;
+    }
+    
+    setIsSaving(true);
     try {
-      const key = 'kua-bookmarks';
-      const bookmarks = JSON.parse(localStorage.getItem(key) || '[]') as string[];
-      let updated: string[];
-      if (bookmarks.includes(service.id)) {
-        updated = bookmarks.filter(b => b !== service.id);
+      const res = await fetch('/api/user/saved-services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serviceId: service.id })
+      });
+      const data = await res.json();
+      if (res.ok && data.saved) {
+        setIsBookmarked(true);
+        // Redirect to user dashboard to see the checklist
+        router.push('/user');
+      } else if (res.ok && !data.saved) {
+        // Was already saved (toggled off) — shouldn't happen but handle gracefully
         setIsBookmarked(false);
       } else {
-        updated = [...bookmarks, service.id];
-        setIsBookmarked(true);
+        alert(data.error || 'Gagal menyimpan layanan');
       }
-      localStorage.setItem(key, JSON.stringify(updated));
-    } catch { /* ignore */ }
+    } catch (error) {
+      alert('Terjadi kesalahan sistem');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const waDirectLink = `https://wa.me/62${settings.whatsapp.replace(/^0/, '')}?text=${encodeURIComponent(
@@ -156,15 +195,20 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
                 Cetak Persyaratan
               </button>
               <button
-                onClick={handleToggleBookmark}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors ml-auto ${
+                onClick={handlePrepare}
+                disabled={isSaving}
+                className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors ml-auto disabled:opacity-50 ${
                   isBookmarked
-                    ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                    : 'bg-surface-tertiary hover:bg-border-light text-text-primary'
+                    ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                    : 'bg-amber-100 text-amber-800 border border-amber-300 hover:bg-amber-200'
                 }`}
               >
-                <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-600 text-amber-600' : ''}`} />
-                {isBookmarked ? 'Tersimpan' : 'Simpan'}
+                {isSaving ? (
+                   <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                   <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-white text-white' : ''}`} />
+                )}
+                {isBookmarked ? 'Lihat Persiapan' : 'Persiapkan'}
               </button>
             </div>
 

@@ -45,7 +45,15 @@ function InnerLoginPage() {
         return;
       }
 
-      router.push('/admin');
+      // Fetch updated session to determine role
+      const sessionRes = await fetch('/api/auth/session');
+      const sess = await sessionRes.json();
+      const role = sess?.user?.role;
+      if (role === 'admin' || role === 'super_admin') {
+        router.push('/admin');
+      } else {
+        router.push('/user');
+      }
       router.refresh();
     } catch {
       setError('Terjadi kesalahan. Silakan coba lagi.');
@@ -56,7 +64,7 @@ function InnerLoginPage() {
   const handleGoogleLogin = async () => {
     setGoogleLoading(true);
     setError('');
-    await signIn('google', { callbackUrl: '/admin' });
+    await signIn('google', { callbackUrl: '/user' });
   };
 
   return (
