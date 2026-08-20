@@ -8,7 +8,7 @@ import { getPublishedServices, getCategories } from '@/lib/data/services';
 import { getRecentInformation } from '@/lib/data/information';
 import { getRecentGallery } from '@/lib/data/gallery';
 import { getSettings } from '@/lib/data/settings';
-import SearchSection from './SearchSection';
+
 import LayananSection from './LayananSection';
 import ServiceCardPublic from '@/components/public/ServiceCard';
 
@@ -274,12 +274,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* 3. SEARCH SECTION */}
-      {/* ============================================================ */}
-      <div className="bg-[#F8FAF9]">
-        <SearchSection services={services} />
-      </div>
+
 
       {/* ============================================================ */}
       {/* 4. LAYANAN POPULER SECTION (INTERACTIVE) */}
