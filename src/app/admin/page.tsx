@@ -4,8 +4,8 @@ import {
   Plus, ArrowRight, Clock, Activity
 } from 'lucide-react';
 import { getServiceCount, getRecentServices } from '@/lib/data/services';
-import { getInformationCount, getRecentInformation } from '@/lib/data/information';
-import { getGalleryCount, getRecentGallery } from '@/lib/data/gallery';
+import { getInformationCount } from '@/lib/data/information';
+import { getGalleryCount } from '@/lib/data/gallery';
 import { getUserCount } from '@/lib/data/users';
 import { getRecentLogs } from '@/lib/data/activity-logs';
 
@@ -18,8 +18,6 @@ export default async function AdminDashboardPage() {
     galleryCount,
     userCount,
     recentServices,
-    , // recentInfo
-    , // recentGallery
     recentLogs,
   ] = await Promise.all([
     getServiceCount(),
@@ -27,8 +25,6 @@ export default async function AdminDashboardPage() {
     getGalleryCount(),
     getUserCount(),
     getRecentServices(5),
-    getRecentInformation(3),
-    getRecentGallery(4),
     getRecentLogs(5),
   ]);
 

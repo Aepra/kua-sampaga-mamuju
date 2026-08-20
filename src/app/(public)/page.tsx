@@ -12,6 +12,8 @@ import SearchSection from './SearchSection';
 import LayananSection from './LayananSection';
 import ServiceCardPublic from '@/components/public/ServiceCard';
 
+export const dynamic = 'force-dynamic';
+
 // Icon mapping
 const iconMap: Record<string, React.ReactNode> = {
   Heart: <Heart className="w-5 h-5 text-emerald-700" />,

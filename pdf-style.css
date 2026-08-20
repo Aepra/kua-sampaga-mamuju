@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px; /* Slightly larger for older folks, but clean */
+  line-height: 1.8;
+  color: #2d3748;
+  margin: 0;
+  padding: 50px 40px;
+  background-color: #ffffff;
+}
+
+/* Cover / Main Title */
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #1a5632; /* Deep KUA Green */
+  text-align: center;
+  border-bottom: 5px solid #2f855a;
+  padding-bottom: 25px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  letter-spacing: -1px;
+}
+
+/* Section Titles */
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #22543d;
+  background-color: #f0fff4;
+  padding: 15px 20px;
+  border-left: 8px solid #38a169;
+  border-radius: 6px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+/* Subtitles */
+h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2b6cb0;
+  margin-top: 35px;
+  margin-bottom: 15px;
+  border-bottom: 2px dashed #e2e8f0;
+  padding-bottom: 8px;
+}
+
+p {
+  margin-bottom: 18px;
+  color: #4a5568;
+}
+
+/* Beautiful Images */
+img {
+  display: block;
+  max-width: 85%;
+  margin: 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border: 1px solid #cbd5e0;
+}
+
+/* Typography for Lists */
+ul, ol {
+  margin-bottom: 25px;
+  padding-left: 30px;
+  color: #4a5568;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Highlights / Important Notes */
+blockquote {
+  background-color: #ebf8ff;
+  border-left: 6px solid #3182ce;
+  padding: 18px 24px;
+  margin: 30px 0;
+  border-radius: 0 12px 12px 0;
+  color: #2c5282;
+  font-style: italic;
+  font-size: 19px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Code and tech snippets */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+pre {
+  background-color: #1a202c;
+  color: #f7fafc;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 30px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background: #e2e8f0;
+  margin: 50px 0;
+}
