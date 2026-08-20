@@ -97,58 +97,61 @@ export default function AdminPeraturanListPage() {
         ) : filtered.length > 0 ? (
           <div className="divide-y divide-border-light">
             {filtered.map(item => (
-              <div key={item.id} className="p-4 hover:bg-surface-secondary/50 transition-colors flex items-start justify-between gap-4">
-                <div className="flex items-start gap-3 min-w-0">
+              <div key={item.id} className="p-4 hover:bg-surface-secondary/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-start gap-3 min-w-0 w-full sm:w-auto flex-1">
                   <div className="w-9 h-9 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <FileText className="w-5 h-5" />
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="font-semibold text-text-primary text-sm sm:text-base">{item.title}</h3>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-text-primary text-sm sm:text-base leading-tight mb-1">{item.title}</h3>
                     {(item.number || item.year) && (
-                      <p className="text-xs font-mono text-text-tertiary mt-0.5">
+                      <p className="text-xs font-mono text-text-tertiary">
                         {[item.number, item.year].filter(Boolean).join(' · ')}
                       </p>
                     )}
                     {item.description && (
-                      <p className="text-xs text-text-secondary mt-1 line-clamp-2">{item.description}</p>
+                      <p className="text-xs text-text-secondary mt-1.5 line-clamp-2">{item.description}</p>
                     )}
                     {item.documentLink && (
                       <a
                         href={item.documentLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-primary-600 hover:underline mt-2 font-medium"
+                        className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-primary-600 hover:underline mt-2 font-medium"
                       >
-                        <ExternalLink className="w-3 h-3" /> Link Dokumen PDF
+                        <ExternalLink className="w-3 h-3" /> Link Dokumen
                       </a>
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto pt-3 sm:pt-0 border-t border-border-light sm:border-0 mt-2 sm:mt-0">
                   {item.published ? (
-                    <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                      <CheckCircle2 className="w-3 h-3" /> Dipublikasikan
+                    <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
+                      <CheckCircle2 className="w-3 h-3" /> Dipublikasi
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-gray-600 bg-gray-100 px-2 py-0.5 rounded-full">
+                    <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">
                       <XCircle className="w-3 h-3" /> Draft
                     </span>
                   )}
-                  <Link
-                    href={`/admin/peraturan/${item.id}/edit`}
-                    className="p-1.5 text-text-tertiary hover:text-primary-600 rounded-md hover:bg-surface-tertiary transition-colors"
-                    title="Edit"
-                  >
-                    <Edit2 className="w-4 h-4" />
-                  </Link>
-                  <button
-                    onClick={() => setDeleteTarget(item)}
-                    className="p-1.5 text-text-tertiary hover:text-red-600 rounded-md hover:bg-surface-tertiary transition-colors"
-                    title="Hapus"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  
+                  <div className="flex items-center gap-1">
+                    <Link
+                      href={`/admin/peraturan/${item.id}/edit`}
+                      className="p-2 text-text-tertiary hover:text-primary-600 rounded-md hover:bg-surface-tertiary transition-colors"
+                      title="Edit"
+                    >
+                      <Edit2 className="w-4 h-4 sm:w-4 sm:h-4" />
+                    </Link>
+                    <button
+                      onClick={() => setDeleteTarget(item)}
+                      className="p-2 text-text-tertiary hover:text-red-600 rounded-md hover:bg-surface-tertiary transition-colors"
+                      title="Hapus"
+                    >
+                      <Trash2 className="w-4 h-4 sm:w-4 sm:h-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
