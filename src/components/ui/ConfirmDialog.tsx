@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { AlertTriangle, X } from 'lucide-react';
 
 interface ConfirmDialogProps {
@@ -8,7 +10,7 @@ interface ConfirmDialogProps {
   message: string;
   confirmLabel?: string;
   cancelLabel?: string;
-  onConfirm: () => void;
+  onConfirm: () => void | Promise<void>;
   onCancel: () => void;
   variant?: 'danger' | 'warning';
 }
@@ -23,7 +25,19 @@ export default function ConfirmDialog({
   onCancel,
   variant = 'danger',
 }: ConfirmDialogProps) {
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
+
+  const handleConfirm = async () => {
+    setLoading(true);
+    try {
+      await onConfirm();
+    } finally {
+      // Small delay just to ensure state is clean when closing
+      setTimeout(() => setLoading(false), 200);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -45,17 +59,26 @@ export default function ConfirmDialog({
           <div className="mt-6 flex gap-3 justify-end">
             <button
               onClick={onCancel}
-              className="px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light transition-colors"
+              disabled={loading}
+              className="px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light transition-colors disabled:opacity-50"
             >
               {cancelLabel}
             </button>
             <button
-              onClick={onConfirm}
-              className={`px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors ${
+              onClick={handleConfirm}
+              disabled={loading}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors disabled:opacity-70 ${
                 variant === 'danger' ? 'bg-red-600 hover:bg-red-700' : 'bg-amber-600 hover:bg-amber-700'
               }`}
             >
-              {confirmLabel}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Menghapus...
+                </>
+              ) : (
+                confirmLabel
+              )}
             </button>
           </div>
         </div>

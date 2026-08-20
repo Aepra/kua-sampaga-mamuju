@@ -196,8 +196,14 @@ export default function AdminPenggunaPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-border-light shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left whitespace-nowrap">
+        <div className="relative">
+          {/* Scroll Indicator Mobile */}
+          <div className="flex sm:hidden items-center justify-center gap-1.5 py-2 bg-primary-50/50 text-[11px] font-medium text-primary-700 border-b border-border-light">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+            Geser tabel ke kiri/kanan untuk melihat lebih detail
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left whitespace-nowrap">
             <thead className="text-xs text-text-secondary bg-surface-secondary border-b border-border-light">
               <tr>
                 <th className="px-6 py-4 font-semibold">Pengguna</th>
@@ -306,6 +312,7 @@ export default function AdminPenggunaPage() {
               )}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
 
