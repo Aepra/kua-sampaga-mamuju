@@ -12,7 +12,7 @@ import { getSettings } from '@/lib/data/settings';
 import LayananSection from './LayananSection';
 import ServiceCardPublic from '@/components/public/ServiceCard';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 // Icon mapping
 const iconMap: Record<string, React.ReactNode> = {
@@ -69,11 +69,14 @@ const quickAccessItems = [
 ];
 
 export default async function HomePage() {
-  const services = await getPublishedServices();
-  const recentInfo = await getRecentInformation(3);
-  const recentGallery = await getRecentGallery(4);
-  const settings = await getSettings();
-  const categories = await getCategories();
+  // Run all queries in parallel for much faster load
+  const [services, recentInfo, recentGallery, settings, categories] = await Promise.all([
+    getPublishedServices(),
+    getRecentInformation(3),
+    getRecentGallery(4),
+    getSettings(),
+    getCategories(),
+  ]);
   const popularServices = services.slice(0, 6);
 
   const waHeroLink = `https://wa.me/62${settings.whatsapp.replace(/^0/, '')}?text=${encodeURIComponent("Assalamu'alaikum, saya ingin bertanya mengenai layanan KUA Kecamatan Sampaga.")}`;

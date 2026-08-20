@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Galeri foto kegiatan KUA Kecamatan Sampaga Kabupaten Mamuju.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function GaleriPage() {
   const gallery = await getPublishedGallery();

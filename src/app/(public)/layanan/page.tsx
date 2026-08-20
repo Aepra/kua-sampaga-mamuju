@@ -7,11 +7,13 @@ export const metadata: Metadata = {
   description: 'Daftar layanan KUA Kecamatan Sampaga Kabupaten Mamuju. Temukan informasi persyaratan dan panduan pengurusan.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function LayananPage() {
-  const services = await getPublishedServices();
-  const categories = await getCategories();
+  const [services, categories] = await Promise.all([
+    getPublishedServices(),
+    getCategories(),
+  ]);
 
   return <ServiceListClient services={services} categories={categories} />;
 }

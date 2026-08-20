@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Pengumuman, berita, dan informasi terbaru dari KUA Kecamatan Sampaga Kabupaten Mamuju.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function InformasiPage() {
   const information = await getPublishedInformation();

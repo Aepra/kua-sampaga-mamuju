@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: info.title, description: info.excerpt };
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function InformasiDetailPage({ params }: Props) {
   const { slug } = await params;

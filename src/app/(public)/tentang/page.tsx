@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Profil KUA Kecamatan Sampaga Kabupaten Mamuju.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function TentangPage() {
   const s = await getSettings();

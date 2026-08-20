@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Daftar peraturan dan regulasi resmi KUA Kecamatan Sampaga Kabupaten Mamuju.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function PeraturanPublicPage() {
   const regulations = await getPublishedRegulations();
