@@ -11,12 +11,12 @@ export async function GET(req: Request) {
     if (type === 'mine') {
       // Get current user's feedback
       const session = await getServerSession(authOptions);
-      if (!session?.user?.id) {
+      if (!(session?.user as any)?.id) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
       }
 
       const myFeedback = await prisma.feedback.findUnique({
-        where: { userId: session.user.id },
+        where: { userId: (session!.user as any).id },
       });
       return NextResponse.json({ success: true, data: myFeedback });
     }
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!(session?.user as any)?.id) {
       return NextResponse.json({ success: false, error: 'Silakan login terlebih dahulu' }, { status: 401 });
     }
 
@@ -49,16 +49,16 @@ export async function POST(req: Request) {
 
     // Upsert ensures only 1 feedback per user
     const feedback = await prisma.feedback.upsert({
-      where: { userId: session.user.id },
+      where: { userId: (session!.user as any).id },
       update: {
         message,
         rating: rating || 5,
         published: false, // Reset published status on edit so admin can re-review
-        name: session.user.name || 'Pengunjung', // Update name in case it changed
+        name: session?.user?.name || 'Pengunjung', // Update name in case it changed
       },
       create: {
-        userId: session.user.id,
-        name: session.user.name || 'Pengunjung',
+        userId: (session!.user as any).id,
+        name: session?.user?.name || 'Pengunjung',
         message,
         rating: rating || 5,
         published: false,
@@ -75,12 +75,12 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!(session?.user as any)?.id) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     await prisma.feedback.delete({
-      where: { userId: session.user.id },
+      where: { userId: (session!.user as any).id },
     });
 
     return NextResponse.json({ success: true });

@@ -6,7 +6,7 @@ import { authOptions } from '@/lib/authOptions';
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (session?.user?.role !== 'admin') {
+    if ((session?.user as any)?.role !== 'admin') {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 

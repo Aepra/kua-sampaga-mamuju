@@ -9,13 +9,13 @@ import { useToast } from '@/components/ui/Toast';
 
 export default function FeedbackButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
-  const { addToast } = useToast();
+  const { showToast } = useToast();
 
   const handleClick = () => {
     if (status === 'unauthenticated') {
-      addToast('Silakan masuk (login) terlebih dahulu untuk memberikan masukan.', 'error');
+      showToast('Silakan masuk (login) terlebih dahulu untuk memberikan masukan.', 'error');
       router.push('/login');
     } else {
       setIsOpen(true);
