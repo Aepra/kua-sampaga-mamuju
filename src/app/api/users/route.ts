@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/authOptions';
+import { getSession } from '@/lib/auth';
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+  const session = await getSession();
   
-  if ((session?.user as any)?.role !== 'super_admin') {
+  if (!session || (session.role !== 'admin' && session.role !== 'super_admin')) {
     return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 403 });
   }
 
@@ -25,14 +24,15 @@ export async function GET() {
 
     return NextResponse.json({ success: true, users });
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ success: false, error: 'Gagal mengambil data pengguna' }, { status: 500 });
   }
 }
 
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions);
+  const session = await getSession();
   
-  if ((session?.user as any)?.role !== 'super_admin') {
+  if (!session || (session.role !== 'admin' && session.role !== 'super_admin')) {
     return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 403 });
   }
 
@@ -47,24 +47,33 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Role tidak valid' }, { status: 400 });
     }
 
-    // Check if user exists
+    // Only super_admin can create super_admin
+    if (role === 'super_admin' && session.role !== 'super_admin') {
+      return NextResponse.json({ success: false, error: 'Hanya Super Admin yang dapat menambahkan Super Admin baru' }, { status: 403 });
+    }
+
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
 
     if (existingUser) {
-      // Update role if user exists
+      if (existingUser.role === 'super_admin' && session.role !== 'super_admin') {
+        return NextResponse.json({ success: false, error: 'Admin tidak dapat mengubah akun Super Admin' }, { status: 403 });
+      }
+      if (existingUser.role === 'admin' && session.role !== 'super_admin' && existingUser.id !== session.userId) {
+        return NextResponse.json({ success: false, error: 'Admin tidak dapat mengubah role Admin lainnya' }, { status: 403 });
+      }
+
       const updatedUser = await prisma.user.update({
         where: { email },
         data: { role }
       });
       return NextResponse.json({ success: true, user: updatedUser, message: 'Role pengguna berhasil diperbarui' });
     } else {
-      // Create new placeholder user if doesn't exist
       const newUser = await prisma.user.create({
         data: {
           email,
-          name: email.split('@')[0], // Generate a default name from email
+          name: email.split('@')[0],
           role,
         }
       });

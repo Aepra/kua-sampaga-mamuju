@@ -64,49 +64,24 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     // When JWT is created, attach user role from database
-    async jwt({ token, user, account }) {
-      if (user) {
-        // First sign-in: attach role
+    async jwt({ token, user }) {
+      const email = user?.email || token.email;
+      if (email) {
         const dbUser = await prisma.user.findUnique({
-          where: { email: token.email! },
+          where: { email },
         });
-        
+
         let role = dbUser?.role || 'user';
-        if (token.email === 'sampagakua@gmail.com') {
+        if (email === 'sampagakua@gmail.com') {
           role = 'super_admin';
-          // Auto update in DB if not already super_admin
           if (dbUser && dbUser.role !== 'super_admin') {
-            await prisma.user.update({ where: { email: token.email! }, data: { role: 'super_admin' } });
+            await prisma.user.update({ where: { email }, data: { role: 'super_admin' } });
           }
         }
 
         token.role = role;
-        token.userId = dbUser?.id || user.id;
-      }
-
-      // For Google OAuth: auto-set role to 'admin' on first sign-in
-      // if email matches an allowed admin email
-      if (account?.provider === 'google' && user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-        });
-        
-        let role = dbUser?.role || 'user';
-        if (user.email === 'sampagakua@gmail.com') {
-          role = 'super_admin';
-        }
-
-        token.role = role;
-        token.userId = dbUser?.id || user.id;
-      }
-
-      // Fallback for old sessions that don't have role in token
-      if (!token.role && token.email) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: token.email },
-        });
-        token.role = dbUser?.role || 'user';
-        token.userId = dbUser?.id;
+        token.userId = dbUser?.id || user?.id || token.userId;
+        token.email = email;
       }
 
       return token;

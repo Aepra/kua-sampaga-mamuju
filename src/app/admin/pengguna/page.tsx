@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { Shield, User, ShieldAlert, Check } from 'lucide-react';
+import { Shield, User, ShieldAlert, Check, Trash2 } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
-import FullScreenLoader from '@/components/ui/FullScreenLoader';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 type UserData = {
   id: string;
@@ -21,11 +21,15 @@ export default function AdminPenggunaPage() {
   const [users, setUsers] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<UserData | null>(null);
   
   // Add User Form State
   const [newEmail, setNewEmail] = useState('');
   const [newRole, setNewRole] = useState('admin');
   const [isAdding, setIsAdding] = useState(false);
+
+  const currentUserRole = (session?.user as { role?: string })?.role;
+  const currentUserId = (session?.user as { id?: string })?.id;
 
   useEffect(() => {
     fetchUsers();
@@ -37,6 +41,8 @@ export default function AdminPenggunaPage() {
       const data = await res.json();
       if (data.success) {
         setUsers(data.users);
+      } else {
+        showToast(data.error || 'Gagal memuat data pengguna', 'error');
       }
     } catch {
       showToast('Gagal memuat data pengguna', 'error');
@@ -46,7 +52,7 @@ export default function AdminPenggunaPage() {
   };
 
   const handleRoleChange = async (userId: string, newRole: string) => {
-    if (userId === (session?.user as any)?.id) {
+    if (userId === currentUserId) {
       showToast('Anda tidak bisa mengubah role Anda sendiri', 'error');
       return;
     }
@@ -74,6 +80,29 @@ export default function AdminPenggunaPage() {
       showToast('Terjadi kesalahan jaringan', 'error');
     } finally {
       setActionLoading(null);
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    if (!deleteTarget) return;
+
+    setActionLoading(deleteTarget.id);
+    try {
+      const res = await fetch(`/api/users/${deleteTarget.id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast('Pengguna berhasil dihapus', 'success');
+        fetchUsers();
+      } else {
+        showToast(data.error || 'Gagal menghapus pengguna', 'error');
+      }
+    } catch {
+      showToast('Terjadi kesalahan jaringan', 'error');
+    } finally {
+      setActionLoading(null);
+      setDeleteTarget(null);
     }
   };
 
@@ -107,12 +136,12 @@ export default function AdminPenggunaPage() {
     }
   };
 
-  if ((session?.user as any)?.role !== 'super_admin') {
+  if (currentUserRole !== 'admin' && currentUserRole !== 'super_admin') {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
-        <h1 className="text-2xl font-bold text-text-primary">Akses Ditolak</h1>
-        <p className="text-text-secondary mt-2">Halaman ini hanya dapat diakses oleh Super Admin.</p>
+        <h1 className="text-2xl font-bold text-text-primary font-heading">Akses Ditolak</h1>
+        <p className="text-text-secondary mt-2 text-sm">Halaman ini hanya dapat diakses oleh Admin dan Super Admin.</p>
       </div>
     );
   }
@@ -122,13 +151,13 @@ export default function AdminPenggunaPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">Kelola Admin & Pengguna</h1>
-          <p className="text-xs sm:text-sm text-text-secondary mt-1">Tambahkan pengguna baru atau ubah hak akses mereka.</p>
+          <p className="text-xs sm:text-sm text-text-secondary mt-1">Tambahkan pengguna baru atau atur hak akses akun terdaftar.</p>
         </div>
       </div>
 
       {/* Add User Form */}
-      <div className="bg-white rounded-xl border border-border-light shadow-sm p-5">
-        <h2 className="text-sm font-bold text-text-primary mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-xl border border-border-light shadow-xs p-5">
+        <h2 className="text-sm font-bold text-text-primary mb-4 flex items-center gap-2 font-heading">
           <User className="w-4 h-4 text-primary-600" />
           Tambah Pengguna Baru
         </h2>
@@ -138,20 +167,22 @@ export default function AdminPenggunaPage() {
               type="email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
-              placeholder="Alamat Email (misal: budi@gmail.com)"
+              placeholder="Alamat Email (misal: pegawai@gmail.com)"
               required
-              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
           <div className="w-full sm:w-48">
             <select
               value={newRole}
               onChange={(e) => setNewRole(e.target.value)}
-              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+              className="w-full px-4 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
             >
               <option value="admin">Admin</option>
               <option value="user">User</option>
-              <option value="guest">Guest</option>
+              {currentUserRole === 'super_admin' && (
+                <option value="super_admin">Super Admin</option>
+              )}
             </select>
           </div>
           <button
@@ -164,7 +195,7 @@ export default function AdminPenggunaPage() {
         </form>
       </div>
 
-      <div className="bg-white rounded-xl border border-border-light shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-border-light shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left whitespace-nowrap">
             <thead className="text-xs text-text-secondary bg-surface-secondary border-b border-border-light">
@@ -190,70 +221,101 @@ export default function AdminPenggunaPage() {
                   </td>
                 </tr>
               ) : (
-                users.map(user => (
-                  <tr key={user.id} className="hover:bg-surface-secondary/50 transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        {user.image ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={user.image} alt={user.name} className="w-8 h-8 rounded-full" />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center">
-                            <User className="w-4 h-4" />
-                          </div>
-                        )}
-                        <div>
-                          <p className="font-semibold text-text-primary">{user.name}</p>
-                          <p className="text-[11px] text-text-tertiary">{user.email}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        user.role === 'super_admin' ? 'bg-purple-100 text-purple-700 border border-purple-200' :
-                        user.role === 'admin' ? 'bg-primary-100 text-primary-700 border border-primary-200' :
-                        'bg-gray-100 text-gray-700 border border-gray-200'
-                      }`}>
-                        {user.role === 'super_admin' && <Shield className="w-3 h-3" />}
-                        {user.role === 'admin' && <Check className="w-3 h-3" />}
-                        {user.role}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      {new Date(user.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      {user.role === 'super_admin' ? (
-                        <span className="text-xs text-text-tertiary italic">Akses Permanen</span>
-                      ) : (
-                        <div className="flex justify-end gap-2">
-                          {user.role === 'user' ? (
-                            <button
-                              onClick={() => handleRoleChange(user.id, 'admin')}
-                              disabled={actionLoading === user.id}
-                              className="px-3 py-1.5 bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200 rounded-lg text-xs font-bold transition-colors"
-                            >
-                              {actionLoading === user.id ? 'Loading...' : 'Jadikan Admin'}
-                            </button>
+                users.map(user => {
+                  const isSelf = user.id === currentUserId;
+                  const isSuperAdmin = user.role === 'super_admin';
+                  const isAdmin = user.role === 'admin';
+                  const canManageRole = currentUserRole === 'super_admin' || (!isSuperAdmin && !isAdmin && currentUserRole === 'admin');
+                  const canDelete = !isSelf && !isSuperAdmin && (currentUserRole === 'super_admin' || (!isAdmin && currentUserRole === 'admin'));
+
+                  return (
+                    <tr key={user.id} className="hover:bg-surface-secondary/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          {user.image ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={user.image} alt={user.name} className="w-8 h-8 rounded-full" />
                           ) : (
+                            <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center">
+                              <User className="w-4 h-4" />
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-semibold text-text-primary">{user.name}</p>
+                            <p className="text-[11px] text-text-tertiary">{user.email}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                          user.role === 'super_admin' ? 'bg-purple-100 text-purple-700 border border-purple-200' :
+                          user.role === 'admin' ? 'bg-primary-100 text-primary-700 border border-primary-200' :
+                          'bg-gray-100 text-gray-700 border border-gray-200'
+                        }`}>
+                          {user.role === 'super_admin' && <Shield className="w-3 h-3" />}
+                          {user.role === 'admin' && <Check className="w-3 h-3" />}
+                          {user.role}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary text-xs">
+                        {new Date(user.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          {canManageRole && (
+                            user.role === 'user' ? (
+                              <button
+                                onClick={() => handleRoleChange(user.id, 'admin')}
+                                disabled={actionLoading === user.id}
+                                className="px-3 py-1 bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200 rounded-lg text-xs font-semibold transition-colors"
+                              >
+                                {actionLoading === user.id ? 'Loading...' : 'Jadikan Admin'}
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleRoleChange(user.id, 'user')}
+                                disabled={actionLoading === user.id}
+                                className="px-3 py-1 bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200 rounded-lg text-xs font-semibold transition-colors"
+                              >
+                                {actionLoading === user.id ? 'Loading...' : 'Cabut Admin'}
+                              </button>
+                            )
+                          )}
+
+                          {canDelete && (
                             <button
-                              onClick={() => handleRoleChange(user.id, 'user')}
+                              onClick={() => setDeleteTarget(user)}
                               disabled={actionLoading === user.id}
-                              className="px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-lg text-xs font-bold transition-colors"
+                              className="p-1.5 text-text-tertiary hover:text-red-600 rounded-md hover:bg-surface-tertiary transition-colors"
+                              title="Hapus Pengguna"
                             >
-                              {actionLoading === user.id ? 'Loading...' : 'Cabut Admin'}
+                              <Trash2 className="w-4 h-4" />
                             </button>
                           )}
+
+                          {!canManageRole && !canDelete && (
+                            <span className="text-xs text-text-tertiary italic">
+                              {isSelf ? 'Akun Anda' : isSuperAdmin ? 'Super Admin' : 'Akses Terbatas'}
+                            </span>
+                          )}
                         </div>
-                      )}
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
         </div>
       </div>
+
+      <ConfirmDialog
+        isOpen={!!deleteTarget}
+        title="Hapus Pengguna"
+        message={`Apakah Anda yakin ingin menghapus akun "${deleteTarget?.name}" (${deleteTarget?.email})? Aksi ini tidak dapat dibatalkan.`}
+        onConfirm={handleDeleteUser}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   );
 }

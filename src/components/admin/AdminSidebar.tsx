@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import {
   LayoutDashboard, FileText, Image as ImageIcon, BookOpen,
-  Landmark, Settings, LogOut, Users,
+  Landmark, Settings, LogOut, Users, Scale,
   ChevronRight, X
 } from 'lucide-react';
 
@@ -27,6 +27,7 @@ const menuGroups = [
       { href: '/admin/layanan', label: 'Layanan', icon: FileText },
       { href: '/admin/informasi', label: 'Informasi', icon: BookOpen },
       { href: '/admin/galeri', label: 'Galeri', icon: ImageIcon },
+      { href: '/admin/peraturan', label: 'Peraturan', icon: Scale },
     ],
   },
   {
@@ -57,12 +58,12 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   };
 
   const dynamicMenuGroups = [...menuGroups];
-  
-  if ((session?.user as any)?.role === 'super_admin') {
+  const role = (session?.user as any)?.role;
+  if (role === 'admin' || role === 'super_admin') {
     dynamicMenuGroups.push({
-      title: 'Super Admin',
+      title: 'Manajemen Akun',
       items: [
-        { href: '/admin/pengguna', label: 'Kelola Admin', icon: Users },
+        { href: '/admin/pengguna', label: 'Kelola Admin & Pengguna', icon: Users },
       ],
     });
   }

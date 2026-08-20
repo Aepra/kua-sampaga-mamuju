@@ -80,7 +80,7 @@ export interface User {
   name: string;
   email: string;
   passwordHash: string;
-  role: 'admin' | 'user';
+  role: 'admin' | 'super_admin' | 'user';
   createdAt: string;
 }
 
@@ -88,7 +88,7 @@ export interface UserPublic {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'user';
+  role: 'admin' | 'super_admin' | 'user';
 }
 
 // --- Site Settings ---

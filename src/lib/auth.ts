@@ -1,11 +1,13 @@
 // ============================================================
 // Authentication Utilities
-// JWT-based session with HTTP-only cookies
+// Unified session resolution (NextAuth + Legacy JWT cookies)
 // ============================================================
 
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import bcrypt from 'bcryptjs';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './authOptions';
 import { getUserByEmail } from './data/users';
 import { UserPublic } from './types';
 
@@ -19,7 +21,7 @@ export interface SessionPayload {
   userId: string;
   name: string;
   email: string;
-  role: 'admin' | 'user';
+  role: 'admin' | 'super_admin' | 'user';
 }
 
 export async function hashPassword(password: string): Promise<string> {
@@ -58,6 +60,19 @@ export async function createSession(user: UserPublic): Promise<string> {
 
 export async function getSession(): Promise<SessionPayload | null> {
   try {
+    // 1. Try NextAuth session first (Google OAuth & NextAuth Credentials)
+    const nextAuthSession = await getServerSession(authOptions);
+    if (nextAuthSession?.user) {
+      const u = nextAuthSession.user as { id?: string; name?: string; email?: string; role?: string };
+      return {
+        userId: u.id || '',
+        name: u.name || '',
+        email: u.email || '',
+        role: (u.role as 'admin' | 'super_admin' | 'user') || 'user',
+      };
+    }
+
+    // 2. Fallback to legacy JWT cookie (kua-session)
     const cookieStore = await cookies();
     const token = cookieStore.get(COOKIE_NAME)?.value;
     if (!token) return null;
@@ -89,7 +104,7 @@ export async function login(email: string, password: string): Promise<{ success:
     id: user.id,
     name: user.name,
     email: user.email,
-    role: user.role,
+    role: user.role as 'admin' | 'super_admin' | 'user',
   };
 
   await createSession(userPublic);
@@ -106,7 +121,7 @@ export async function requireAuth(): Promise<SessionPayload> {
 
 export async function requireAdmin(): Promise<SessionPayload> {
   const session = await requireAuth();
-  if (session.role !== 'admin') {
+  if (session.role !== 'admin' && session.role !== 'super_admin') {
     throw new Error('Forbidden');
   }
   return session;

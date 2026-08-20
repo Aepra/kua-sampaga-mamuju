@@ -23,11 +23,6 @@ export default withAuth(
         }
         return NextResponse.redirect(new URL('/login', req.url));
       }
-
-      // Check /admin/pengguna specifically: must be super_admin
-      if (path.startsWith('/admin/pengguna') && role !== 'super_admin') {
-        return NextResponse.redirect(new URL('/admin', req.url));
-      }
     }
 
     // Check /user routes: must be logged in

@@ -15,7 +15,7 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const session = await getSession();
-    if (!session || session.role !== 'admin') return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    if (!session || (session.role !== 'admin' && session.role !== 'super_admin')) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     const body = await request.json();
     const updated = await updateSettings(body);
     await addLog('Edit Profil KUA', 'Memperbarui profil KUA', session.userId, session.name);
