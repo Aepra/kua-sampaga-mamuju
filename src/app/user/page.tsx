@@ -23,6 +23,7 @@ export default function UserDashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [savedServices, setSavedServices] = useState<SavedServiceData[]>([]);
+  const [feedback, setFeedback] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [updatingReq, setUpdatingReq] = useState<string | null>(null);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
@@ -41,6 +42,15 @@ export default function UserDashboardPage() {
         })
         .catch(console.error)
         .finally(() => setLoading(false));
+
+      fetch('/api/feedback?type=mine')
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.data) {
+            setFeedback(data.data);
+          }
+        })
+        .catch(console.error);
     }
   }, [session]);
 
@@ -86,6 +96,14 @@ export default function UserDashboardPage() {
         body: JSON.stringify({ serviceId })
       });
       if (res.ok) setSavedServices(prev => prev.filter(ss => ss.serviceId !== serviceId));
+    } catch (error) { console.error(error); }
+  };
+
+  const handleDeleteFeedback = async () => {
+    if (!confirm('Hapus masukan Anda secara permanen?')) return;
+    try {
+      const res = await fetch('/api/feedback', { method: 'DELETE' });
+      if (res.ok) setFeedback(null);
     } catch (error) { console.error(error); }
   };
 
@@ -366,8 +384,69 @@ export default function UserDashboardPage() {
           </div>
         )}
 
+        {/* Feedback Section */}
+        {feedback && (
+          <div className="mt-8 mb-4">
+            <h2 className="text-xl font-bold font-heading text-gray-900 mb-4 flex items-center gap-2">
+              <MessageCircle className="w-5 h-5 text-emerald-600" />
+              Masukan & Penilaian Saya
+            </h2>
+            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${feedback.published ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>
+                      {feedback.published ? 'Publik' : 'Menunggu Tinjauan'}
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      {new Date(feedback.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-gray-700 italic border-l-2 border-emerald-100 pl-3">
+                    "{feedback.message}"
+                  </p>
+                  
+                  {feedback.adminReply && (
+                    <div className="mt-4 bg-emerald-50 border border-emerald-100 p-3.5 rounded-xl relative">
+                      <div className="absolute -top-[5px] left-5 w-2.5 h-2.5 bg-emerald-50 border-t border-l border-emerald-100 transform rotate-45"></div>
+                      <div className="flex items-center gap-1.5 mb-1 text-xs font-bold text-emerald-800">
+                        <CheckSquare className="w-3.5 h-3.5" />
+                        Balasan Admin KUA
+                      </div>
+                      <p className="text-xs sm:text-sm text-emerald-900 leading-relaxed">
+                        {feedback.adminReply}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-gray-50">
+                  <Link
+                    href="/#berikan-masukan"
+                    onClick={(e) => {
+                      // Simulasikan klik pada tombol di beranda jika memungkinkan, atau arahkan ke beranda
+                      if (window.location.pathname !== '/') {
+                        window.location.href = '/';
+                      }
+                    }}
+                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg transition-colors"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={handleDeleteFeedback}
+                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-lg transition-colors"
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Help Card */}
-        {savedServices.length > 0 && (
+        {savedServices.length > 0 && !feedback && (
           <div className="mt-6 bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">

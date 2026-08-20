@@ -6,7 +6,7 @@ import { signOut, useSession } from 'next-auth/react';
 import {
   LayoutDashboard, FileText, Image as ImageIcon, BookOpen,
   Landmark, Settings, LogOut, Users, Scale,
-  ChevronRight, X
+  ChevronRight, X, MessageCircle
 } from 'lucide-react';
 
 interface AdminSidebarProps {
@@ -27,6 +27,7 @@ const menuGroups = [
       { href: '/admin/layanan', label: 'Layanan', icon: FileText },
       { href: '/admin/informasi', label: 'Informasi', icon: BookOpen },
       { href: '/admin/galeri', label: 'Galeri', icon: ImageIcon },
+      { href: '/admin/masukan', label: 'Masukan', icon: MessageCircle },
       { href: '/admin/peraturan', label: 'Peraturan', icon: Scale },
     ],
   },

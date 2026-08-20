@@ -93,6 +93,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   savedServices UserSavedService[]
+  feedback      Feedback?
 }
 
 model Account {
@@ -170,4 +171,25 @@ model UserSavedService {
   service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
   @@unique([userId, serviceId])
+}
+
+model VisitorCount {
+  id        String   @id @default("global")
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  name      String
+  message   String
+  rating      Int       @default(5)
+  published   Boolean   @default(false)
+  adminReply  String?   @db.Text
+  repliedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

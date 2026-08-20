@@ -43,18 +43,18 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
         </div>
 
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
             {filtered.map(item => (
               <button
                 key={item.id}
                 onClick={() => setSelectedImage(item)}
-                className="group relative aspect-square rounded-[24px] overflow-hidden bg-[#064E3B] border border-[#E5EBE5] shadow-sm cursor-pointer"
+                className="group relative w-full inline-block rounded-[24px] overflow-hidden bg-[#064E3B] border border-[#E5EBE5] shadow-sm cursor-pointer"
               >
                 {item.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                  <img src={item.image} alt={item.title} className="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center"><BookOpen className="w-12 h-12 text-[#10B981] opacity-30" /></div>
+                  <div className="w-full aspect-square flex items-center justify-center"><BookOpen className="w-12 h-12 text-[#10B981] opacity-30" /></div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/90 via-[#022C22]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300 text-left">

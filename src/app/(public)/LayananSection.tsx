@@ -38,7 +38,7 @@ export default function LayananSection({ services, categories, iconMap }: Layana
   const isSearching = searchQuery.trim().length > 0;
 
   return (
-    <section id="layanan-section" className="py-8 sm:py-10 lg:py-24 bg-[#F8FAF9] border-t border-b border-[#E5EBE5]">
+    <section id="layanan-section" className="py-8 sm:py-10 lg:py-24 bg-white border-t border-b border-[#E5EBE5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Title - compact on mobile */}

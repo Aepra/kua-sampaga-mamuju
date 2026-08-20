@@ -11,6 +11,9 @@ import { getSettings } from '@/lib/data/settings';
 
 import LayananSection from './LayananSection';
 import ServiceCardPublic from '@/components/public/ServiceCard';
+import FeedbackButton from '@/components/public/FeedbackButton';
+import VisitorCounter from '@/components/public/VisitorCounter';
+import FeedbackList from '@/components/public/FeedbackList';
 
 export const revalidate = 60;
 
@@ -72,7 +75,7 @@ export default async function HomePage() {
   // Run all queries in parallel for much faster load
   const [services, recentInfo, recentGallery, settings, categories] = await Promise.all([
     getPublishedServices(),
-    getRecentInformation(3),
+    getRecentInformation(5),
     getRecentGallery(4),
     getSettings(),
     getCategories(),
@@ -169,6 +172,7 @@ export default async function HomePage() {
                   <MessageCircle className="w-4 h-4" />
                   Hubungi Admin
                 </a>
+                <FeedbackButton />
               </div>
 
               {/* Minimalist Feature Indicators */}
@@ -181,6 +185,11 @@ export default async function HomePage() {
                   <ShieldCheck className="w-5 h-5 text-[#FCD34D]" />
                   Bebas Biaya Liar
                 </div>
+              </div>
+
+              {/* Visitor Counter */}
+              <div className="mt-8 pt-6 border-t border-white/20 w-full text-left">
+                <VisitorCounter className="text-[#A7F3D0]" />
               </div>
             </div>
 
@@ -225,7 +234,7 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 2. QUICK ACCESS SECTION (PROFESSIONAL & PRECISE) */}
       {/* ============================================================ */}
-      <section className="relative bg-white py-8 sm:py-16 z-20 border-b border-[#E5EBE5] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+      <section className="relative bg-[#F8FAF9] py-8 sm:py-16 z-20 border-b border-[#E5EBE5] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="max-w-[1000px] mx-auto px-2 sm:px-6">
           <div className="flex flex-wrap md:flex-nowrap items-start justify-center gap-4 sm:gap-12 lg:gap-16">
             {quickAccessItems.map((item, i) => {
@@ -292,9 +301,9 @@ export default async function HomePage() {
       {/* 5. INFORMASI TERBARU SECTION */}
       {/* ============================================================ */}
       {recentInfo.length > 0 && (
-        <section className="py-10 lg:py-24 bg-white relative overflow-hidden">
+        <section className="py-10 lg:py-24 bg-[#ECFDF5]/60 relative overflow-hidden">
           {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#ECFDF5] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 lg:mb-12">
@@ -315,56 +324,94 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className={`grid grid-cols-1 ${recentInfo.length > 1 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:max-w-2xl mx-auto'} gap-6 sm:gap-8`}>
-              {recentInfo.map(info => (
-                <Link
-                  key={info.id}
-                  href={`/informasi/${info.slug}`}
-                  className="group bg-white rounded-[24px] border border-[#E5EBE5] overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-[#10B981] transition-all duration-300 flex flex-col justify-between h-full"
-                >
-                  <div>
-                    <div className="h-48 sm:h-56 bg-[#F1F5F3] overflow-hidden relative">
-                      {info.thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={info.thumbnail}
-                          alt={info.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
-                          <BookOpen className="w-12 h-12 opacity-40" />
+            {recentInfo.length > 0 && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+                {/* Featured (Large) */}
+                <div className="lg:col-span-7 xl:col-span-8">
+                  {(() => {
+                    const featured = recentInfo[0];
+                    return (
+                      <Link
+                        href={`/informasi/${featured.slug}`}
+                        className="group bg-white rounded-[24px] border border-[#E5EBE5] overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-[#10B981] transition-all duration-300 flex flex-col h-full relative"
+                      >
+                        <div className="h-[300px] sm:h-[400px] lg:h-full min-h-[350px] bg-[#F1F5F3] overflow-hidden relative">
+                          {featured.thumbnail ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={featured.thumbnail}
+                              alt={featured.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
+                              <BookOpen className="w-16 h-16 opacity-40" />
+                            </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-90 transition-opacity duration-300"></div>
+                          
+                          <span className="absolute top-5 left-5 text-[10px] sm:text-xs font-bold text-white bg-[#059669] px-3 sm:px-4 py-1.5 rounded-full shadow-sm tracking-wider uppercase">
+                            {featured.category}
+                          </span>
+                          
+                          {/* Text embedded in image for portal style */}
+                          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                            <div className="flex items-center gap-2 text-[11px] sm:text-[12px] font-medium text-[#A7F3D0] mb-3">
+                              <Clock className="w-4 h-4" />
+                              <span>{new Date(featured.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                            </div>
+                            <h3 className="font-extrabold text-white text-xl sm:text-3xl font-heading line-clamp-3 sm:line-clamp-2 leading-snug group-hover:text-[#A7F3D0] transition-colors">
+                              {featured.title}
+                            </h3>
+                            <p className="text-sm text-white/80 line-clamp-2 leading-relaxed mt-3 hidden sm:block">
+                              {featured.excerpt}
+                            </p>
+                          </div>
                         </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="absolute top-4 left-4 text-[10px] font-bold text-[#047857] bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm">
-                        {info.category}
-                      </span>
-                    </div>
+                      </Link>
+                    );
+                  })()}
+                </div>
 
-                    <div className="p-6 space-y-3">
-                      <div className="flex items-center gap-2 text-[12px] font-medium text-[#6B7E6B]">
-                        <Clock className="w-4 h-4 text-[#059669]" />
-                        <span>{new Date(info.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                      </div>
-                      <h3 className="font-extrabold text-[#1A2E1A] text-lg sm:text-xl group-hover:text-[#059669] transition-colors font-heading line-clamp-2 leading-snug">
-                        {info.title}
-                      </h3>
-                      <p className="text-sm text-[#4A5D4A] line-clamp-3 leading-relaxed">
-                        {info.excerpt}
-                      </p>
-                    </div>
+                {/* Other News List */}
+                {recentInfo.length > 1 && (
+                  <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-4">
+                    {recentInfo.slice(1).map(info => (
+                      <Link
+                        key={info.id}
+                        href={`/informasi/${info.slug}`}
+                        className="group flex gap-4 bg-white p-3 sm:p-4 rounded-[20px] border border-[#E5EBE5] hover:border-[#10B981] hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] transition-all duration-300 items-center"
+                      >
+                        <div className="w-24 h-24 sm:w-[100px] sm:h-[100px] rounded-xl overflow-hidden bg-[#F1F5F3] relative flex-shrink-0">
+                          {info.thumbnail ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={info.thumbnail}
+                              alt={info.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
+                              <BookOpen className="w-8 h-8 opacity-40" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex flex-col flex-1 py-1 pr-2">
+                          <span className="text-[10px] font-bold text-[#059669] mb-1.5 uppercase tracking-wider">{info.category}</span>
+                          <h4 className="font-bold text-[#1A2E1A] text-sm sm:text-base group-hover:text-[#059669] transition-colors font-heading line-clamp-2 leading-snug mb-2">
+                            {info.title}
+                          </h4>
+                          <div className="flex items-center gap-1.5 text-[10px] font-medium text-[#6B7E6B] mt-auto">
+                            <Clock className="w-3 h-3" />
+                            <span>{new Date(info.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-
-                  <div className="px-6 pb-6 pt-2 mt-auto">
-                    <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#059669] group-hover:text-[#047857] group-hover:translate-x-2 transition-all duration-300">
-                      Baca Selengkapnya
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                )}
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -393,21 +440,21 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div className="columns-2 md:columns-4 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
               {recentGallery.map(item => (
                 <div
                   key={item.id}
-                  className="group relative aspect-square rounded-[20px] overflow-hidden bg-[#064E3B] border border-white/10 shadow-lg"
+                  className="group relative w-full inline-block rounded-[20px] overflow-hidden bg-[#064E3B] border border-white/10 shadow-lg"
                 >
                   {item.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                      className="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full aspect-square flex items-center justify-center">
                       <BookOpen className="w-10 h-10 text-white/20" />
                     </div>
                   )}
@@ -426,7 +473,7 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 7. PROFIL KUA SECTION */}
       {/* ============================================================ */}
-      <section className="py-10 lg:py-24 bg-[#F8FAF9] border-t border-[#E5EBE5]">
+      <section className="py-10 lg:py-24 bg-[#FFFBEB]/50 border-t border-[#FDE68A]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-12 rounded-[24px] sm:rounded-[32px] border border-[#E5EBE5] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden">
             
@@ -509,7 +556,12 @@ export default async function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 8. DISCLAIMER BANNER */}
+      {/* 8. TESTIMONIAL / SUARA PENGUNJUNG */}
+      {/* ============================================================ */}
+      <FeedbackList />
+
+      {/* ============================================================ */}
+      {/* 9. DISCLAIMER BANNER */}
       {/* ============================================================ */}
       <section className="bg-gradient-to-r from-[#FFFBEB] via-[#FEF3C7] to-[#FFFBEB] border-y border-[#FDE68A] shadow-inner py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

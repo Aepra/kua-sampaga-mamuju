@@ -22,6 +22,7 @@
     "nextjs-toploader": "^3.9.17",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-easy-crop": "^6.2.3",
     "uuid": "^14.0.1"
   },
   "devDependencies": {
