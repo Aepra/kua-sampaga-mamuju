@@ -99,15 +99,15 @@ export default function AdminMasukanPage() {
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Kelola Masukan</h1>
-          <p className="text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Kelola Masukan</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
             Lihat, balas, dan kelola masukan dari pengunjung website.
           </p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-4 border-b border-gray-200 flex flex-col sm:flex-row gap-4 justify-between bg-gray-50/50">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row gap-4 justify-between bg-gray-50 dark:bg-gray-800/50 dark:bg-gray-700/50/50">
           <div className="relative w-full sm:w-96">
             <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
@@ -115,7 +115,7 @@ export default function AdminMasukanPage() {
               placeholder="Cari masukan atau nama pengirim..."
               value={query}
               onChange={e => setQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 text-sm"
+              className="w-full pl-10 pr-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 text-sm"
             />
           </div>
         </div>
@@ -125,13 +125,13 @@ export default function AdminMasukanPage() {
             <div className="w-8 h-8 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="p-12 text-center text-gray-500">
+          <div className="p-12 text-center text-gray-500 dark:text-gray-400">
             {query ? 'Tidak ada masukan yang cocok dengan pencarian Anda.' : 'Belum ada masukan sama sekali.'}
           </div>
         ) : (
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-gray-100 dark:divide-gray-700">
             {filtered.map(f => (
-              <div key={f.id} className="p-4 sm:p-6 hover:bg-gray-50/50 transition-colors">
+              <div key={f.id} className="p-4 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/50 dark:bg-gray-800/50 dark:hover:bg-gray-700/50 dark:bg-gray-700/50/50 transition-colors">
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Feedback Content */}
                   <div className="flex-1 space-y-3">
@@ -140,8 +140,8 @@ export default function AdminMasukanPage() {
                         {f.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <div className="font-bold text-gray-900">{f.name}</div>
-                        <div className="text-xs text-gray-500">
+                        <div className="font-bold text-gray-900 dark:text-gray-100">{f.name}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
                           {f.user?.email || 'Tanpa Email'} • {new Date(f.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </div>
                       </div>
@@ -153,7 +153,7 @@ export default function AdminMasukanPage() {
                       ))}
                     </div>
 
-                    <p className="text-gray-700 bg-white p-3 rounded-lg border border-gray-100 shadow-sm text-sm">
+                    <p className="text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm text-sm">
                       "{f.message}"
                     </p>
 
@@ -168,13 +168,13 @@ export default function AdminMasukanPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex lg:flex-col items-center lg:items-end justify-center gap-2 min-w-[140px] pt-2 lg:pt-0 border-t lg:border-t-0 border-gray-100">
+                  <div className="flex lg:flex-col items-center lg:items-end justify-center gap-2 min-w-[140px] pt-2 lg:pt-0 border-t lg:border-t-0 border-gray-100 dark:border-gray-700">
                     <button
                       onClick={() => handleTogglePublish(f.id, f.published)}
                       className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
                         f.published 
                           ? 'border-green-200 bg-green-50 text-green-700 hover:bg-green-100'
-                          : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
+                          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 dark:bg-gray-800/50 dark:hover:bg-gray-700/50 dark:bg-gray-700/50'
                       }`}
                     >
                       {f.published ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
@@ -194,7 +194,7 @@ export default function AdminMasukanPage() {
 
                     <button
                       onClick={() => handleDelete(f.id)}
-                      className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-200 bg-red-50 text-red-600 hover:bg-red-100"
+                      className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-200 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100"
                     >
                       <Trash2 className="w-4 h-4" />
                       Hapus
@@ -210,33 +210,33 @@ export default function AdminMasukanPage() {
       {/* Reply Modal */}
       {replyTarget && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl w-full max-w-lg shadow-xl overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-xl w-full max-w-lg shadow-xl overflow-hidden">
             <form onSubmit={handleReplySubmit}>
-              <div className="p-4 border-b border-gray-100 bg-gray-50">
-                <h3 className="font-bold text-gray-900">Balas Masukan</h3>
-                <p className="text-xs text-gray-500 mt-1">Membalas pesan dari {replyTarget.name}</p>
+              <div className="p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 dark:bg-gray-700/50">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100">Balas Masukan</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Membalas pesan dari {replyTarget.name}</p>
               </div>
               <div className="p-4 space-y-4">
-                <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 text-sm text-gray-600 italic">
+                <div className="bg-gray-50 dark:bg-gray-800/50 dark:bg-gray-700/50 p-3 rounded-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400 italic">
                   "{replyTarget.message}"
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Balasan Anda</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Balasan Anda</label>
                   <textarea
                     value={replyText}
                     onChange={e => setReplyText(e.target.value)}
                     rows={4}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     placeholder="Ketik balasan Anda di sini..."
                     required
                   ></textarea>
                 </div>
               </div>
-              <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
+              <div className="p-4 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 dark:bg-gray-700/50 flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setReplyTarget(null)}
-                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:bg-gray-700 rounded-lg transition-colors"
                 >
                   Batal
                 </button>
@@ -255,3 +255,7 @@ export default function AdminMasukanPage() {
     </div>
   );
 }
+
+
+
+

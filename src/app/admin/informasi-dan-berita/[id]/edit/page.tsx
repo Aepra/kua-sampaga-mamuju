@@ -16,3 +16,6 @@ export default async function EditInformasiPage({ params }: Props) {
 
   return <InformationForm initialData={item} />;
 }
+
+
+

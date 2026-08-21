@@ -13,3 +13,4 @@ export default async function GaleriPage() {
   const gallery = await getPublishedGallery();
   return <GalleryClient gallery={gallery} />;
 }
+

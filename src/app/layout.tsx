@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import { ToastProvider } from '@/components/ui/Toast';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,12 +37,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`${inter.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
-      <body className={`${inter.className} min-h-screen flex flex-col antialiased bg-white text-[#1A2E1A]`}>
-        <ToastProvider>
+    <html lang="id" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
+      <body suppressHydrationWarning className={`${inter.className} min-h-screen flex flex-col antialiased bg-white dark:bg-gray-950 text-[#1A2E1A] dark:text-gray-100 transition-colors duration-300`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ToastProvider>
           {children}
         </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
+
+

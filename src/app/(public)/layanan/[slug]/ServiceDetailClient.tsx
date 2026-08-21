@@ -121,9 +121,9 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
   )}`;
 
   return (
-    <div className="min-h-screen bg-[#F8FAF9] pb-16">
+    <div className="min-h-screen bg-[#F8FAF9] dark:bg-gray-900 pb-16">
       {/* ===== HEADER BAR (HIDDEN ON PRINT) ===== */}
-      <div className="bg-[#022C22] text-white pt-[70px] relative overflow-hidden print:hidden">
+      <div className="bg-[#022C22] dark:bg-gray-950 text-white pt-[70px] relative overflow-hidden print:hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 relative z-10">
           {/* Breadcrumb */}
@@ -172,7 +172,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
           <div className="lg:col-span-8 space-y-8 print:space-y-4">
 
             {/* ACTION BAR */}
-            <div className="flex flex-wrap items-center gap-2.5 bg-white p-3.5 rounded-xl border border-border-light shadow-sm no-print">
+            <div className="flex flex-wrap items-center gap-2.5 bg-white dark:bg-gray-800 p-3.5 rounded-xl border border-border-light shadow-sm no-print">
               <button
                 onClick={handleWhatsAppShare}
                 className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
@@ -182,14 +182,14 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
               </button>
               <button
                 onClick={handleCopyLink}
-                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-surface-tertiary hover:bg-border-light text-text-primary rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-surface-tertiary dark:bg-gray-800 hover:bg-border-light text-text-primary rounded-lg transition-colors"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
                 {copied ? 'Tersalin!' : 'Salin Link'}
               </button>
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-surface-tertiary hover:bg-border-light text-text-primary rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-surface-tertiary dark:bg-gray-800 hover:bg-border-light text-text-primary rounded-lg transition-colors"
               >
                 <Printer className="w-4 h-4" />
                 Cetak Persyaratan
@@ -227,7 +227,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
 
             {/* ADDITIONAL DESCRIPTION */}
             {service.additionalDescription && (
-              <div className="bg-white p-5 rounded-xl border border-border-light print:p-0 print:border-none">
+              <div className="bg-white dark:bg-gray-800 p-5 rounded-xl border border-border-light print:p-0 print:border-none">
                 <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
                   {service.additionalDescription}
                 </p>
@@ -251,7 +251,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
                   {service.requirements.map(req => (
                     <div
                       key={req.id}
-                      className="bg-white p-4 rounded-xl border border-border-light shadow-sm hover:border-primary-medium/40 transition-all flex items-start gap-3.5 print:p-2 print:border-b print:border-x-0 print:border-t-0 print:rounded-none print:shadow-none print:gap-2"
+                      className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-border-light shadow-sm hover:border-primary-medium/40 transition-all flex items-start gap-3.5 print:p-2 print:border-b print:border-x-0 print:border-t-0 print:rounded-none print:shadow-none print:gap-2"
                     >
                       <div className="mt-0.5 flex-shrink-0">
                         {req.required ? (
@@ -269,7 +269,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
                             className={`text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider print:border-none print:p-0 print:bg-transparent print:text-black print:before:content-['('] print:after:content-[')'] ${
                               req.required
                                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                                : 'bg-surface-tertiary text-text-muted border border-border-light'
+                                : 'bg-surface-tertiary dark:bg-gray-800 text-text-muted border border-border-light'
                             }`}
                           >
                             {req.required ? 'WAJIB' : 'OPSIONAL'}
@@ -303,7 +303,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
                   {service.documentsToBring.map((doc, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-3 bg-white p-3 rounded-xl border border-border-light shadow-xs print:p-0 print:border-none print:shadow-none"
+                      className="flex items-center gap-3 bg-white dark:bg-gray-800 p-3 rounded-xl border border-border-light shadow-xs print:p-0 print:border-none print:shadow-none"
                     >
                       <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 text-xs font-bold print:hidden">
                         ✓
@@ -322,7 +322,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
                 <h2 className="text-xl font-bold text-text-primary font-heading print:text-base print:text-black">
                   Alur Prosedur
                 </h2>
-                <div className="bg-white p-6 rounded-2xl border border-border-light space-y-6 print:p-0 print:border-none print:space-y-1.5">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-border-light space-y-6 print:p-0 print:border-none print:space-y-1.5">
                   {service.steps.map((step, idx) => (
                     <div key={idx} className="flex gap-4 items-start relative print:gap-2">
                       {/* Step Number Circle */}
@@ -394,7 +394,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
           <div className="lg:col-span-4 space-y-6">
 
             {/* SUMMARY CARD */}
-            <div className="bg-white p-5 rounded-2xl border border-border-light shadow-sm sticky top-24 space-y-5 no-print">
+            <div className="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-border-light shadow-sm sticky top-24 space-y-5 no-print">
               <h3 className="text-base font-bold text-text-primary font-heading border-b border-border-light pb-3">
                 Ringkasan Layanan
               </h3>
@@ -448,7 +448,7 @@ export default function ServiceDetailClient({ service, settings }: ServiceDetail
               </div>
 
               {/* DISCLAIMER BOX */}
-              <div className="p-3.5 bg-surface-secondary rounded-xl border border-border-light text-[11px] text-text-muted leading-relaxed">
+              <div className="p-3.5 bg-surface-secondary dark:bg-gray-900 rounded-xl border border-border-light text-[11px] text-text-muted leading-relaxed">
                 <span className="font-semibold text-text-secondary block mb-1">📢 Himbauan KUA:</span>
                 Pastikan dokumen fisik dibawa langsung ke kantor KUA Kecamatan Sampaga di <strong>Jl. Sakinah No. 1 Bunde</strong>.
               </div>

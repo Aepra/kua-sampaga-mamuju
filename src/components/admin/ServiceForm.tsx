@@ -163,20 +163,20 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
       <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui layanan...' : 'Menambahkan layanan...'} />
       <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl pb-12">
         {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light dark:border-gray-700 pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => router.back()}
-            className="p-2 text-text-secondary hover:text-text-primary hover:bg-surface-tertiary rounded-lg"
+            className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-text-primary font-heading">
+            <h1 className="text-xl font-bold text-text-primary dark:text-gray-100 font-heading">
               {initialData ? 'Edit Layanan' : 'Tambah Layanan Baru'}
             </h1>
-            <p className="text-xs text-text-tertiary">
+            <p className="text-xs text-text-tertiary dark:text-gray-500">
               Lengkapi formulir di bawah ini untuk mengelola data layanan.
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
           <button
             type="button"
             onClick={() => router.back()}
-            className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light"
+            className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-text-secondary dark:text-gray-400 bg-surface-tertiary dark:bg-gray-700 rounded-lg hover:bg-border-light dark:hover:bg-gray-600"
           >
             Batal
           </button>
@@ -201,12 +201,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
       </div>
 
       {/* Main Info Card */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-6">
-        <h2 className="text-base font-bold text-text-primary font-heading">Informasi Utama</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-6">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Informasi Utama</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Judul Layanan <span className="text-red-500">*</span>
             </label>
             <input
@@ -215,12 +215,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
               onChange={e => handleTitleChange(e.target.value)}
               placeholder="Contoh: Pendaftaran Nikah"
               required
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Slug (URL) <span className="text-red-500">*</span>
             </label>
             <input
@@ -229,18 +229,18 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
               onChange={e => setSlug(e.target.value)}
               placeholder="pendaftaran-nikah"
               required
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Kategori <span className="text-red-500">*</span>
             </label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             >
               {SERVICE_CATEGORIES.filter(c => c !== 'Semua').map(cat => (
                 <option key={cat} value={cat}>
@@ -251,13 +251,13 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Icon Layanan
             </label>
             <select
               value={icon}
               onChange={e => setIcon(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             >
               <option value="Heart">Heart (Pernikahan)</option>
               <option value="Globe">Globe (Online)</option>
@@ -276,7 +276,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Deskripsi Ringkas <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -285,12 +285,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             onChange={e => setDescription(e.target.value)}
             placeholder="Ringkasan singkat layanan untuk kartu layanan dan search..."
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Deskripsi Tambahan / Pengantar Detail
           </label>
           <textarea
@@ -298,7 +298,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             value={additionalDescription}
             onChange={e => setAdditionalDescription(e.target.value)}
             placeholder="Penjelasan lebih rinci mengenai layanan ini..."
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
@@ -312,13 +312,13 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
       </div>
 
       {/* Persyaratan (Dynamic) */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-text-primary font-heading">Persyaratan Layanan</h2>
+          <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Persyaratan Layanan</h2>
           <button
             type="button"
             onClick={addRequirement}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> Tambah Syarat
           </button>
@@ -327,13 +327,13 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
         {requirements.length > 0 ? (
           <div className="space-y-3">
             {requirements.map((req, idx) => (
-              <div key={req.id} className="p-4 bg-surface-secondary rounded-xl border border-border-light space-y-3">
+              <div key={req.id} className="p-4 bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-xl border border-border-light dark:border-gray-700 space-y-3">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-text-tertiary">Syarat #{idx + 1}</span>
+                  <span className="text-xs font-bold text-text-tertiary dark:text-gray-500">Syarat #{idx + 1}</span>
                   <button
                     type="button"
                     onClick={() => removeRequirement(req.id)}
-                    className="text-xs text-red-600 hover:underline flex items-center gap-1"
+                    className="text-xs text-red-600 dark:text-red-400 hover:underline flex items-center gap-1"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Hapus
                   </button>
@@ -345,16 +345,16 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
                       value={req.title}
                       onChange={e => updateRequirement(req.id, 'title', e.target.value)}
                       placeholder="Nama Dokumen / Syarat (cth: KTP)"
-                      className="w-full px-3 py-1.5 text-sm bg-white border border-border-light rounded-lg focus:border-primary-500 outline-none"
+                      className="w-full px-3 py-1.5 text-sm bg-white dark:bg-gray-800 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
                     />
                   </div>
                   <div className="flex items-center gap-2">
-                    <label className="flex items-center gap-2 text-xs text-text-primary font-medium cursor-pointer">
+                    <label className="flex items-center gap-2 text-xs text-text-primary dark:text-gray-100 font-medium cursor-pointer">
                       <input
                         type="checkbox"
                         checked={req.required}
                         onChange={e => updateRequirement(req.id, 'required', e.target.checked)}
-                        className="rounded border-border-medium text-primary-600 focus:ring-primary-500"
+                        className="rounded border-border-medium text-primary-600 dark:text-primary-400 focus:ring-primary-500"
                       />
                       Syarat Wajib
                     </label>
@@ -365,24 +365,24 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
                   value={req.description}
                   onChange={e => updateRequirement(req.id, 'description', e.target.value)}
                   placeholder="Keterangan tambahan (cth: KTP asli dan fotokopi)"
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-border-light rounded-lg focus:border-primary-500 outline-none"
+                  className="w-full px-3 py-1.5 text-xs bg-white dark:bg-gray-800 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
                 />
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-xs text-text-tertiary italic">Belum ada persyaratan. Klik tombol di atas untuk menambah.</p>
+          <p className="text-xs text-text-tertiary dark:text-gray-500 italic">Belum ada persyaratan. Klik tombol di atas untuk menambah.</p>
         )}
       </div>
 
       {/* Dokumen yang perlu dibawa */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-text-primary font-heading">Dokumen yang Harus Dibawa</h2>
+          <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Dokumen yang Harus Dibawa</h2>
           <button
             type="button"
             onClick={() => addListItem(setDocumentsToBring)}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> Tambah Dokumen
           </button>
@@ -397,12 +397,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
                   value={doc}
                   onChange={e => updateListItem(setDocumentsToBring, idx, e.target.value)}
                   placeholder="Contoh: KTP asli dan fotokopi"
-                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => removeListItem(setDocumentsToBring, idx)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:bg-red-900/30 rounded-lg"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -410,18 +410,18 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-text-tertiary italic">Belum ada dokumen yang dimasukkan.</p>
+          <p className="text-xs text-text-tertiary dark:text-gray-500 italic">Belum ada dokumen yang dimasukkan.</p>
         )}
       </div>
 
       {/* Langkah Pengurusan Timeline */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-text-primary font-heading">Langkah Pengurusan (Alur)</h2>
+          <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Langkah Pengurusan (Alur)</h2>
           <button
             type="button"
             onClick={() => addListItem(setSteps)}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> Tambah Langkah
           </button>
@@ -439,12 +439,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
                   value={step}
                   onChange={e => updateListItem(setSteps, idx, e.target.value)}
                   placeholder="Contoh: Siapkan dokumen persyaratan"
-                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => removeListItem(setSteps, idx)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:bg-red-900/30 rounded-lg"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -452,18 +452,18 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-text-tertiary italic">Belum ada langkah pengurusan.</p>
+          <p className="text-xs text-text-tertiary dark:text-gray-500 italic">Belum ada langkah pengurusan.</p>
         )}
       </div>
 
       {/* Catatan Penting */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-text-primary font-heading">Catatan Penting</h2>
+          <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Catatan Penting</h2>
           <button
             type="button"
             onClick={() => addListItem(setNotes)}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> Tambah Catatan
           </button>
@@ -478,12 +478,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
                   value={note}
                   onChange={e => updateListItem(setNotes, idx, e.target.value)}
                   placeholder="Contoh: Pastikan data pada KTP dan KK sesuai."
-                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+                  className="flex-1 px-3 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => removeListItem(setNotes, idx)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:bg-red-900/30 rounded-lg"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -491,40 +491,40 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-text-tertiary italic">Belum ada catatan penting.</p>
+          <p className="text-xs text-text-tertiary dark:text-gray-500 italic">Belum ada catatan penting.</p>
         )}
       </div>
 
       {/* Additional Settings */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
-        <h2 className="text-base font-bold text-text-primary font-heading">Pengaturan Tambahan</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Pengaturan Tambahan</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Biaya Pelayanan</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Biaya Pelayanan</label>
             <input
               type="text"
               value={fee}
               onChange={e => setFee(e.target.value)}
               placeholder="cth: Gratis / Sesuai ketentuan"
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Waktu Pelayanan</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Waktu Pelayanan</label>
             <input
               type="text"
               value={processingTime}
               onChange={e => setProcessingTime(e.target.value)}
               placeholder="cth: 10 hari kerja"
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Link Eksternal Pendaftaran (Opsional)
           </label>
           <input
@@ -532,12 +532,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             value={externalLink}
             onChange={e => setExternalLink(e.target.value)}
             placeholder="https://simkah4.kemenag.go.id"
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Kata Kunci Pencarian (Pisahkan dengan koma)
           </label>
           <input
@@ -545,7 +545,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             value={keywords}
             onChange={e => setKeywords(e.target.value)}
             placeholder="nikah, pendaftaran, perkawinan, kawin"
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
@@ -555,9 +555,9 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
               type="checkbox"
               checked={published}
               onChange={e => setPublished(e.target.checked)}
-              className="rounded border-border-medium text-primary-600 focus:ring-primary-500"
+              className="rounded border-border-medium text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm font-medium text-text-primary">Dipublikasikan di website publik</span>
+            <span className="text-sm font-medium text-text-primary dark:text-gray-100">Dipublikasikan di website publik</span>
           </label>
         </div>
         </div>
@@ -565,3 +565,5 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
     </>
   );
 }
+
+

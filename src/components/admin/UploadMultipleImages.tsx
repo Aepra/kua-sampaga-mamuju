@@ -151,14 +151,14 @@ export default function UploadMultipleImages({
     <div className="space-y-3">
       {label && (
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-bold text-text-primary">
-            {label} <span className="text-xs font-normal text-text-tertiary">({value.length}/{maxImages})</span>
+          <label className="block text-sm font-bold text-text-primary dark:text-gray-100">
+            {label} <span className="text-xs font-normal text-text-tertiary dark:text-gray-500">({value.length}/{maxImages})</span>
           </label>
         </div>
       )}
 
       {error && (
-        <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 p-3 rounded-xl border border-red-200 shadow-sm">
+        <div className="flex items-center gap-2 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 p-3 rounded-xl border border-red-200 shadow-sm">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span>{error}</span>
         </div>
@@ -167,17 +167,17 @@ export default function UploadMultipleImages({
       {/* CROP MODAL */}
       {imageSrc && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col max-h-[90vh] overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col max-h-[90vh] overflow-hidden">
             
-            <div className="flex items-center justify-between p-4 border-b border-border-light bg-surface-secondary/50">
-              <h3 className="text-lg font-bold text-text-primary flex items-center gap-2">
-                <Crop className="w-5 h-5 text-primary-600" />
+            <div className="flex items-center justify-between p-4 border-b border-border-light dark:border-gray-700 bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500/50">
+              <h3 className="text-lg font-bold text-text-primary dark:text-gray-100 flex items-center gap-2">
+                <Crop className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 Sesuaikan Gambar
               </h3>
               <button
                 type="button"
                 onClick={cancelCrop}
-                className="p-1.5 text-text-secondary hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors"
+                className="p-1.5 text-text-secondary dark:text-gray-400 hover:text-red-500 hover:bg-red-50 dark:bg-red-900/30 rounded-xl transition-colors"
                 disabled={loading}
               >
                 <X className="w-5 h-5" />
@@ -198,11 +198,11 @@ export default function UploadMultipleImages({
               />
             </div>
 
-            <div className="p-4 sm:p-6 bg-surface-secondary flex flex-col gap-4">
+            <div className="p-4 sm:p-6 bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 flex flex-col gap-4">
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-between">
                 
                 {/* Aspect Ratio Selector */}
-                <div className="flex items-center gap-2 bg-white p-1 rounded-xl border border-border-light w-full sm:w-auto overflow-x-auto hide-scrollbar shadow-sm">
+                <div className="flex items-center gap-2 bg-white dark:bg-gray-800 p-1 rounded-xl border border-border-light dark:border-gray-700 w-full sm:w-auto overflow-x-auto hide-scrollbar shadow-sm">
                   {ASPECT_RATIOS.map((ratio) => (
                     <button
                       type="button"
@@ -211,7 +211,7 @@ export default function UploadMultipleImages({
                       className={`px-3 py-1.5 text-xs font-bold rounded-lg whitespace-nowrap transition-all ${
                         aspect === ratio.value
                           ? 'bg-primary-600 text-white shadow-md'
-                          : 'text-text-secondary hover:bg-surface-tertiary hover:text-text-primary'
+                          : 'text-text-secondary dark:text-gray-400 hover:bg-surface-tertiary dark:bg-gray-700 hover:text-text-primary dark:text-gray-100'
                       }`}
                     >
                       {ratio.label}
@@ -220,8 +220,8 @@ export default function UploadMultipleImages({
                 </div>
 
                 {/* Zoom Control */}
-                <div className="flex items-center gap-3 w-full sm:w-64 bg-white px-4 py-2 rounded-xl border border-border-light shadow-sm">
-                  <span className="text-xs font-bold text-text-secondary">Zoom</span>
+                <div className="flex items-center gap-3 w-full sm:w-64 bg-white dark:bg-gray-800 px-4 py-2 rounded-xl border border-border-light dark:border-gray-700 shadow-sm">
+                  <span className="text-xs font-bold text-text-secondary dark:text-gray-400">Zoom</span>
                   <input
                     type="range"
                     value={zoom}
@@ -241,7 +241,7 @@ export default function UploadMultipleImages({
                   type="button"
                   onClick={cancelCrop}
                   disabled={loading}
-                  className="px-5 py-2.5 text-sm font-bold text-text-secondary bg-white border border-border-medium hover:bg-surface-tertiary hover:text-text-primary rounded-xl transition-all shadow-sm"
+                  className="px-5 py-2.5 text-sm font-bold text-text-secondary dark:text-gray-400 bg-white dark:bg-gray-800 border border-border-medium hover:bg-surface-tertiary dark:bg-gray-700 hover:text-text-primary dark:text-gray-100 rounded-xl transition-all shadow-sm"
                 >
                   Batal
                 </button>
@@ -273,7 +273,7 @@ export default function UploadMultipleImages({
       {!imageSrc && (
         <div className="flex flex-wrap items-start gap-4">
           {value.map((url, idx) => (
-            <div key={idx} className="relative group inline-block rounded-2xl overflow-hidden border-2 border-border-light bg-surface-tertiary shadow-sm hover:shadow-md transition-all">
+            <div key={idx} className="relative group inline-block rounded-2xl overflow-hidden border-2 border-border-light dark:border-gray-700 bg-surface-tertiary dark:bg-gray-700 shadow-sm hover:shadow-md transition-all">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={url}
@@ -284,7 +284,7 @@ export default function UploadMultipleImages({
                 <button
                   type="button"
                   onClick={() => handleRemoveClick(idx)}
-                  className="w-10 h-10 flex items-center justify-center bg-red-600 hover:bg-red-500 text-white rounded-full shadow-lg transform scale-75 group-hover:scale-100 transition-all"
+                  className="w-10 h-10 flex items-center justify-center bg-red-600 hover:bg-red-50 dark:bg-red-900/300 text-white rounded-full shadow-lg transform scale-75 group-hover:scale-100 transition-all"
                   title="Hapus gambar"
                 >
                   <X className="w-5 h-5" />
@@ -299,15 +299,15 @@ export default function UploadMultipleImages({
           {value.length < maxImages && (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="w-[200px] h-[200px] border-2 border-dashed border-border-medium hover:border-primary-500 rounded-2xl p-4 text-center cursor-pointer bg-surface-secondary/50 hover:bg-primary-50/50 transition-all group flex flex-col items-center justify-center"
+              className="w-[200px] h-[200px] border-2 border-dashed border-border-medium hover:border-primary-500 rounded-2xl p-4 text-center cursor-pointer bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500/50 hover:bg-primary-50 dark:bg-primary-900/30/50 transition-all group flex flex-col items-center justify-center"
             >
-              <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-border-light group-hover:border-primary-200 group-hover:bg-primary-50 flex items-center justify-center text-primary-600 mb-3 transition-all group-hover:scale-110">
+              <div className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-border-light dark:border-gray-700 group-hover:border-primary-200 group-hover:bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 dark:text-primary-400 mb-3 transition-all group-hover:scale-110">
                 <ImagePlus className="w-5 h-5" />
               </div>
-              <p className="text-sm font-bold text-text-primary group-hover:text-primary-700 transition-colors">
+              <p className="text-sm font-bold text-text-primary dark:text-gray-100 group-hover:text-primary-700 dark:text-primary-400 transition-colors">
                 Tambah Gambar
               </p>
-              <p className="text-[11px] font-medium text-text-tertiary mt-1.5 px-4">
+              <p className="text-[11px] font-medium text-text-tertiary dark:text-gray-500 mt-1.5 px-4">
                 Maksimal 5MB (JPG, PNG, WebP)
               </p>
             </div>
@@ -336,3 +336,5 @@ export default function UploadMultipleImages({
     </div>
   );
 }
+
+

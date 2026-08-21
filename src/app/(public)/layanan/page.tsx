@@ -17,3 +17,4 @@ export default async function LayananPage() {
 
   return <ServiceListClient services={services} categories={categories} />;
 }
+

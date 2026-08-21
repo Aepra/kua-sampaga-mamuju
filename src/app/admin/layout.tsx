@@ -10,7 +10,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-surface-secondary flex">
+    <div className="min-h-screen bg-surface-secondary dark:bg-gray-950 flex">
       <NextTopLoader color="#059669" height={3} showSpinner={false} />
       <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -30,3 +30,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </SessionProvider>
   );
 }
+
+
+
+
+
+

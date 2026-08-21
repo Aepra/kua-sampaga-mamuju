@@ -44,3 +44,4 @@ export default function VisitorCounter({ className = '' }: VisitorCounterProps) 
     </div>
   );
 }
+

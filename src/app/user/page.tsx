@@ -109,8 +109,8 @@ export default function UserDashboardPage() {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8FAF9]">
-        <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-[#F8FAF9] dark:bg-gray-950">
+        <Loader2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400 animate-spin" />
       </div>
     );
   }
@@ -126,17 +126,17 @@ export default function UserDashboardPage() {
   }).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F0FDF4] via-[#F8FAF9] to-[#F8FAF9]">
+    <div className="min-h-screen bg-gradient-to-b from-[#F0FDF4] via-[#F8FAF9] to-[#F8FAF9] dark:from-gray-950 dark:via-gray-950 dark:to-gray-950">
       {/* ============ PROFILE CARD (floating on top) ============ */}
       <div className="pt-[76px] sm:pt-[84px]">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <div className="bg-gradient-to-br from-[#064E3B] to-[#047857] rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white shadow-xl shadow-emerald-900/10 relative overflow-hidden">
             {/* Decorative blobs */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/[0.07] rounded-full blur-2xl"></div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white dark:bg-gray-800/[0.07] rounded-full blur-2xl"></div>
             <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-emerald-300/10 rounded-full blur-2xl"></div>
 
             <div className="relative z-10 flex items-center gap-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 border-2 border-white/25 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-gray-800/20 border-2 border-white/25 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
                 {session.user?.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={session.user.image} alt="Profile" className="w-full h-full object-cover" />
@@ -154,7 +154,7 @@ export default function UserDashboardPage() {
               </div>
               <button
                 onClick={handleLogout}
-                className="p-2 sm:px-3.5 sm:py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all flex-shrink-0 border border-white/10"
+                className="p-2 sm:px-3.5 sm:py-1.5 bg-white dark:bg-gray-800/10 hover:bg-white dark:bg-gray-800/20 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all flex-shrink-0 border border-white/10"
               >
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Keluar</span>
@@ -168,7 +168,7 @@ export default function UserDashboardPage() {
                 { value: totalComplete, label: 'Siap Diurus', color: 'text-emerald-300' },
                 { value: totalSaved - totalComplete, label: 'Perlu Dilengkapi', color: 'text-amber-300' },
               ].map((stat, i) => (
-                <div key={i} className="bg-white/[0.08] rounded-xl px-3 py-2.5 text-center backdrop-blur-sm border border-white/[0.06]">
+                <div key={i} className="bg-white dark:bg-gray-800/[0.08] rounded-xl px-3 py-2.5 text-center backdrop-blur-sm border border-white/[0.06]">
                   <p className={`text-xl sm:text-2xl font-extrabold leading-none ${stat.color}`}>{stat.value}</p>
                   <p className="text-[10px] sm:text-xs text-emerald-100/50 font-medium mt-1">{stat.label}</p>
                 </div>
@@ -182,13 +182,13 @@ export default function UserDashboardPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-24">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base sm:text-lg font-bold text-text-primary font-heading flex items-center gap-2">
-            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
+          <h2 className="text-base sm:text-lg font-bold text-[#1A2E1A] dark:text-gray-100 font-heading flex items-center gap-2">
+            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400" />
             Layanan Tersimpan
           </h2>
           <Link
             href="/layanan"
-            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 px-3 py-1.5 rounded-lg transition-colors"
           >
             <Search className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             Cari Layanan
@@ -198,7 +198,7 @@ export default function UserDashboardPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-8 h-8 text-emerald-500 animate-spin mb-3" />
-            <p className="text-sm text-text-secondary">Memuat...</p>
+            <p className="text-sm text-[#4A5D4A] dark:text-gray-400">Memuat...</p>
           </div>
         ) : savedServices.length > 0 ? (
           <div className="space-y-3">
@@ -213,19 +213,19 @@ export default function UserDashboardPage() {
               return (
                 <div
                   key={saved.id}
-                  className={`bg-white rounded-2xl border overflow-hidden transition-all duration-300 shadow-sm ${
-                    isComplete ? 'border-emerald-200 shadow-emerald-100/50' : 'border-gray-100'
+                  className={`bg-white dark:bg-gray-800 rounded-2xl border overflow-hidden transition-all duration-300 shadow-sm ${
+                    isComplete ? 'border-emerald-200 shadow-emerald-100/50' : 'border-gray-100 dark:border-gray-700'
                   }`}
                 >
                   {/* Accordion Header */}
                   <button
                     onClick={() => toggleCard(saved.id)}
-                    className="w-full flex items-center gap-3 p-4 sm:p-5 text-left active:bg-gray-50 transition-colors"
+                    className="w-full flex items-center gap-3 p-4 sm:p-5 text-left active:bg-gray-50 dark:active:bg-gray-700 transition-colors"
                   >
                     {/* Mini Progress Ring */}
                     <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0">
                       <svg className="w-full h-full -rotate-90" viewBox="0 0 44 44">
-                        <circle cx="22" cy="22" r="18" fill="none" strokeWidth="3" className="stroke-gray-100" />
+                        <circle cx="22" cy="22" r="18" fill="none" strokeWidth="3" className="stroke-gray-100 dark:stroke-gray-700" />
                         <circle
                           cx="22" cy="22" r="18" fill="none" strokeWidth="3"
                           strokeDasharray={`${2 * Math.PI * 18}`}
@@ -238,7 +238,7 @@ export default function UserDashboardPage() {
                         {isComplete ? (
                           <CircleCheck className="w-4 h-4 text-emerald-500" />
                         ) : (
-                          <span className="text-[10px] font-extrabold text-gray-700">{progress}%</span>
+                          <span className="text-[10px] font-extrabold text-gray-700 dark:text-gray-300">{progress}%</span>
                         )}
                       </div>
                     </div>
@@ -246,11 +246,11 @@ export default function UserDashboardPage() {
                     {/* Title & Meta */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-50 text-emerald-700 rounded">
+                        <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded">
                           {s.category}
                         </span>
                       </div>
-                      <h3 className="text-sm sm:text-[15px] font-bold text-gray-800 font-heading truncate leading-snug">
+                      <h3 className="text-sm sm:text-[15px] font-bold text-gray-800 dark:text-gray-100 font-heading truncate leading-snug">
                         {s.title}
                       </h3>
                       <p className="text-[11px] text-gray-400 mt-0.5">
@@ -273,7 +273,7 @@ export default function UserDashboardPage() {
                         {/* Thin progress bar */}
                         {totalReq > 0 && (
                           <div className="mb-4">
-                            <div className="w-full bg-gray-100 rounded-full h-1 overflow-hidden">
+                            <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-1 overflow-hidden">
                               <div
                                 className={`h-1 rounded-full transition-all duration-700 ${isComplete ? 'bg-emerald-400' : 'bg-amber-400'}`}
                                 style={{ width: `${progress}%` }}
@@ -292,8 +292,8 @@ export default function UserDashboardPage() {
                                   key={req.id}
                                   className={`flex items-center gap-3 py-2.5 px-3 rounded-xl cursor-pointer transition-all active:scale-[0.98] ${
                                     isChecked
-                                      ? 'bg-emerald-50/70'
-                                      : 'hover:bg-gray-50'
+                                      ? 'bg-emerald-50 dark:bg-emerald-900/30'
+                                      : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
                                   }`}
                                 >
                                   <input
@@ -313,12 +313,12 @@ export default function UserDashboardPage() {
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <span className={`text-[13px] font-medium block leading-snug ${isChecked ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
+                                    <span className={`text-[13px] font-medium block leading-snug ${isChecked ? 'text-gray-400 dark:text-gray-500 line-through' : 'text-gray-700 dark:text-gray-300'}`}>
                                       {req.title}
                                       {req.required && <span className="text-red-400 ml-0.5 text-xs">*</span>}
                                     </span>
                                     {req.description && (
-                                      <span className={`text-[11px] block leading-snug mt-0.5 ${isChecked ? 'text-gray-300' : 'text-gray-400'}`}>
+                                      <span className={`text-[11px] block leading-snug mt-0.5 ${isChecked ? 'text-gray-300 dark:text-gray-600' : 'text-gray-400 dark:text-gray-500'}`}>
                                         {req.description}
                                       </span>
                                     )}
@@ -332,10 +332,10 @@ export default function UserDashboardPage() {
                         )}
 
                         {/* Actions */}
-                        <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-50">
+                        <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-50 dark:border-gray-700">
                           <Link
                             href={`/layanan/${s.slug}`}
-                            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg transition-colors"
+                            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 px-3 py-1.5 rounded-lg transition-colors"
                           >
                             <ExternalLink className="w-3 h-3" />
                             Detail
@@ -344,14 +344,14 @@ export default function UserDashboardPage() {
                             href={`https://wa.me/628114169614?text=${encodeURIComponent(`Assalamu'alaikum, saya ingin bertanya mengenai persyaratan "${s.title}" di KUA Kecamatan Sampaga.`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-gray-500 hover:text-emerald-600 bg-gray-50 hover:bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors"
+                            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-300 bg-gray-50 dark:bg-gray-800/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 px-3 py-1.5 rounded-lg transition-colors"
                           >
                             <MessageCircle className="w-3 h-3" />
                             Tanya
                           </a>
                           <button
                             onClick={(e) => handleUnsave(e, s.id)}
-                            className="inline-flex items-center text-[11px] font-semibold text-gray-300 hover:text-red-500 p-1.5 rounded-lg transition-colors ml-auto"
+                            className="inline-flex items-center text-[11px] font-semibold text-gray-300 hover:text-red-500 dark:text-red-400 p-1.5 rounded-lg transition-colors ml-auto"
                             title="Hapus"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -366,7 +366,7 @@ export default function UserDashboardPage() {
           </div>
         ) : (
           /* Empty State */
-          <div className="bg-white p-10 sm:p-14 rounded-3xl border border-gray-100 shadow-sm text-center">
+          <div className="bg-white dark:bg-gray-800 p-10 sm:p-14 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm text-center">
             <div className="w-16 h-16 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-sm">
               <Sparkles className="w-7 h-7 text-emerald-400" />
             </div>
@@ -388,27 +388,27 @@ export default function UserDashboardPage() {
         {feedback && (
           <div className="mt-8 mb-4">
             <h2 className="text-xl font-bold font-heading text-gray-900 mb-4 flex items-center gap-2">
-              <MessageCircle className="w-5 h-5 text-emerald-600" />
+              <MessageCircle className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               Masukan & Penilaian Saya
             </h2>
-            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden">
               <div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${feedback.published ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${feedback.published ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border-emerald-100' : 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border-amber-100'}`}>
                       {feedback.published ? 'Publik' : 'Menunggu Tinjauan'}
                     </span>
                     <span className="text-xs text-gray-400">
                       {new Date(feedback.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-gray-700 italic border-l-2 border-emerald-100 pl-3">
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300 italic border-l-2 border-emerald-100 pl-3">
                     "{feedback.message}"
                   </p>
                   
                   {feedback.adminReply && (
-                    <div className="mt-4 bg-emerald-50 border border-emerald-100 p-3.5 rounded-xl relative">
-                      <div className="absolute -top-[5px] left-5 w-2.5 h-2.5 bg-emerald-50 border-t border-l border-emerald-100 transform rotate-45"></div>
+                    <div className="mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 p-3.5 rounded-xl relative">
+                      <div className="absolute -top-[5px] left-5 w-2.5 h-2.5 bg-emerald-50 dark:bg-emerald-900/30 border-t border-l border-emerald-100 transform rotate-45"></div>
                       <div className="flex items-center gap-1.5 mb-1 text-xs font-bold text-emerald-800">
                         <CheckSquare className="w-3.5 h-3.5" />
                         Balasan Admin KUA
@@ -429,13 +429,13 @@ export default function UserDashboardPage() {
                         window.location.href = '/';
                       }
                     }}
-                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg transition-colors"
+                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-lg transition-colors"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={handleDeleteFeedback}
-                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-lg transition-colors"
+                    className="flex-1 sm:w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 text-red-600 text-xs font-bold rounded-lg transition-colors"
                   >
                     Hapus
                   </button>
@@ -447,13 +447,13 @@ export default function UserDashboardPage() {
 
         {/* Help Card */}
         {savedServices.length > 0 && !feedback && (
-          <div className="mt-6 bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-sm">
+          <div className="mt-6 bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                <MessageCircle className="w-4 h-4 text-emerald-600" />
+              <div className="w-9 h-9 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-gray-700">Butuh bantuan?</p>
+                <p className="text-xs font-bold text-gray-700 dark:text-gray-300">Butuh bantuan?</p>
                 <p className="text-[11px] text-gray-400">Tanya admin via WhatsApp</p>
               </div>
               <a
@@ -471,3 +471,5 @@ export default function UserDashboardPage() {
     </div>
   );
 }
+
+

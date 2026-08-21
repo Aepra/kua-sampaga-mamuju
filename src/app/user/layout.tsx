@@ -11,10 +11,11 @@ export default async function UserLayout({ children }: { children: React.ReactNo
     <UserSessionProvider>
       <NextTopLoader color="#059669" height={3} showSpinner={false} />
       <Navbar />
-      <main className="flex-1 bg-surface-secondary min-h-[calc(100vh-64px)] pb-12">
+      <main className="flex-1 bg-[#F8FAF9] dark:bg-gray-950 min-h-[calc(100vh-64px)] pb-12">
         {children}
       </main>
       <Footer settings={settings} />
     </UserSessionProvider>
   );
 }
+

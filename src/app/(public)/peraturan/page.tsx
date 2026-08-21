@@ -14,9 +14,9 @@ export default async function PeraturanPublicPage() {
   const regulations = await getPublishedRegulations();
 
   return (
-    <div className="min-h-screen bg-[#F8FAF9]">
+    <div className="min-h-screen bg-[#F8FAF9] dark:bg-gray-950">
       {/* Header Banner */}
-      <div className="bg-[#022C22] text-white pt-[70px] relative overflow-hidden">
+      <div className="bg-[#022C22] dark:bg-gray-950 text-white pt-[70px] relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-10 pointer-events-none"
           style={{
@@ -45,33 +45,33 @@ export default async function PeraturanPublicPage() {
             {regulations.map((reg) => (
               <div
                 key={reg.id}
-                className="bg-white rounded-xl border border-border-light p-5 sm:p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
+                className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-5 sm:p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <div className="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-gray-800 text-emerald-700 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                       <FileText className="w-5 h-5" />
                     </div>
                     {(reg.number || reg.year) && (
-                      <span className="text-[11px] font-mono font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                      <span className="text-[11px] font-mono font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-gray-800 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-gray-600">
                         {[reg.number, reg.year].filter(Boolean).join(' · ')}
                       </span>
                     )}
                   </div>
 
-                  <h2 className="text-base sm:text-lg font-bold text-text-primary font-heading group-hover:text-emerald-700 transition-colors">
+                  <h2 className="text-base sm:text-lg font-bold text-text-primary dark:text-gray-100 font-heading group-hover:text-emerald-700 dark:text-emerald-400 transition-colors">
                     {reg.title}
                   </h2>
 
                   {reg.description && (
-                    <p className="mt-2 text-xs sm:text-sm text-text-secondary leading-relaxed">
+                    <p className="mt-2 text-xs sm:text-sm text-text-secondary dark:text-gray-300 leading-relaxed">
                       {reg.description}
                     </p>
                   )}
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-border-light flex items-center justify-between">
-                  <span className="text-[11px] text-text-tertiary">
+                <div className="mt-5 pt-4 border-t border-border-light dark:border-gray-700 flex items-center justify-between">
+                  <span className="text-[11px] text-text-tertiary dark:text-gray-400">
                     Diperbarui {new Date(reg.updatedAt || reg.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
 
@@ -80,12 +80,12 @@ export default async function PeraturanPublicPage() {
                       href={reg.documentLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-gray-800 hover:bg-emerald-100 rounded-lg transition-colors"
                     >
                       <Download className="w-3.5 h-3.5" /> Unduh PDF
                     </a>
                   ) : (
-                    <span className="text-xs text-text-tertiary italic">Dokumen fisik di kantor</span>
+                    <span className="text-xs text-text-tertiary dark:text-gray-400 italic">Dokumen fisik di kantor</span>
                   )}
                 </div>
               </div>
@@ -102,3 +102,5 @@ export default async function PeraturanPublicPage() {
     </div>
   );
 }
+
+

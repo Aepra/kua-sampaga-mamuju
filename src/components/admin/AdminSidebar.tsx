@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import ThemeToggle from '@/components/ThemeToggle';
 import {
   LayoutDashboard, FileText, Image as ImageIcon, BookOpen,
   Landmark, Settings, LogOut, Users, Scale,
@@ -81,7 +82,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-primary-950 text-white flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-primary-950 dark:bg-gray-950 text-white flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -148,6 +149,9 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
             <Landmark className="w-4 h-4" />
             <span>Lihat Website Publik</span>
           </Link>
+          <div className="mb-3 px-3">
+            <ThemeToggle />
+          </div>
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-red-300 hover:text-red-100 hover:bg-red-950/50 rounded-lg transition-colors"
@@ -160,5 +164,10 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
     </>
   );
 }
+
+
+
+
+
 
 

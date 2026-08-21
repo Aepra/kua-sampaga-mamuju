@@ -93,20 +93,20 @@ export default function InformationForm({ initialData }: InformationFormProps) {
     <>
       <FullScreenLoader isLoading={loading} message={initialData ? 'Memperbarui informasi...' : 'Menambahkan informasi...'} />
       <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light dark:border-gray-700 pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => router.back()}
-            className="p-2 text-text-secondary hover:text-text-primary hover:bg-surface-tertiary rounded-lg"
+            className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-text-primary font-heading">
+            <h1 className="text-xl font-bold text-text-primary dark:text-gray-100 font-heading">
               {initialData ? 'Edit Informasi' : 'Tambah Informasi'}
             </h1>
-            <p className="text-xs text-text-tertiary">
+            <p className="text-xs text-text-tertiary dark:text-gray-500">
               Kelola pengumuman, berita, atau kegiatan KUA.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
           <button
             type="button"
             onClick={() => router.back()}
-            className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light"
+            className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-text-secondary dark:text-gray-400 bg-surface-tertiary dark:bg-gray-700 rounded-lg hover:bg-border-light dark:hover:bg-gray-600"
           >
             Batal
           </button>
@@ -130,10 +130,10 @@ export default function InformationForm({ initialData }: InformationFormProps) {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-5">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Judul Informasi <span className="text-red-500">*</span>
             </label>
             <input
@@ -142,12 +142,12 @@ export default function InformationForm({ initialData }: InformationFormProps) {
               onChange={e => handleTitleChange(e.target.value)}
               placeholder="Contoh: Pengumuman Jam Pelayanan Bulan Ramadhan"
               required
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Slug (URL) <span className="text-red-500">*</span>
             </label>
             <input
@@ -156,7 +156,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
               onChange={e => setSlug(e.target.value)}
               placeholder="pengumuman-jam-pelayanan"
               required
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
         </div>
@@ -171,13 +171,13 @@ export default function InformationForm({ initialData }: InformationFormProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Kategori <span className="text-red-500">*</span>
             </label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             >
               {INFORMATION_CATEGORIES.filter(c => c !== 'Semua').map(cat => (
                 <option key={cat} value={cat}>
@@ -188,20 +188,20 @@ export default function InformationForm({ initialData }: InformationFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Tanggal Publikasi
             </label>
             <input
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Ringkasan / Excerpt
           </label>
           <textarea
@@ -209,12 +209,12 @@ export default function InformationForm({ initialData }: InformationFormProps) {
             value={excerpt}
             onChange={e => setExcerpt(e.target.value)}
             placeholder="Ringkasan singkat yang tampil di daftar berita..."
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Isi Informasi Lengkap <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -223,7 +223,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
             onChange={e => setContent(e.target.value)}
             placeholder="Tuliskan isi pengumuman atau berita secara lengkap..."
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
@@ -242,9 +242,9 @@ export default function InformationForm({ initialData }: InformationFormProps) {
               type="checkbox"
               checked={published}
               onChange={e => setPublished(e.target.checked)}
-              className="rounded border-border-medium text-primary-600 focus:ring-primary-500"
+              className="rounded border-border-medium text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm font-medium text-text-primary">
+            <span className="text-sm font-medium text-text-primary dark:text-gray-100">
               Dipublikasikan di website publik
             </span>
           </label>
@@ -254,3 +254,5 @@ export default function InformationForm({ initialData }: InformationFormProps) {
     </>
   );
 }
+
+

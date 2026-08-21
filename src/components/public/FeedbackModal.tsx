@@ -83,21 +83,21 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div 
-        className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative animate-fade-in"
+        className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors"
+          className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 rounded-full transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="p-6">
-          <h2 className="text-xl font-bold font-heading text-[#1A2E1A] mb-1">
+          <h2 className="text-xl font-bold font-heading text-[#1A2E1A] dark:text-gray-100 mb-1">
             {isEdit ? 'Perbarui Masukan' : 'Berikan Masukan'}
           </h2>
-          <p className="text-sm text-[#4A5D4A] mb-6">
+          <p className="text-sm text-[#4A5D4A] dark:text-gray-300 mb-6">
             Masukan Anda sangat berarti bagi peningkatan layanan kami.
           </p>
 
@@ -107,11 +107,11 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
             </div>
           ) : success ? (
             <div className="flex flex-col items-center justify-center py-8 text-center space-y-3">
-              <div className="w-16 h-16 bg-[#D1FAE5] text-[#059669] rounded-full flex items-center justify-center mb-2">
+              <div className="w-16 h-16 bg-[#D1FAE5] dark:bg-gray-700 text-[#059669] dark:text-emerald-400 rounded-full flex items-center justify-center mb-2">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-[#1A2E1A] text-lg">Terima Kasih!</h3>
-              <p className="text-sm text-[#4A5D4A]">Masukan Anda telah kami {isEdit ? 'perbarui' : 'terima'}.</p>
+              <h3 className="font-bold text-[#1A2E1A] dark:text-gray-100 text-lg">Terima Kasih!</h3>
+              <p className="text-sm text-[#4A5D4A] dark:text-gray-300">Masukan Anda telah kami {isEdit ? 'perbarui' : 'terima'}.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -123,18 +123,18 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
               )}
 
               {/* Show the user's name implicitly */}
-              <div className="bg-[#F8FAF9] p-3 rounded-xl border border-[#E5EBE5] flex items-center gap-3">
+              <div className="bg-[#F8FAF9] dark:bg-gray-900 p-3 rounded-xl border border-[#E5EBE5] dark:border-gray-700 flex items-center gap-3">
                 <div className="w-10 h-10 bg-[#eefcef] text-[#186f64] flex items-center justify-center rounded-lg font-bold text-lg">
                   {session?.user?.name ? session.user.name.charAt(0).toUpperCase() : 'U'}
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#1A2E1A]">{session?.user?.name || 'Pengguna'}</h4>
+                  <h4 className="text-sm font-bold text-[#1A2E1A] dark:text-gray-100">{session?.user?.name || 'Pengguna'}</h4>
                   <p className="text-xs text-[#9fabad]">Mengirim sebagai akun ini</p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#1A2E1A] mb-1.5">Penilaian</label>
+                <label className="block text-sm font-semibold text-[#1A2E1A] dark:text-gray-100 mb-1.5">Penilaian</label>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
@@ -152,13 +152,13 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#1A2E1A] mb-1.5">Pesan atau Masukan</label>
+                <label className="block text-sm font-semibold text-[#1A2E1A] dark:text-gray-100 mb-1.5">Pesan atau Masukan</label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tuliskan pengalaman atau saran Anda..."
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E5EBE5] bg-[#F8FAF9] focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:bg-white transition-all text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E5EBE5] dark:border-gray-700 bg-[#F8FAF9] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[#10B981] dark:focus:ring-emerald-500 focus:bg-white dark:bg-gray-800 transition-all text-sm resize-none"
                   disabled={loading}
                 />
               </div>
@@ -184,3 +184,4 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
     </div>
   );
 }
+

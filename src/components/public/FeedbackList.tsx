@@ -38,7 +38,7 @@ export default function FeedbackList() {
   }
 
   return (
-    <section className="py-16 sm:py-24 bg-white border-t border-[#E5EBE5]">
+    <section className="py-16 sm:py-24 bg-white dark:bg-gray-800 border-t border-[#E5EBE5] dark:border-gray-700">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         
         <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
@@ -55,7 +55,7 @@ export default function FeedbackList() {
           {feedbacks.map((item) => (
             <div 
               key={item.id}
-              className="bg-white p-8 border border-[#e6ebec] hover:border-[#344245] hover:shadow-lg transition-all duration-300 flex flex-col"
+              className="bg-white dark:bg-gray-800 p-8 border border-[#e6ebec] hover:border-[#344245] hover:shadow-lg transition-all duration-300 flex flex-col"
             >
               <div className="flex gap-1 mb-6">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -84,3 +84,4 @@ export default function FeedbackList() {
     </section>
   );
 }
+

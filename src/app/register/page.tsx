@@ -67,19 +67,19 @@ function InnerRegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 px-4">
       <div className="w-full max-w-md my-8">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-lg mx-auto mb-4 border-2 border-white"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
-          <h1 className="text-2xl font-bold text-text-primary font-heading">Daftar Akun</h1>
-          <p className="text-sm text-text-secondary mt-1">KUA Kecamatan Sampaga</p>
+          <h1 className="text-2xl font-bold text-[#1A2E1A] dark:text-gray-100 font-heading">Daftar Akun</h1>
+          <p className="text-sm text-[#4A5D4A] dark:text-gray-400 mt-1">KUA Kecamatan Sampaga</p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white rounded-2xl border border-border-light shadow-sm p-6 lg:p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-border-light dark:border-gray-700 shadow-sm p-6 lg:p-8">
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800/50 rounded-lg text-sm text-red-700 dark:text-red-400">
               {error}
             </div>
           )}
@@ -89,10 +89,10 @@ function InnerRegisterPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 px-4 py-2.5 bg-white hover:bg-gray-50 border border-border-light rounded-lg text-sm font-medium text-text-primary transition-all shadow-sm hover:shadow disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-3 px-4 py-2.5 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:bg-gray-700 border border-border-light dark:border-gray-700 rounded-lg text-sm font-medium text-[#1A2E1A] dark:text-gray-100 transition-all shadow-sm hover:shadow disabled:opacity-60"
           >
             {googleLoading ? (
-              <div className="w-5 h-5 border-2 border-gray-300 border-t-primary-600 rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-600 border-t-primary-600 rounded-full animate-spin" />
             ) : (
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -107,10 +107,10 @@ function InnerRegisterPage() {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border-light" />
+              <div className="w-full border-t border-border-light dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="bg-white px-4 text-text-tertiary font-medium">atau daftar dengan email</span>
+              <span className="bg-white dark:bg-gray-800 px-4 text-gray-400 dark:text-gray-500 font-medium">atau daftar dengan email</span>
             </div>
           </div>
 
@@ -118,7 +118,7 @@ function InnerRegisterPage() {
           <form onSubmit={handleRegister}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-1.5">
+                <label htmlFor="name" className="block text-sm font-medium text-[#1A2E1A] dark:text-gray-100 mb-1.5">
                   Nama Lengkap
                 </label>
                 <input
@@ -128,11 +128,11 @@ function InnerRegisterPage() {
                   onChange={e => setName(e.target.value)}
                   placeholder="Nama Anda"
                   required
-                  className="w-full px-4 py-2.5 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+                  className="w-full px-4 py-2.5 text-sm bg-[#F8FAF9] dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-1.5">
+                <label htmlFor="email" className="block text-sm font-medium text-[#1A2E1A] dark:text-gray-100 mb-1.5">
                   Email
                 </label>
                 <input
@@ -142,11 +142,11 @@ function InnerRegisterPage() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder="email@contoh.com"
                   required
-                  className="w-full px-4 py-2.5 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
+                  className="w-full px-4 py-2.5 text-sm bg-[#F8FAF9] dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-text-primary mb-1.5">
+                <label htmlFor="password" className="block text-sm font-medium text-[#1A2E1A] dark:text-gray-100 mb-1.5">
                   Password (minimal 6 karakter)
                 </label>
                 <div className="relative">
@@ -158,12 +158,12 @@ function InnerRegisterPage() {
                     placeholder="••••••••"
                     required
                     minLength={6}
-                    className="w-full px-4 py-2.5 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors pr-10"
+                    className="w-full px-4 py-2.5 text-sm bg-[#F8FAF9] dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 focus:ring-0 outline-none transition-colors pr-10"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-secondary transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-[#4A5D4A] dark:text-gray-400 transition-colors"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -188,11 +188,11 @@ function InnerRegisterPage() {
           </form>
 
           {/* Login Link */}
-          <div className="mt-6 text-center text-sm text-text-tertiary">
+          <div className="mt-6 text-center text-sm text-gray-400 dark:text-gray-500">
             Sudah punya akun?{' '}
             <button 
               onClick={() => router.push('/login')}
-              className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+              className="text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:text-primary-400 transition-colors"
             >
               Masuk di sini
             </button>
@@ -210,6 +210,8 @@ export default function RegisterPage() {
     </SessionProvider>
   );
 }
+
+
 
 
 

@@ -86,12 +86,12 @@ export default async function HomePage() {
   const waHeroLink = `https://wa.me/62${settings.whatsapp.replace(/^0/, '')}?text=${encodeURIComponent("Assalamu'alaikum, saya ingin bertanya mengenai layanan KUA Kecamatan Sampaga.")}`;
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white dark:bg-gray-800 min-h-screen">
       {/* ============================================================ */}
       {/* 1. HERO SECTION (MODERN, PROFESSIONAL, CLEAN) */}
       {/* ============================================================ */}
       <section 
-        className="relative min-h-[100svh] flex items-center pt-[90px] lg:pt-[100px] pb-12 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#047857]"
+        className="relative min-h-[100svh] flex items-center pt-[90px] lg:pt-[100px] pb-12 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#064E3B] via-[#059669] to-[#047857] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
         style={{ paddingLeft: 'clamp(1rem, 5vw, 8rem)', paddingRight: 'clamp(1rem, 5vw, 8rem)' }}
       > 
         <style>{`
@@ -113,7 +113,7 @@ export default async function HomePage() {
         
         {/* Animated Aurora Glows for Depth */}
         <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] rounded-full bg-[#34D399]/30 blur-[120px] z-0 pointer-events-none" style={{ animation: 'float1 18s ease-in-out infinite' }}></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-[#022C22]/40 blur-[140px] z-0 pointer-events-none" style={{ animation: 'float2 22s ease-in-out infinite' }}></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] rounded-full bg-[#022C22] dark:bg-gray-950/40 blur-[140px] z-0 pointer-events-none" style={{ animation: 'float2 22s ease-in-out infinite' }}></div>
         
         {/* Animated Grid Overlay (White transparent) */}
         <div className="absolute inset-0 z-0 mix-blend-overlay" style={{ 
@@ -157,7 +157,7 @@ export default async function HomePage() {
               >
                 <a
                   href="#layanan-section"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-[#FBBF24] hover:bg-[#F59E0B] text-[#1A2E1A] font-bold transition-all shadow-[0_4px_15px_rgba(251,191,36,0.2)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.4)] hover:-translate-y-0.5"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-[#FBBF24] hover:bg-[#F59E0B] text-[#1A2E1A] dark:text-gray-100 font-bold transition-all shadow-[0_4px_15px_rgba(251,191,36,0.2)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.4)] hover:-translate-y-0.5"
                   style={{ padding: '12px 28px', borderRadius: '100px', fontSize: '14px' }}
                 >
                   Jelajahi Layanan
@@ -167,7 +167,7 @@ export default async function HomePage() {
                   href={waHeroLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-transparent hover:bg-white/10 text-white border-2 border-white/50 font-bold transition-all hover:-translate-y-0.5"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-transparent hover:bg-white dark:bg-gray-800/10 text-white border-2 border-white/50 font-bold transition-all hover:-translate-y-0.5"
                   style={{ padding: '10px 28px', borderRadius: '100px', fontSize: '14px' }}
                 >
                   <MessageCircle className="w-4 h-4" />
@@ -206,24 +206,24 @@ export default async function HomePage() {
               </div>
 
               {/* Floating Card 1: Layanan Nikah */}
-              <div className="absolute top-[15%] -left-[10%] bg-white p-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-[#E5EBE5] w-[280px] flex items-center gap-4 animate-bounce" style={{ animationDuration: '4s' }}>
+              <div className="absolute top-[15%] -left-[10%] bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-[#E5EBE5] dark:border-gray-700 w-[280px] flex items-center gap-4 animate-bounce" style={{ animationDuration: '4s' }}>
                 <div className="w-12 h-12 rounded-full bg-[#FFFBEB] flex items-center justify-center">
                   <span className="text-2xl">💍</span>
                 </div>
                 <div>
-                  <h4 className="text-[#1A2E1A] font-bold text-sm">Pendaftaran Nikah</h4>
-                  <p className="text-[#6B7E6B] text-xs mt-0.5">Syarat & Prosedur Lengkap</p>
+                  <h4 className="text-[#1A2E1A] dark:text-gray-100 font-bold text-sm">Pendaftaran Nikah</h4>
+                  <p className="text-[#6B7E6B] dark:text-gray-400 text-xs mt-0.5">Syarat & Prosedur Lengkap</p>
                 </div>
               </div>
 
               {/* Floating Card 2: Konsultasi */}
-              <div className="absolute bottom-[20%] -right-[5%] bg-white p-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-[#E5EBE5] w-[260px] flex items-center gap-4 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
-                <div className="w-12 h-12 rounded-full bg-[#ECFDF5] flex items-center justify-center">
+              <div className="absolute bottom-[20%] -right-[5%] bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-[#E5EBE5] dark:border-gray-700 w-[260px] flex items-center gap-4 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
+                <div className="w-12 h-12 rounded-full bg-[#ECFDF5] dark:bg-gray-800 flex items-center justify-center">
                   <span className="text-2xl">🤝</span>
                 </div>
                 <div>
-                  <h4 className="text-[#1A2E1A] font-bold text-sm">Konsultasi Keluarga</h4>
-                  <p className="text-[#6B7E6B] text-xs mt-0.5">Layanan Gratis KUA</p>
+                  <h4 className="text-[#1A2E1A] dark:text-gray-100 font-bold text-sm">Konsultasi Keluarga</h4>
+                  <p className="text-[#6B7E6B] dark:text-gray-400 text-xs mt-0.5">Layanan Gratis KUA</p>
                 </div>
               </div>
 
@@ -235,21 +235,21 @@ export default async function HomePage() {
       {/* ============================================================ */}
       {/* 2. QUICK ACCESS SECTION (PROFESSIONAL & PRECISE) */}
       {/* ============================================================ */}
-      <section className="relative bg-[#F8FAF9] py-8 sm:py-16 z-20 border-b border-[#E5EBE5] shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+      <section className="relative bg-[#F8FAF9] dark:bg-gray-900 py-8 sm:py-16 z-20 border-b border-[#E5EBE5] dark:border-gray-700 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
         <div className="max-w-[1000px] mx-auto px-2 sm:px-6">
           <div className="flex flex-wrap md:flex-nowrap items-start justify-center gap-4 sm:gap-12 lg:gap-16">
             {quickAccessItems.map((item, i) => {
               const content = (
                 <div className="flex flex-col items-center justify-start gap-3 sm:gap-4 w-[90px] sm:w-[110px]">
                   {/* Icon Container */}
-                  <div className="w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] rounded-2xl bg-[#F8FAF9] border border-[#E5EBE5] flex items-center justify-center group-hover:-translate-y-2 group-hover:bg-[#ECFDF5] group-hover:border-[#10B981] group-hover:shadow-[0_12px_24px_rgba(16,185,129,0.15)] group-active:scale-90 group-active:bg-[#D1FAE5] transition-all duration-300">
-                    <div className="scale-[1.2] sm:scale-[1.3] text-[#059669] transition-transform duration-300 group-hover:scale-[1.4] group-active:scale-[1.1]">
+                  <div className="w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] rounded-2xl bg-[#F8FAF9] dark:bg-gray-900 border border-[#E5EBE5] dark:border-gray-700 flex items-center justify-center group-hover:-translate-y-2 group-hover:bg-[#ECFDF5] dark:hover:bg-gray-700 dark:bg-gray-800 group-hover:border-[#10B981] group-hover:shadow-[0_12px_24px_rgba(16,185,129,0.15)] group-active:scale-90 group-active:bg-[#D1FAE5] dark:bg-gray-700 transition-all duration-300">
+                    <div className="scale-[1.2] sm:scale-[1.3] text-[#059669] dark:text-emerald-400 transition-transform duration-300 group-hover:scale-[1.4] group-active:scale-[1.1]">
                       {item.icon}
                     </div>
                   </div>
                   {/* Label Container - Fixed height for alignment */}
                   <div className="h-[40px] flex items-start justify-center">
-                    <span className="text-[12px] sm:text-[14px] font-bold text-[#4A5D4A] text-center leading-[1.3] group-hover:text-[#059669] transition-colors">
+                    <span className="text-[12px] sm:text-[14px] font-bold text-[#4A5D4A] dark:text-gray-300 text-center leading-[1.3] group-hover:text-[#059669] dark:group-hover:text-emerald-400 dark:text-emerald-400 transition-colors">
                       {item.label}
                     </span>
                   </div>
@@ -302,23 +302,23 @@ export default async function HomePage() {
       {/* 5. INFORMASI TERBARU SECTION */}
       {/* ============================================================ */}
       {recentInfo.length > 0 && (
-        <section className="py-10 lg:py-24 bg-[#ECFDF5]/60 relative overflow-hidden">
+        <section className="py-10 lg:py-24 bg-[#ECFDF5] dark:bg-gray-800/60 relative overflow-hidden">
           {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white dark:bg-gray-800 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 lg:mb-12">
               <div className="space-y-2 sm:space-y-3">
-                <span className="text-[10px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
+                <span className="text-[10px] sm:text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-[0.15em] bg-[#ECFDF5] dark:bg-gray-800 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block shadow-sm">
                   Pengumuman & Berita
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] dark:text-gray-100 font-heading tracking-tight">
                   Informasi dan Berita Terbaru
                 </h2>
               </div>
               <Link
                 href="/informasi-dan-berita"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#059669] hover:text-[#047857] bg-[#F8FAF9] hover:bg-[#ECFDF5] px-5 py-2.5 rounded-full transition-all border border-[#E5EBE5] hover:border-[#A7F3D0]"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#059669] dark:text-emerald-400 hover:text-[#047857] dark:text-emerald-400 bg-[#F8FAF9] dark:bg-gray-900 hover:bg-[#ECFDF5] dark:hover:bg-gray-700 dark:bg-gray-800 px-5 py-2.5 rounded-full transition-all border border-[#E5EBE5] dark:border-gray-700 hover:border-[#A7F3D0]"
               >
                 Lihat Semua
                 <ArrowRight className="w-4 h-4" />
@@ -334,7 +334,7 @@ export default async function HomePage() {
                     return (
                       <Link
                         href={`/informasi-dan-berita/${featured.slug}`}
-                        className="group bg-white rounded-[24px] border border-[#E5EBE5] overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-[#10B981] transition-all duration-300 flex flex-col h-full relative"
+                        className="group bg-white dark:bg-gray-800 rounded-[24px] border border-[#E5EBE5] dark:border-gray-700 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-[#10B981] transition-all duration-300 flex flex-col h-full relative"
                       >
                         <div className="h-[300px] sm:h-[400px] lg:h-full min-h-[350px] bg-[#F1F5F3] overflow-hidden relative">
                           {featured.thumbnail || (featured.images && featured.images.length > 0) ? (
@@ -345,7 +345,7 @@ export default async function HomePage() {
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
+                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] dark:text-gray-400 bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
                               <BookOpen className="w-16 h-16 opacity-40" />
                             </div>
                           )}
@@ -381,7 +381,7 @@ export default async function HomePage() {
                       <Link
                         key={info.id}
                         href={`/informasi-dan-berita/${info.slug}`}
-                        className="group flex gap-4 bg-white p-3 sm:p-4 rounded-[20px] border border-[#E5EBE5] hover:border-[#10B981] hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] transition-all duration-300 items-center"
+                        className="group flex gap-4 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-[20px] border border-[#E5EBE5] dark:border-gray-700 hover:border-[#10B981] hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] transition-all duration-300 items-center"
                       >
                         <div className="w-24 h-24 sm:w-[100px] sm:h-[100px] rounded-xl overflow-hidden bg-[#F1F5F3] relative flex-shrink-0">
                           {info.thumbnail || (info.images && info.images.length > 0) ? (
@@ -392,17 +392,17 @@ export default async function HomePage() {
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
+                            <div className="w-full h-full flex items-center justify-center text-[#6B7E6B] dark:text-gray-400 bg-gradient-to-br from-[#F8FAF9] to-[#E5EBE5]">
                               <BookOpen className="w-8 h-8 opacity-40" />
                             </div>
                           )}
                         </div>
                         <div className="flex flex-col flex-1 py-1 pr-2">
-                          <span className="text-[10px] font-bold text-[#059669] mb-1.5 uppercase tracking-wider">{info.category}</span>
-                          <h4 className="font-bold text-[#1A2E1A] text-sm sm:text-base group-hover:text-[#059669] transition-colors font-heading line-clamp-2 leading-snug mb-2">
+                          <span className="text-[10px] font-bold text-[#059669] dark:text-emerald-400 mb-1.5 uppercase tracking-wider">{info.category}</span>
+                          <h4 className="font-bold text-[#1A2E1A] dark:text-gray-100 text-sm sm:text-base group-hover:text-[#059669] dark:group-hover:text-emerald-400 dark:text-emerald-400 transition-colors font-heading line-clamp-2 leading-snug mb-2">
                             {info.title}
                           </h4>
-                          <div className="flex items-center gap-1.5 text-[10px] font-medium text-[#6B7E6B] mt-auto">
+                          <div className="flex items-center gap-1.5 text-[10px] font-medium text-[#6B7E6B] dark:text-gray-400 mt-auto">
                             <Clock className="w-3 h-3" />
                             <span>{new Date(info.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                           </div>
@@ -421,11 +421,11 @@ export default async function HomePage() {
       {/* 6. GALERI KEGIATAN SECTION */}
       {/* ============================================================ */}
       {recentGallery.length > 0 && (
-        <section className="py-10 lg:py-24 bg-[#022C22] text-white">
+        <section className="py-10 lg:py-24 bg-[#022C22] dark:bg-gray-950 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 lg:mb-12">
               <div className="space-y-2 sm:space-y-3">
-                <span className="text-[10px] sm:text-xs font-bold text-[#A7F3D0] uppercase tracking-[0.15em] bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/20 inline-block">
+                <span className="text-[10px] sm:text-xs font-bold text-[#A7F3D0] uppercase tracking-[0.15em] bg-white dark:bg-gray-800/10 backdrop-blur-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/20 inline-block">
                   Dokumentasi
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-heading tracking-tight">
@@ -434,7 +434,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/galeri"
-                className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#A7F3D0] bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-2.5 rounded-full transition-all"
+                className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#A7F3D0] bg-white dark:bg-gray-800/10 hover:bg-white dark:bg-gray-800/20 border border-white/20 px-5 py-2.5 rounded-full transition-all"
               >
                 Lihat Galeri Lengkap
                 <ArrowRight className="w-4 h-4" />
@@ -476,42 +476,42 @@ export default async function HomePage() {
       {/* ============================================================ */}
       <section className="py-10 lg:py-24 bg-[#FFFBEB]/50 border-t border-[#FDE68A]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-12 rounded-[24px] sm:rounded-[32px] border border-[#E5EBE5] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white dark:bg-gray-800 p-6 sm:p-12 rounded-[24px] sm:rounded-[32px] border border-[#E5EBE5] dark:border-gray-700 shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden">
             
             {/* Subtle background pattern in the card */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #064E3B 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
             
             <div className="lg:col-span-7 space-y-4 sm:space-y-6 relative z-10">
-              <span className="text-[10px] sm:text-xs font-bold text-[#059669] uppercase tracking-[0.15em] bg-[#ECFDF5] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block">
+              <span className="text-[10px] sm:text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-[0.15em] bg-[#ECFDF5] dark:bg-gray-800 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#D1FAE5] inline-block">
                 Profil Institusi
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading leading-tight tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] dark:text-gray-100 font-heading leading-tight tracking-tight">
                 KUA Kecamatan Sampaga Kabupaten Mamuju
               </h2>
-              <p className="text-sm sm:text-base text-[#4A5D4A] leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-[#4A5D4A] dark:text-gray-300 leading-relaxed max-w-2xl">
                 {settings.description}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-                <div className="p-5 bg-[#F8FAF9] rounded-2xl border border-[#E5EBE5] flex items-start gap-4 hover:border-[#10B981] hover:bg-white hover:shadow-md transition-all">
-                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] text-[#059669] flex items-center justify-center flex-shrink-0">
+                <div className="p-5 bg-[#F8FAF9] dark:bg-gray-900 rounded-2xl border border-[#E5EBE5] dark:border-gray-700 flex items-start gap-4 hover:border-[#10B981] hover:bg-white dark:bg-gray-800 hover:shadow-md transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] dark:bg-gray-800 text-[#059669] dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-[#6B7E6B] mb-1">Kepala KUA</p>
-                    <p className="text-sm font-bold text-[#1A2E1A]">{settings.head}</p>
-                    <p className="text-[11px] text-[#6B7E6B] font-mono mt-1">NIP. {settings.nip}</p>
+                    <p className="text-xs font-semibold text-[#6B7E6B] dark:text-gray-400 mb-1">Kepala KUA</p>
+                    <p className="text-sm font-bold text-[#1A2E1A] dark:text-gray-100">{settings.head}</p>
+                    <p className="text-[11px] text-[#6B7E6B] dark:text-gray-400 font-mono mt-1">NIP. {settings.nip}</p>
                   </div>
                 </div>
 
-                <a href="https://maps.app.goo.gl/4WBnMUuMDaheJUQw7" target="_blank" rel="noopener noreferrer" className="p-5 bg-[#F8FAF9] rounded-2xl border border-[#E5EBE5] flex items-start gap-4 hover:border-[#10B981] hover:bg-[#ECFDF5] hover:shadow-md transition-all group">
-                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-colors flex items-center justify-center flex-shrink-0">
+                <a href="https://maps.app.goo.gl/4WBnMUuMDaheJUQw7" target="_blank" rel="noopener noreferrer" className="p-5 bg-[#F8FAF9] dark:bg-gray-900 rounded-2xl border border-[#E5EBE5] dark:border-gray-700 flex items-start gap-4 hover:border-[#10B981] hover:bg-[#ECFDF5] dark:hover:bg-gray-700 dark:bg-gray-800 hover:shadow-md transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] dark:bg-gray-800 text-[#059669] dark:text-emerald-400 group-hover:bg-[#059669] group-hover:text-white transition-colors flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-[#6B7E6B] mb-1">Alamat Kantor</p>
-                    <p className="text-sm font-bold text-[#1A2E1A] leading-snug group-hover:text-[#059669] transition-colors">{settings.address}</p>
-                    <p className="text-[11px] text-[#6B7E6B] mt-1">Kecamatan Sampaga, Mamuju</p>
+                    <p className="text-xs font-semibold text-[#6B7E6B] dark:text-gray-400 mb-1">Alamat Kantor</p>
+                    <p className="text-sm font-bold text-[#1A2E1A] dark:text-gray-100 leading-snug group-hover:text-[#059669] dark:group-hover:text-emerald-400 dark:text-emerald-400 transition-colors">{settings.address}</p>
+                    <p className="text-[11px] text-[#6B7E6B] dark:text-gray-400 mt-1">Kecamatan Sampaga, Mamuju</p>
                   </div>
                 </a>
               </div>
@@ -519,7 +519,7 @@ export default async function HomePage() {
               <div className="pt-6">
                 <Link
                   href="/tentang"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#064E3B] hover:bg-[#022C22] text-white font-bold text-sm rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#064E3B] hover:bg-[#022C22] dark:bg-gray-950 text-white font-bold text-sm rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
                   Lihat Visi Misi & Profil Lengkap
                   <ArrowRight className="w-4 h-4 text-[#A7F3D0]" />
@@ -534,13 +534,13 @@ export default async function HomePage() {
                     <img src={settings.officeImage} alt="Kantor KUA Sampaga" className="w-full h-auto group-hover:scale-105 transition-transform duration-500" />
                   </div>
                 ) : (
-                  <div className="relative w-24 h-24 rounded-2xl mx-auto shadow-inner bg-white p-2 border border-white/20"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain p-2" /></div>
+                  <div className="relative w-24 h-24 rounded-2xl mx-auto shadow-inner bg-white dark:bg-gray-800 p-2 border border-white/20"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain p-2" /></div>
                 )}
                 <div>
                   <h3 className="font-extrabold text-white text-xl font-heading tracking-tight">KUA Kecamatan Sampaga</h3>
                   <p className="text-sm text-[#A7F3D0] mt-1 font-medium">Kementerian Agama Kab. Mamuju</p>
                 </div>
-                <div className="p-5 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 text-left text-sm space-y-2.5">
+                <div className="p-5 bg-white dark:bg-gray-800/5 backdrop-blur-sm rounded-2xl border border-white/10 text-left text-sm space-y-2.5">
                   <div className="flex items-center gap-2 mb-3 border-b border-white/10 pb-2">
                     <Clock className="w-4 h-4 text-[#FCD34D]" />
                     <strong className="text-white font-semibold">Jam Pelayanan</strong>
@@ -584,5 +584,7 @@ export default async function HomePage() {
     </div>
   );
 }
+
+
 
 

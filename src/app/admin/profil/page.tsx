@@ -81,17 +81,17 @@ export default function AdminProfilPage() {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-sm text-text-secondary">Memuat profil KUA...</div>;
+    return <div className="p-8 text-center text-sm text-text-secondary dark:text-gray-400">Memuat profil KUA...</div>;
   }
 
   return (
     <>
       <FullScreenLoader isLoading={saving} message="Menyimpan profil..." />
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-12">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light dark:border-gray-700 pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary font-heading">Profil & Informasi KUA</h1>
-          <p className="text-sm text-text-secondary mt-1">
+          <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Profil & Informasi KUA</h1>
+          <p className="text-sm text-text-secondary dark:text-gray-400 mt-1">
             Kelola data resmi, kontak, media sosial, dan visi misi KUA.
           </p>
         </div>
@@ -106,141 +106,141 @@ export default function AdminProfilPage() {
       </div>
 
       {/* Data Resmi */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
-        <h2 className="text-base font-bold text-text-primary font-heading">Data Resmi KUA</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Data Resmi KUA</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-text-primary mb-1">Nama Lembaga</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Nama Lembaga</label>
             <input
               type="text"
               value={settings.name}
               onChange={e => handleChange('name', e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Nama Kepala KUA</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Nama Kepala KUA</label>
             <input
               type="text"
               value={settings.head}
               onChange={e => handleChange('head', e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">NIP Kepala KUA</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">NIP Kepala KUA</label>
             <input
               type="text"
               value={settings.nip}
               onChange={e => handleChange('nip', e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-text-primary mb-1">Alamat Kantor</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Alamat Kantor</label>
             <input
               type="text"
               value={settings.address}
               onChange={e => handleChange('address', e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-text-primary mb-1">Deskripsi Singkat</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Deskripsi Singkat</label>
             <textarea
               rows={3}
               value={settings.description}
               onChange={e => handleChange('description', e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
         </div>
       </div>
 
       {/* Kontak & Medsos */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
-        <h2 className="text-base font-bold text-text-primary font-heading">Kontak & Media Sosial</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Kontak & Media Sosial</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Nomor WhatsApp</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Nomor WhatsApp</label>
             <input
               type="text"
               value={settings.whatsapp}
               onChange={e => handleChange('whatsapp', e.target.value)}
               placeholder="08114169614"
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Facebook URL</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Facebook URL</label>
             <input
               type="url"
               value={settings.facebook}
               onChange={e => handleChange('facebook', e.target.value)}
               placeholder="https://facebook.com/..."
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">Instagram URL</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Instagram URL</label>
             <input
               type="url"
               value={settings.instagram}
               onChange={e => handleChange('instagram', e.target.value)}
               placeholder="https://instagram.com/..."
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">TikTok URL</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">TikTok URL</label>
             <input
               type="url"
               value={settings.tiktok}
               onChange={e => handleChange('tiktok', e.target.value)}
               placeholder="https://tiktok.com/@..."
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">YouTube URL</label>
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">YouTube URL</label>
             <input
               type="url"
               value={settings.youtube}
               onChange={e => handleChange('youtube', e.target.value)}
               placeholder="https://youtube.com/@..."
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
         </div>
       </div>
 
       {/* Visi & Misi */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
-        <h2 className="text-base font-bold text-text-primary font-heading">Visi & Misi</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Visi & Misi</h2>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">Visi</label>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Visi</label>
           <textarea
             rows={2}
             value={settings.vision}
             onChange={e => handleChange('vision', e.target.value)}
             placeholder="Visi KUA Kecamatan Sampaga..."
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Misi (Pisahkan per baris baru)
           </label>
           <textarea
@@ -248,25 +248,25 @@ export default function AdminProfilPage() {
             value={missionText}
             onChange={e => setMissionText(e.target.value)}
             placeholder="1. Misi pertama&#10;2. Misi kedua..."
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">Jam Pelayanan</label>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Jam Pelayanan</label>
           <textarea
             rows={3}
             value={settings.officeHours}
             onChange={e => handleChange('officeHours', e.target.value)}
             placeholder="Senin - Kamis: 08.00 - 16.00 WITA&#10;Jumat: 08.00 - 16.30 WITA"
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
       </div>
 
       {/* Foto Kantor & Kepala KUA */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
-        <h2 className="text-base font-bold text-text-primary font-heading">Gambar Profil KUA</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
+        <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Gambar Profil KUA</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <UploadImage
@@ -290,3 +290,7 @@ export default function AdminProfilPage() {
     </>
   );
 }
+
+
+
+

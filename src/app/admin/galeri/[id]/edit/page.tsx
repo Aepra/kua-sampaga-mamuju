@@ -16,3 +16,6 @@ export default async function EditGaleriPage({ params }: Props) {
 
   return <GalleryForm initialData={item} />;
 }
+
+
+

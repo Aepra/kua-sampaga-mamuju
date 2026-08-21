@@ -89,25 +89,25 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-sm text-text-secondary">Memuat data peraturan...</div>;
+    return <div className="p-8 text-center text-sm text-text-secondary dark:text-gray-400">Memuat data peraturan...</div>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
-      <div className="flex items-center justify-between gap-4 border-b border-border-light pb-4">
+      <div className="flex items-center justify-between gap-4 border-b border-border-light dark:border-gray-700 pb-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => router.back()}
-            className="p-2 text-text-secondary hover:text-text-primary hover:bg-surface-tertiary rounded-lg"
+            className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-text-primary font-heading">
+            <h1 className="text-xl font-bold text-text-primary dark:text-gray-100 font-heading">
               Edit Peraturan
             </h1>
-            <p className="text-xs text-text-tertiary">
+            <p className="text-xs text-text-tertiary dark:text-gray-500">
               Ubah data peraturan atau regulasi KUA.
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-sm font-medium text-text-secondary bg-surface-tertiary rounded-lg hover:bg-border-light"
+            className="px-4 py-2 text-sm font-medium text-text-secondary dark:text-gray-400 bg-surface-tertiary dark:bg-gray-700 rounded-lg hover:bg-border-light dark:hover:bg-gray-600"
           >
             Batal
           </button>
@@ -131,60 +131,60 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
-            Judul Peraturan <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
+            Judul Peraturan <span className="text-red-500 dark:text-red-400">*</span>
           </label>
           <input
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Nomor Peraturan
             </label>
             <input
               type="text"
               value={number}
               onChange={e => setNumber(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-primary mb-1">
+            <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
               Tahun
             </label>
             <input
               type="text"
               value={year}
               onChange={e => setYear(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+              className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Deskripsi Ringkas
           </label>
           <textarea
             rows={3}
             value={description}
             onChange={e => setDescription(e.target.value)}
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">
             Link Dokumen (PDF / Google Drive / External)
           </label>
           <input
@@ -192,7 +192,7 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
             value={documentLink}
             onChange={e => setDocumentLink(e.target.value)}
             placeholder="https://..."
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none font-mono"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none font-mono"
           />
         </div>
 
@@ -202,9 +202,9 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
               type="checkbox"
               checked={published}
               onChange={e => setPublished(e.target.checked)}
-              className="rounded border-border-medium text-primary-600 focus:ring-primary-500"
+              className="rounded border-border-medium text-primary-600 dark:text-primary-400 focus:ring-primary-500"
             />
-            <span className="text-sm font-medium text-text-primary">
+            <span className="text-sm font-medium text-text-primary dark:text-gray-100">
               Dipublikasikan di website publik
             </span>
           </label>
@@ -213,3 +213,6 @@ export default function EditPeraturanPage({ params }: { params: Promise<{ id: st
     </form>
   );
 }
+
+
+

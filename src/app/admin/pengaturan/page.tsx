@@ -42,20 +42,20 @@ export default function AdminPengaturanPage() {
       <FullScreenLoader isLoading={saving} message="Memperbarui kata sandi..." />
       <div className="space-y-6 max-w-2xl">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary font-heading">Pengaturan Akun</h1>
-        <p className="text-sm text-text-secondary mt-1">Kelola keamanan dan kata sandi akun admin.</p>
+          <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Pengaturan Akun</h1>
+        <p className="text-sm text-text-secondary dark:text-gray-400 mt-1">Kelola keamanan dan kata sandi akun admin.</p>
       </div>
 
       {/* Account Info */}
-      <div className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-full bg-primary-100 text-primary-700 dark:text-primary-400 flex items-center justify-center font-bold">
             <User className="w-6 h-6" />
           </div>
           <div>
-            <p className="font-semibold text-text-primary">Administrator</p>
-            <p className="text-xs text-text-tertiary">admin@kuasampaga.test</p>
-            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-bold bg-primary-50 text-primary-700 rounded-full">
+            <p className="font-semibold text-text-primary dark:text-gray-100">Administrator</p>
+            <p className="text-xs text-text-tertiary dark:text-gray-500">admin@kuasampaga.test</p>
+            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-bold bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded-full">
               ROLE: ADMIN
             </span>
           </div>
@@ -63,45 +63,45 @@ export default function AdminPengaturanPage() {
       </div>
 
       {/* Change Password */}
-      <form onSubmit={handleSubmitPassword} className="bg-white rounded-xl border border-border-light p-6 space-y-4">
+      <form onSubmit={handleSubmitPassword} className="bg-white dark:bg-gray-800 rounded-xl border border-border-light dark:border-gray-700 p-6 space-y-4">
         <div className="flex items-center gap-2 mb-2">
-          <Shield className="w-5 h-5 text-primary-600" />
-          <h2 className="text-base font-bold text-text-primary font-heading">Ubah Password</h2>
+          <Shield className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+          <h2 className="text-base font-bold text-text-primary dark:text-gray-100 font-heading">Ubah Password</h2>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">Password Saat Ini</label>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Password Saat Ini</label>
           <input
             type="password"
             value={currentPassword}
             onChange={e => setCurrentPassword(e.target.value)}
             placeholder="••••••••"
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">Password Baru</label>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Password Baru</label>
           <input
             type="password"
             value={newPassword}
             onChange={e => setNewPassword(e.target.value)}
             placeholder="Minimal 6 karakter"
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">Konfirmasi Password Baru</label>
+          <label className="block text-sm font-medium text-text-primary dark:text-gray-100 mb-1">Konfirmasi Password Baru</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
             placeholder="Ulangi password baru"
             required
-            className="w-full px-3.5 py-2 text-sm bg-surface-secondary border border-border-light rounded-lg focus:border-primary-500 outline-none"
+            className="w-full px-3.5 py-2 text-sm bg-surface-secondary dark:bg-gray-900 text-text-primary dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-border-light dark:border-gray-700 rounded-lg focus:border-primary-500 outline-none"
           />
         </div>
 
@@ -120,3 +120,7 @@ export default function AdminPengaturanPage() {
       </>
     );
   }
+
+
+
+
