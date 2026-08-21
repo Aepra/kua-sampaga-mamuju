@@ -6,6 +6,7 @@ import { ArrowLeft, Save } from 'lucide-react';
 import type { Information } from '@/lib/types';
 import { INFORMATION_CATEGORIES } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
+import UploadMultipleImages from '@/components/admin/UploadMultipleImages';
 import { useToast } from '@/components/ui/Toast';
 import FullScreenLoader from '@/components/ui/FullScreenLoader';
 
@@ -22,6 +23,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
   const [slug, setSlug] = useState(initialData?.slug || '');
   const [content, setContent] = useState(initialData?.content || '');
   const [excerpt, setExcerpt] = useState(initialData?.excerpt || '');
+  const [images, setImages] = useState<string[]>(initialData?.images || []);
   const [thumbnail, setThumbnail] = useState(initialData?.thumbnail || '');
   const [category, setCategory] = useState(initialData?.category || 'Pengumuman');
   const [date, setDate] = useState(initialData?.date || new Date().toISOString().split('T')[0]);
@@ -54,6 +56,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
       slug,
       content,
       excerpt: excerpt.trim() || content.substring(0, 150),
+      images,
       thumbnail,
       category,
       date,
@@ -74,7 +77,7 @@ export default function InformationForm({ initialData }: InformationFormProps) {
 
       if (data.success) {
         showToast(`Informasi berhasil ${initialData ? 'diperbarui' : 'ditambahkan'}.`, 'success');
-        router.push('/admin/informasi');
+        router.push('/admin/informasi-dan-berita');
         router.refresh();
       } else {
         showToast(data.error || 'Gagal menyimpan informasi.', 'error');
@@ -158,6 +161,14 @@ export default function InformationForm({ initialData }: InformationFormProps) {
           </div>
         </div>
 
+        <UploadImage
+          value={thumbnail}
+          onChange={setThumbnail}
+          folder="information"
+          prefix={slug || 'info-cover'}
+          label="Thumbnail / Gambar Sampul (Opsional)"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-text-primary mb-1">
@@ -216,12 +227,13 @@ export default function InformationForm({ initialData }: InformationFormProps) {
           />
         </div>
 
-        <UploadImage
-          value={thumbnail}
-          onChange={setThumbnail}
+        <UploadMultipleImages
+          value={images}
+          onChange={setImages}
           folder="information"
           prefix={slug || 'info'}
-          label="Thumbnail / Gambar Sampul (Opsional)"
+          label="Tambahkan gambar / dokumentasi"
+          maxImages={2}
         />
 
         <div className="pt-2">

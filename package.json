@@ -34,7 +34,9 @@
     "@types/uuid": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
+    "md-to-pdf": "^5.2.5",
     "prisma": "^5.22.0",
+    "puppeteer": "^25.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

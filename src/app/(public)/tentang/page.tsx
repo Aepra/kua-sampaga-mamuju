@@ -31,7 +31,7 @@ export default async function TentangPage() {
               <img src={s.officeImage} alt="Kantor KUA" className="max-h-[300px] object-contain rounded-2xl relative z-10 shadow-lg border border-white/50" />
             ) : (
               <div className="text-center relative z-10 py-10">
-                <Landmark className="w-24 h-24 text-[#059669] mx-auto mb-4 opacity-80" />
+                <div className="relative w-28 h-28 mx-auto mb-6 drop-shadow-md"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
                 <p className="text-sm font-bold text-[#047857] uppercase tracking-widest">KUA Kecamatan Sampaga</p>
               </div>
             )}
@@ -135,3 +135,4 @@ export default async function TentangPage() {
     </div>
   );
 }
+

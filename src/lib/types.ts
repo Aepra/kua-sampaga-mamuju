@@ -53,6 +53,7 @@ export interface Information {
   slug: string;
   content: string;
   excerpt: string;
+  images: string[];
   thumbnail: string;
   category: string;
   date: string;

@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { Menu, X, Search, LogIn, Landmark, User, LayoutDashboard, LogOut } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
   { href: '/layanan', label: 'Layanan' },
-  { href: '/informasi', label: 'Informasi' },
+  { href: '/informasi-dan-berita', label: 'Informasi & Berita' },
   { href: '/galeri', label: 'Galeri' },
   { href: '/peraturan', label: 'Peraturan' },
   { href: '/tentang', label: 'Tentang' },
@@ -51,9 +52,7 @@ export default function Navbar() {
         
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#022C22] to-[#064E3B] flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:-translate-y-0.5">
-            <Landmark className="w-5.5 h-5.5 text-white" />
-          </div>
+          <div className="relative w-11 h-11 rounded-full overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:-translate-y-0.5"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
           <div className="flex flex-col justify-center">
             <span className="text-base font-extrabold text-[#1A2E1A] leading-tight font-heading group-hover:text-[#059669] transition-colors tracking-tight">
               KUA Sampaga
@@ -222,3 +221,6 @@ export default function Navbar() {
     </header>
   );
 }
+
+
+

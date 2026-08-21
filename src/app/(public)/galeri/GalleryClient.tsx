@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, BookOpen } from 'lucide-react';
+import { X, BookOpen, Landmark } from 'lucide-react';
 import { GALLERY_CATEGORIES } from '@/lib/types';
 import type { GalleryItem } from '@/lib/types';
 import EmptyState from '@/components/ui/StateDisplay';
@@ -48,19 +48,22 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
               <button
                 key={item.id}
                 onClick={() => setSelectedImage(item)}
-                className="group relative w-full inline-block rounded-[24px] overflow-hidden bg-[#064E3B] border border-[#E5EBE5] shadow-sm cursor-pointer"
+                className="group w-full flex flex-col bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_-10px_rgba(5,150,105,0.15)] transition-all duration-300 text-left mb-4 sm:mb-6 cursor-pointer"
               >
-                {item.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.image} alt={item.title} className="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out" />
-                ) : (
-                  <div className="w-full aspect-square flex items-center justify-center"><BookOpen className="w-12 h-12 text-[#10B981] opacity-30" /></div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/90 via-[#022C22]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300 text-left">
-                    <p className="text-[10px] font-bold text-[#FCD34D] uppercase tracking-wider mb-1">{item.category}</p>
-                    <p className="text-sm sm:text-base font-bold text-white leading-snug line-clamp-2">{item.title}</p>
+                <div className="relative w-full overflow-hidden bg-gray-100">
+                  {item.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.image} alt={item.title} className="w-full h-auto block group-hover:scale-105 transition-transform duration-500 ease-out" />
+                  ) : (
+                    <div className="w-full aspect-square flex items-center justify-center"><BookOpen className="w-12 h-12 text-[#10B981] opacity-30" /></div>
+                  )}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-[#059669] text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm">{item.category}</span>
                   </div>
+                </div>
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-extrabold text-[#1A2E1A] text-base sm:text-lg font-heading leading-snug group-hover:text-[#059669] transition-colors">{item.title}</h3>
+                  {item.date && <p className="text-[10px] sm:text-[11px] font-bold text-[#6B7E6B] mt-2 uppercase tracking-wider">{item.date}</p>}
                 </div>
               </button>
             ))}
@@ -73,24 +76,59 @@ export default function GalleryClient({ gallery }: GalleryClientProps) {
         )}
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox / Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
-          <button className="absolute top-6 right-6 text-white/60 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors" onClick={() => setSelectedImage(null)} aria-label="Tutup">
-            <X className="w-6 h-6" />
+        <div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 sm:p-6 lg:p-10 backdrop-blur-md" onClick={() => setSelectedImage(null)}>
+          <button className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2.5 rounded-full transition-all z-[110]" onClick={() => setSelectedImage(null)} aria-label="Tutup">
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
-          <div className="max-w-5xl w-full max-h-[85vh] relative flex flex-col items-center" onClick={e => e.stopPropagation()}>
-            {selectedImage.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={selectedImage.image} alt={selectedImage.title} className="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl" />
-            ) : (
-              <div className="w-full max-w-lg aspect-square bg-[#022C22] rounded-xl flex items-center justify-center"><BookOpen className="w-20 h-20 text-[#10B981] opacity-50" /></div>
-            )}
-            <div className="mt-6 text-center max-w-2xl bg-black/50 p-6 rounded-2xl backdrop-blur-md border border-white/10">
-              <span className="inline-block px-3 py-1 bg-white/10 text-[#A7F3D0] text-xs font-bold rounded-full mb-3 uppercase tracking-wider">{selectedImage.category}</span>
-              <p className="text-white font-bold text-xl sm:text-2xl font-heading mb-2">{selectedImage.title}</p>
-              {selectedImage.description && <p className="text-white/70 text-sm leading-relaxed">{selectedImage.description}</p>}
+          
+          <div className="bg-white w-full max-w-5xl max-h-[90vh] sm:max-h-[85vh] rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row relative" onClick={e => e.stopPropagation()}>
+            
+            {/* Image Section with blurred background */}
+            <div className="w-full md:w-3/5 lg:w-2/3 bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden h-[40vh] md:h-[85vh]">
+              {selectedImage.image && (
+                <div className="absolute inset-0 opacity-40 blur-2xl transform scale-110" style={{ backgroundImage: `url(${selectedImage.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              )}
+              {selectedImage.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={selectedImage.image} alt={selectedImage.title} className="max-w-full max-h-full object-contain relative z-10" />
+              ) : (
+                <BookOpen className="w-20 h-20 text-white/20 relative z-10" />
+              )}
             </div>
+
+            {/* Info Section (Instagram Style) */}
+            <div className="w-full md:w-2/5 lg:w-1/3 bg-white flex flex-col h-[50vh] md:h-[85vh]">
+              <div className="p-6 sm:p-8 flex-grow overflow-y-auto">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#064E3B] to-[#022C22] flex items-center justify-center text-white flex-shrink-0 shadow-md">
+                    <Landmark className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-extrabold text-[#1A2E1A] text-sm font-heading leading-none mb-1">Admin KUA</h4>
+                    <p className="text-[10px] text-[#059669] font-black uppercase tracking-wider">{selectedImage.category}</p>
+                  </div>
+                </div>
+                
+                <div className="w-full h-[1px] bg-gray-100 my-5"></div>
+                
+                <h2 className="text-xl sm:text-2xl font-black text-[#1A2E1A] font-heading leading-tight mb-3">
+                  {selectedImage.title}
+                </h2>
+                
+                {selectedImage.date && (
+                  <p className="text-[11px] font-bold text-[#6B7E6B] mb-5 uppercase tracking-widest">{selectedImage.date}</p>
+                )}
+                
+                {selectedImage.description && (
+                  <div className="prose prose-sm max-w-none text-[#4A5D4A] leading-relaxed">
+                    <p>{selectedImage.description}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
       )}

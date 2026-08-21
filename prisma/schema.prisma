@@ -60,7 +60,8 @@ model Information {
   slug      String   @unique
   content   String
   excerpt   String
-  thumbnail String
+  images    String[] @default([])
+  thumbnail String   @default("")
   category  String
   date      String
   published Boolean  @default(true)

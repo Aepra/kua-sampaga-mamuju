@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession, SessionProvider } from 'next-auth/react';
@@ -72,9 +73,7 @@ function InnerLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center mx-auto shadow-lg mb-4">
-            <Landmark className="w-7 h-7 text-white" />
-          </div>
+          <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-lg mx-auto mb-4 border-2 border-white"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
           <h1 className="text-2xl font-bold text-text-primary font-heading">Masuk</h1>
           <p className="text-sm text-text-secondary mt-1">KUA Kecamatan Sampaga</p>
         </div>
@@ -211,3 +210,6 @@ export default function LoginPage() {
     </SessionProvider>
   );
 }
+
+
+

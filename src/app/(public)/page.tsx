@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Heart, FileText, ClipboardList, MapPin, MessageCircle,
@@ -199,7 +200,7 @@ export default async function HomePage() {
               {/* Main Decorative Image/Shape */}
               <div className="absolute w-[450px] h-[550px] bg-gradient-to-br from-[#064E3B] to-[#022C22] rounded-[40px] shadow-2xl overflow-hidden flex flex-col items-center justify-center text-white">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-                <Landmark className="w-32 h-32 opacity-20 mb-8" />
+                <div className="relative w-48 h-48 mb-8 drop-shadow-2xl"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
                 <h3 className="text-3xl font-heading font-bold text-white/90">KUA Sampaga</h3>
                 <p className="text-white/60 mt-2 font-medium">Melayani dengan Sepenuh Hati</p>
               </div>
@@ -312,11 +313,11 @@ export default async function HomePage() {
                   Pengumuman & Berita
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A2E1A] font-heading tracking-tight">
-                  Informasi Terbaru
+                  Informasi dan Berita Terbaru
                 </h2>
               </div>
               <Link
-                href="/informasi"
+                href="/informasi-dan-berita"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#059669] hover:text-[#047857] bg-[#F8FAF9] hover:bg-[#ECFDF5] px-5 py-2.5 rounded-full transition-all border border-[#E5EBE5] hover:border-[#A7F3D0]"
               >
                 Lihat Semua
@@ -332,14 +333,14 @@ export default async function HomePage() {
                     const featured = recentInfo[0];
                     return (
                       <Link
-                        href={`/informasi/${featured.slug}`}
+                        href={`/informasi-dan-berita/${featured.slug}`}
                         className="group bg-white rounded-[24px] border border-[#E5EBE5] overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:border-[#10B981] transition-all duration-300 flex flex-col h-full relative"
                       >
                         <div className="h-[300px] sm:h-[400px] lg:h-full min-h-[350px] bg-[#F1F5F3] overflow-hidden relative">
-                          {featured.thumbnail ? (
+                          {featured.thumbnail || (featured.images && featured.images.length > 0) ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
-                              src={featured.thumbnail}
+                              src={featured.thumbnail || featured.images[0]}
                               alt={featured.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
@@ -379,14 +380,14 @@ export default async function HomePage() {
                     {recentInfo.slice(1).map(info => (
                       <Link
                         key={info.id}
-                        href={`/informasi/${info.slug}`}
+                        href={`/informasi-dan-berita/${info.slug}`}
                         className="group flex gap-4 bg-white p-3 sm:p-4 rounded-[20px] border border-[#E5EBE5] hover:border-[#10B981] hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] transition-all duration-300 items-center"
                       >
                         <div className="w-24 h-24 sm:w-[100px] sm:h-[100px] rounded-xl overflow-hidden bg-[#F1F5F3] relative flex-shrink-0">
-                          {info.thumbnail ? (
+                          {info.thumbnail || (info.images && info.images.length > 0) ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
-                              src={info.thumbnail}
+                              src={info.thumbnail || info.images[0]}
                               alt={info.title}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
@@ -503,16 +504,16 @@ export default async function HomePage() {
                   </div>
                 </div>
 
-                <div className="p-5 bg-[#F8FAF9] rounded-2xl border border-[#E5EBE5] flex items-start gap-4 hover:border-[#10B981] hover:bg-white hover:shadow-md transition-all">
-                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] text-[#059669] flex items-center justify-center flex-shrink-0">
+                <a href="https://maps.app.goo.gl/4WBnMUuMDaheJUQw7" target="_blank" rel="noopener noreferrer" className="p-5 bg-[#F8FAF9] rounded-2xl border border-[#E5EBE5] flex items-start gap-4 hover:border-[#10B981] hover:bg-[#ECFDF5] hover:shadow-md transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-colors flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-[#6B7E6B] mb-1">Alamat Kantor</p>
-                    <p className="text-sm font-bold text-[#1A2E1A] leading-snug">{settings.address}</p>
+                    <p className="text-sm font-bold text-[#1A2E1A] leading-snug group-hover:text-[#059669] transition-colors">{settings.address}</p>
                     <p className="text-[11px] text-[#6B7E6B] mt-1">Kecamatan Sampaga, Mamuju</p>
                   </div>
-                </div>
+                </a>
               </div>
 
               <div className="pt-6">
@@ -527,10 +528,14 @@ export default async function HomePage() {
             </div>
 
             <div className="lg:col-span-5 relative z-10 flex justify-center lg:justify-end">
-              <div className="bg-gradient-to-br from-[#064E3B] to-[#022C22] p-8 sm:p-10 rounded-[32px] shadow-2xl text-center space-y-6 w-full max-w-md border border-[#047857]/50">
-                <div className="w-24 h-24 rounded-2xl bg-white/10 backdrop-blur-md text-white flex items-center justify-center mx-auto shadow-inner border border-white/20">
-                  <Landmark className="w-12 h-12" />
-                </div>
+              <div className="bg-gradient-to-br from-[#064E3B] to-[#022C22] p-6 sm:p-8 rounded-[32px] shadow-2xl text-center space-y-6 w-full max-w-md border border-[#047857]/50">
+                {settings.officeImage ? (
+                  <div className="w-full rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+                    <img src={settings.officeImage} alt="Kantor KUA Sampaga" className="w-full h-auto group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ) : (
+                  <div className="relative w-24 h-24 rounded-2xl mx-auto shadow-inner bg-white p-2 border border-white/20"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain p-2" /></div>
+                )}
                 <div>
                   <h3 className="font-extrabold text-white text-xl font-heading tracking-tight">KUA Kecamatan Sampaga</h3>
                   <p className="text-sm text-[#A7F3D0] mt-1 font-medium">Kementerian Agama Kab. Mamuju</p>
@@ -579,3 +584,5 @@ export default async function HomePage() {
     </div>
   );
 }
+
+

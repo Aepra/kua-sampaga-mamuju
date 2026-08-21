@@ -37,6 +37,11 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     const { id } = await params;
     const item = await getInformationById(id);
     if (!item) return NextResponse.json({ success: false, error: 'Tidak ditemukan.' }, { status: 404 });
+    if (item.images && item.images.length > 0) {
+      for (const img of item.images) {
+        await deleteFile(img);
+      }
+    }
     if (item.thumbnail) await deleteFile(item.thumbnail);
     await deleteInformation(id);
     await addLog('Hapus Informasi', `Menghapus: ${item.title}`, session.userId, session.name);

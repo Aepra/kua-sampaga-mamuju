@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Plus, Search, Edit2, Trash2, CheckCircle2, XCircle } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, CheckCircle2, XCircle, Eye } from 'lucide-react';
 import type { Information } from '@/lib/types';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { useToast } from '@/components/ui/Toast';
@@ -70,7 +70,7 @@ export default function AdminInformasiListPage() {
           <p className="text-xs sm:text-sm text-text-secondary mt-1">Pengumuman, berita, dan kegiatan KUA.</p>
         </div>
         <Link
-          href="/admin/informasi/tambah"
+          href="/admin/informasi-dan-berita/tambah"
           className="inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs sm:text-sm font-medium transition-colors w-full sm:w-auto"
         >
           <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -141,7 +141,16 @@ export default function AdminInformasiListPage() {
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-2">
                         <Link
-                          href={`/admin/informasi/${item.id}/edit`}
+                          href={`/informasi-dan-berita/${item.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 text-text-tertiary hover:text-emerald-600 rounded-md hover:bg-surface-tertiary"
+                          title="Lihat Tampilan (Preview)"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Link>
+                        <Link
+                          href={`/admin/informasi-dan-berita/${item.id}/edit`}
                           className="p-1.5 text-text-tertiary hover:text-blue-600 rounded-md hover:bg-surface-tertiary"
                           title="Edit"
                         >

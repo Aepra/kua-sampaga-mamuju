@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Landmark, Phone, MapPin } from 'lucide-react';
 import { FacebookIcon, InstagramIcon, TikTokIcon, YoutubeIcon } from '@/components/ui/SocialIcons';
@@ -5,7 +6,7 @@ import { FacebookIcon, InstagramIcon, TikTokIcon, YoutubeIcon } from '@/componen
 const footerNav = [
   { href: '/', label: 'Beranda' },
   { href: '/layanan', label: 'Layanan' },
-  { href: '/informasi', label: 'Informasi' },
+  { href: '/informasi-dan-berita', label: 'Informasi & Berita' },
   { href: '/galeri', label: 'Galeri' },
   { href: '/peraturan', label: 'Peraturan' },
   { href: '/tentang', label: 'Tentang' },
@@ -158,3 +159,5 @@ export default function Footer({ settings }: FooterProps) {
     </footer>
   );
 }
+
+

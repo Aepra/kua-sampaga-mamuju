@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
@@ -25,7 +26,7 @@ const menuGroups = [
     title: 'Kelola Konten',
     items: [
       { href: '/admin/layanan', label: 'Layanan', icon: FileText },
-      { href: '/admin/informasi', label: 'Informasi', icon: BookOpen },
+      { href: '/admin/informasi-dan-berita', label: 'Informasi dan Berita', icon: BookOpen },
       { href: '/admin/galeri', label: 'Galeri', icon: ImageIcon },
       { href: '/admin/masukan', label: 'Masukan', icon: MessageCircle },
       { href: '/admin/peraturan', label: 'Peraturan', icon: Scale },
@@ -87,9 +88,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         {/* Header / Brand */}
         <div className="p-4 flex items-center justify-between border-b border-primary-900">
           <Link href="/admin" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white">
-              <Landmark className="w-4 h-4" />
-            </div>
+            <div className="relative w-9 h-9 rounded-full overflow-hidden shadow-sm"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
             <div>
               <p className="text-sm font-bold leading-tight font-heading">Admin Panel</p>
               <p className="text-[10px] text-primary-300 leading-tight">KUA Sampaga</p>
@@ -161,3 +160,5 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
     </>
   );
 }
+
+

@@ -28,6 +28,7 @@ export async function POST(request: Request) {
       slug: body.slug || '',
       content: body.content || '',
       excerpt: body.excerpt || '',
+      images: body.images || [],
       thumbnail: body.thumbnail || '',
       category: body.category || 'Lainnya',
       date: body.date || now,
