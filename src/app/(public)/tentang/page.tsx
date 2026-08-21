@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Landmark, Users, MapPin, Phone, Clock } from 'lucide-react';
 import { getSettings } from '@/lib/data/settings';
 

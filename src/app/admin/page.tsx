@@ -163,7 +163,7 @@ export default async function AdminDashboardPage() {
                   <div>
                     <p className="text-[9px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-0.5 flex items-center justify-between">
                       <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Tersisa</span>
-                      <span className="text-[11px] font-black text-emerald-600">{(dbUsage.maxCapacityMB - parseFloat(dbUsage.sizeInMB)).toFixed(2)} MB</span>
+                      <span className="text-[11px] font-black text-emerald-600">{(dbUsage.maxCapacityMB - dbUsage.sizeInMB).toFixed(2)} MB</span>
                     </p>
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default async function AdminDashboardPage() {
                   <div>
                     <p className="text-[9px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider mb-0.5 flex items-center justify-between">
                       <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Tersisa</span>
-                      <span className="text-[11px] font-black text-emerald-600">{(storageUsage.maxCapacityMB - parseFloat(storageUsage.sizeInMB)).toFixed(2)} MB</span>
+                      <span className="text-[11px] font-black text-emerald-600">{(storageUsage.maxCapacityMB - storageUsage.sizeInMB).toFixed(2)} MB</span>
                     </p>
                   </div>
                 </div>
