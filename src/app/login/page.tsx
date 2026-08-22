@@ -70,28 +70,36 @@ function InnerLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 px-4">
-      <div className="w-full max-w-md">
-        {/* Back Button */}
-        <button
-          onClick={() => router.push('/')}
-          className="group flex items-center gap-2 text-sm font-medium text-[#4A5D4A] hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors mb-6"
-        >
-          <div className="p-1.5 rounded-full bg-white dark:bg-gray-800 border border-border-light dark:border-gray-700 shadow-sm group-hover:bg-primary-50 dark:group-hover:bg-gray-700 transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-          </div>
-          Kembali ke Beranda
-        </button>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 relative overflow-hidden px-4 py-12">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary-200/30 dark:bg-primary-900/20 blur-3xl opacity-60" />
+        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[60%] rounded-full bg-emerald-200/20 dark:bg-emerald-900/10 blur-3xl opacity-50" />
+        <div className="absolute -bottom-[10%] left-[20%] w-[60%] h-[40%] rounded-full bg-primary-100/40 dark:bg-primary-900/10 blur-3xl opacity-50" />
+      </div>
 
+      {/* Back Button - Absolute Top Left */}
+      <button
+        onClick={() => router.push('/')}
+        className="absolute top-4 left-4 md:top-6 md:left-6 z-20 group flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm px-3 py-2 rounded-full border border-gray-200/50 dark:border-gray-800/50 shadow-sm hover:shadow"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span className="hidden sm:inline">Kembali ke Beranda</span>
+        <span className="sm:hidden">Kembali</span>
+      </button>
+
+      <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-lg mx-auto mb-4 border-2 border-white"><Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain" /></div>
-          <h1 className="text-2xl font-bold text-[#1A2E1A] dark:text-gray-100 font-heading">Masuk</h1>
-          <p className="text-sm text-[#4A5D4A] dark:text-gray-400 mt-1">KUA Kecamatan Sampaga</p>
+          <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-lg mx-auto mb-5 border-4 border-white dark:border-gray-800 bg-white">
+            <Image src="/logo/logo-kua.png" alt="Logo KUA" fill className="object-contain p-2" />
+          </div>
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 font-heading tracking-tight">Masuk</h1>
+          <p className="text-sm font-medium text-primary-600 dark:text-primary-400 mt-2">KUA Kecamatan Sampaga</p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-border-light dark:border-gray-700 shadow-sm p-6 lg:p-8">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl border border-white dark:border-gray-800 shadow-2xl shadow-primary-900/5 dark:shadow-black/40 p-6 md:p-8">
           {error && (
             <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800/50 rounded-lg text-sm text-red-700 dark:text-red-400">
               {error}
