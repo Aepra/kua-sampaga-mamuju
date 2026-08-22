@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { Shield, User, ShieldAlert, Check, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { Shield, User, ShieldAlert, Check, Trash2, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
@@ -149,9 +150,14 @@ export default function AdminPenggunaPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Kelola Admin & Pengguna</h1>
-          <p className="text-xs sm:text-sm text-text-secondary dark:text-gray-400 mt-1">Tambahkan pengguna baru atau atur hak akses akun terdaftar.</p>
+        <div className="flex items-center gap-3">
+          <Link href="/admin" className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg">
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Kelola Admin & Pengguna</h1>
+            <p className="text-xs sm:text-sm text-text-secondary dark:text-gray-400 mt-1">Tambahkan pengguna baru atau atur hak akses akun terdaftar.</p>
+          </div>
         </div>
       </div>
 

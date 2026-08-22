@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Trash2, CheckCircle2, XCircle, MessageCircle, Star } from 'lucide-react';
+import Link from 'next/link';
+import { Search, Trash2, CheckCircle2, XCircle, MessageCircle, Star, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 
 export default function AdminMasukanPage() {
@@ -98,11 +99,19 @@ export default function AdminMasukanPage() {
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Kelola Masukan</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">
-            Lihat, balas, dan kelola masukan dari pengunjung website.
-          </p>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin"
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 font-heading">Kelola Masukan</h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+              Lihat, balas, dan kelola masukan dari pengunjung website.
+            </p>
+          </div>
         </div>
       </div>
 

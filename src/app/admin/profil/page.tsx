@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Save } from 'lucide-react';
+import Link from 'next/link';
+import { Save, Undo2, Redo2, ArrowLeft } from 'lucide-react';
 import type { SiteSettings } from '@/lib/types';
 import UploadImage from '@/components/admin/UploadImage';
 import { useToast } from '@/components/ui/Toast';
 import FullScreenLoader from '@/components/ui/FullScreenLoader';
+import { useFormHistory } from '@/hooks/useFormHistory';
 
 export default function AdminProfilPage() {
   const { showToast } = useToast();
@@ -32,13 +34,24 @@ export default function AdminProfilPage() {
 
   const [missionText, setMissionText] = useState('');
 
+  // Form history for Undo/Redo
+  const { undo, redo, canUndo, canRedo, isDirty, resetHistory, markSaved } = useFormHistory(
+    { settings, missionText },
+    (state) => {
+      setSettings(state.settings);
+      setMissionText(state.missionText);
+    }
+  );
+
   useEffect(() => {
     fetch('/api/settings')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
           setSettings(data.data);
-          setMissionText(data.data.mission?.join('\n') || '');
+          const loadedMission = data.data.mission?.join('\n') || '';
+          setMissionText(loadedMission);
+          resetHistory({ settings: data.data, missionText: loadedMission });
         }
       })
       .catch(() => showToast('Gagal memuat pengaturan.', 'error'))
@@ -70,6 +83,7 @@ export default function AdminProfilPage() {
 
       if (data.success) {
         showToast('Profil KUA berhasil diperbarui.', 'success');
+        markSaved({ settings, missionText });
       } else {
         showToast(data.error || 'Gagal memperbarui profil KUA.', 'error');
       }
@@ -89,20 +103,51 @@ export default function AdminProfilPage() {
       <FullScreenLoader isLoading={saving} message="Menyimpan profil..." />
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl pb-12">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light dark:border-gray-700 pb-4">
-        <div>
-          <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Profil & Informasi KUA</h1>
-          <p className="text-sm text-text-secondary dark:text-gray-400 mt-1">
-            Kelola data resmi, kontak, media sosial, dan visi misi KUA.
-          </p>
+        <div className="flex items-center gap-3">
+          <Link href="/admin" className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg">
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 font-heading">Profil & Informasi KUA</h1>
+            <p className="text-sm text-text-secondary dark:text-gray-400 mt-1">
+              Kelola data resmi, kontak, media sosial, dan visi misi KUA.
+            </p>
+          </div>
         </div>
-        <button
-          type="submit"
-          disabled={saving}
-          className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
-        >
-          <Save className="w-4 h-4" />
-          {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
-        </button>
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-1 mr-2 border-r border-border-medium dark:border-gray-600 pr-3">
+            <button
+              type="button"
+              onClick={undo}
+              disabled={!canUndo}
+              className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+              title="Undo"
+            >
+              <Undo2 className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={redo}
+              disabled={!canRedo}
+              className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+              title="Redo"
+            >
+              <Redo2 className="w-5 h-5" />
+            </button>
+          </div>
+          <button
+            type="submit"
+            disabled={saving || !isDirty}
+            className={`flex-1 sm:flex-none justify-center inline-flex items-center gap-2 px-5 py-2.5 text-white rounded-lg text-sm font-medium transition-colors ${
+              !isDirty
+                ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
+                : 'bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400'
+            }`}
+          >
+            <Save className="w-4 h-4" />
+            {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
+          </button>
+        </div>
       </div>
 
       {/* Data Resmi */}

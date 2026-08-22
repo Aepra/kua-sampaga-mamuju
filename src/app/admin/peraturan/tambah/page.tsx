@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Undo2, Redo2 } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
+import { useFormHistory } from '@/hooks/useFormHistory';
 
 export default function TambahPeraturanPage() {
   const router = useRouter();
@@ -16,6 +17,19 @@ export default function TambahPeraturanPage() {
   const [description, setDescription] = useState('');
   const [documentLink, setDocumentLink] = useState('');
   const [published, setPublished] = useState(true);
+
+  // Form history for Undo/Redo
+  const { undo, redo, canUndo, canRedo, isDirty, markSaved } = useFormHistory(
+    { title, number, year, description, documentLink, published },
+    (state) => {
+      setTitle(state.title);
+      setNumber(state.number);
+      setYear(state.year);
+      setDescription(state.description);
+      setDocumentLink(state.documentLink);
+      setPublished(state.published);
+    }
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,8 +57,12 @@ export default function TambahPeraturanPage() {
 
       const data = await res.json();
 
-      if (data.success) {
+      if (data.success && data.data?.id) {
         showToast('Peraturan berhasil ditambahkan.', 'success');
+        router.replace(`/admin/peraturan/${data.data.id}/edit`);
+      } else if (data.success) {
+        showToast('Peraturan berhasil ditambahkan.', 'success');
+        markSaved({ title, number, year, description, documentLink, published });
         router.push('/admin/peraturan');
         router.refresh();
       } else {
@@ -63,7 +81,7 @@ export default function TambahPeraturanPage() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={() => router.push('/admin/peraturan')}
             className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 rounded-lg"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -78,17 +96,41 @@ export default function TambahPeraturanPage() {
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto mt-2 sm:mt-0">
+          <div className="flex items-center gap-1 mr-2 border-r border-border-medium dark:border-gray-600 pr-3">
+            <button
+              type="button"
+              onClick={undo}
+              disabled={!canUndo}
+              className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+              title="Undo"
+            >
+              <Undo2 className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={redo}
+              disabled={!canRedo}
+              className="p-2 text-text-secondary dark:text-gray-400 hover:text-text-primary dark:text-gray-100 hover:bg-surface-tertiary dark:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+              title="Redo"
+            >
+              <Redo2 className="w-5 h-5" />
+            </button>
+          </div>
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={() => router.push('/admin/peraturan')}
             className="flex-1 sm:flex-none justify-center px-4 py-2 text-sm font-medium text-text-secondary dark:text-gray-400 bg-surface-tertiary dark:bg-gray-700 rounded-lg hover:bg-border-light dark:hover:bg-gray-600"
           >
-            Batal
+            Kembali
           </button>
           <button
             type="submit"
-            disabled={loading}
-            className="flex-1 sm:flex-none justify-center inline-flex items-center gap-2 px-5 py-2 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg text-sm font-medium transition-colors"
+            disabled={loading || !isDirty}
+            className={`flex-1 sm:flex-none justify-center inline-flex items-center gap-2 px-5 py-2 text-white rounded-lg text-sm font-medium transition-colors ${
+              !isDirty
+                ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
+                : 'bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400'
+            }`}
           >
             <Save className="w-4 h-4 hidden sm:block" />
             {loading ? 'Menyimpan...' : 'Simpan'}

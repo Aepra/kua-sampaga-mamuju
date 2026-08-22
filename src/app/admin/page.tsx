@@ -48,7 +48,7 @@ export default async function AdminDashboardPage() {
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-white dark:bg-gray-800 dark:bg-gray-800 opacity-10 rounded-full blur-2xl"></div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-white dark:bg-gray-800 dark:bg-gray-800/20 backdrop-blur-md rounded-full text-white text-[10px] font-bold uppercase tracking-wider mb-2 border border-white/20 shadow-sm">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-white/20 dark:bg-slate-800/40 backdrop-blur-md rounded-full text-white text-[10px] font-bold uppercase tracking-wider mb-2 border border-white/20 shadow-sm">
               <Sparkles className="w-2.5 h-2.5 text-yellow-300" />
               Sistem Pengelola Konten
             </div>
@@ -59,7 +59,7 @@ export default async function AdminDashboardPage() {
               Ringkasan data, layanan, dan semua aktivitas terbaru di website instansi.
             </p>
           </div>
-          <div className="hidden md:flex flex-shrink-0 items-center justify-center w-14 h-14 bg-white dark:bg-gray-800 dark:bg-gray-800/10 rounded-xl backdrop-blur-md border border-white/20 shadow-inner">
+          <div className="hidden md:flex flex-shrink-0 items-center justify-center w-14 h-14 bg-white/20 dark:bg-slate-800/40 rounded-xl backdrop-blur-md border border-white/20 shadow-inner">
             <ShieldCheck className="w-7 h-7 text-white opacity-90" />
           </div>
         </div>
